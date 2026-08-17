@@ -1,202 +1,434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeBridge — Build Your Better Future</title>
 
-  <title>LifeBridge — Jobs, Skills & Careers</title>
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    body {
-      background: #f5f7fb;
-      color: #172033;
-    }
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f8fc;
+  color:#172033;
+  line-height:1.6;
+}
 
-    header {
-      background: #ffffff;
-      padding: 18px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: sticky;
-      top: 0;
-      z-index: 10;
-    }
+header{
+  background:white;
+  padding:18px 7%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  box-shadow:0 2px 15px rgba(0,0,0,.08);
+}
 
-    .logo {
-      font-size: 25px;
-      font-weight: bold;
-      color: #1976d2;
-    }
+.logo{
+  font-size:28px;
+  font-weight:800;
+  color:#1976d2;
+}
 
-    nav a {
-      text-decoration: none;
-      color: #333;
-      margin-left: 20px;
-      font-weight: 600;
-    }
+nav a{
+  text-decoration:none;
+  color:#172033;
+  margin-left:25px;
+  font-weight:600;
+}
 
-    .hero {
-      padding: 80px 7%;
-      text-align: center;
-      background: linear-gradient(135deg, #e3f2fd, #ffffff);
-    }
+.hero{
+  min-height:650px;
+  padding:70px 7%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:40px;
+  background:linear-gradient(135deg,#eaf5ff,#ffffff);
+}
 
-    .hero h1 {
-      font-size: 45px;
-      margin-bottom: 20px;
-      color: #123b66;
-    }
+.hero-text{
+  max-width:600px;
+}
 
-    .hero h1 span {
-      color: #1976d2;
-    }
+.hero h1{
+  font-size:58px;
+  line-height:1.1;
+  margin-bottom:25px;
+}
 
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      font-size: 18px;
-      line-height: 1.7;
-      color: #555;
-    }
+.hero h1 span{
+  color:#1976d2;
+}
 
-    .buttons {
-      margin-top: 30px;
-    }
+.hero p{
+  font-size:21px;
+  color:#626b78;
+  margin-bottom:35px;
+}
 
-    .btn {
-      display: inline-block;
-      padding: 14px 25px;
-      margin: 6px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
+.buttons{
+  display:flex;
+  gap:15px;
+  flex-wrap:wrap;
+}
 
-    .primary {
-      background: #1976d2;
-      color: white;
-    }
+.btn{
+  padding:16px 30px;
+  border-radius:12px;
+  text-decoration:none;
+  font-size:17px;
+  font-weight:700;
+  display:inline-block;
+}
 
-    .secondary {
-      background: white;
-      color: #1976d2;
-      border: 2px solid #1976d2;
-    }
+.primary{
+  background:#1976d2;
+  color:white;
+}
 
-    .section {
-      padding: 60px 7%;
-      text-align: center;
-    }
+.secondary{
+  background:white;
+  color:#1976d2;
+  border:2px solid #1976d2;
+}
 
-    .section h2 {
-      font-size: 32px;
-      margin-bottom: 35px;
-    }
+/* HUMAN GRAPHIC */
+.person-area{
+  width:420px;
+  height:430px;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:flex-end;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
+.person{
+  width:210px;
+  height:300px;
+  position:relative;
+}
 
-    .card {
-      background: white;
-      padding: 30px 20px;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
+.head{
+  width:105px;
+  height:105px;
+  background:#f2b28d;
+  border-radius:50%;
+  margin:auto;
+  position:relative;
+  z-index:3;
+}
 
-    .icon {
-      font-size: 42px;
-      margin-bottom: 15px;
-    }
+.hair{
+  position:absolute;
+  width:110px;
+  height:55px;
+  background:#252525;
+  border-radius:60px 60px 20px 20px;
+  top:-5px;
+  left:-3px;
+}
 
-    .card h3 {
-      margin-bottom: 12px;
-    }
+.eye{
+  position:absolute;
+  width:9px;
+  height:9px;
+  background:#222;
+  border-radius:50%;
+  top:52px;
+}
 
-    .card p {
-      color: #666;
-      line-height: 1.6;
-    }
+.eye.left{left:28px}
+.eye.right{right:28px}
 
-    .cta {
-      background: #1976d2;
-      color: white;
-      padding: 60px 7%;
-      text-align: center;
-    }
+.smile{
+  position:absolute;
+  width:32px;
+  height:15px;
+  border-bottom:3px solid #222;
+  border-radius:50%;
+  left:36px;
+  top:70px;
+}
 
-    .cta h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
+.body{
+  width:180px;
+  height:170px;
+  background:#1976d2;
+  border-radius:45px 45px 15px 15px;
+  margin:0 auto;
+  position:relative;
+}
 
-    .cta p {
-      margin-bottom: 25px;
-      font-size: 17px;
-    }
+.arm{
+  position:absolute;
+  width:35px;
+  height:125px;
+  background:#f2b28d;
+  border-radius:25px;
+  top:20px;
+}
 
-    .cta .btn {
-      background: white;
-      color: #1976d2;
-    }
+.arm.left{
+  left:-25px;
+  transform:rotate(25deg);
+}
 
-    footer {
-      background: #101828;
-      color: #bbb;
-      text-align: center;
-      padding: 25px;
-    }
+.arm.right{
+  right:-25px;
+  transform:rotate(-25deg);
+}
 
-    @media (max-width: 700px) {
-      nav {
-        display: none;
-      }
+.laptop{
+  position:absolute;
+  width:130px;
+  height:80px;
+  background:#202b3c;
+  border:8px solid #5d6b7d;
+  border-radius:8px;
+  left:25px;
+  top:70px;
+  z-index:5;
+}
 
-      .hero {
-        padding: 60px 5%;
-      }
+.laptop:after{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:10px;
+  background:#697789;
+  left:-18px;
+  bottom:-20px;
+  border-radius:10px;
+}
 
-      .hero h1 {
-        font-size: 34px;
-      }
+/* SECTIONS */
+section{
+  padding:80px 7%;
+}
 
-      .cards {
-        grid-template-columns: 1fr;
-      }
+.section-title{
+  text-align:center;
+  font-size:42px;
+  margin-bottom:15px;
+}
 
-      .section {
-        padding: 50px 5%;
-      }
-    }
-  </style>
+.section-subtitle{
+  text-align:center;
+  color:#68717d;
+  font-size:18px;
+  max-width:700px;
+  margin:0 auto 50px;
+}
+
+/* FEATURES */
+.features{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:25px;
+}
+
+.card{
+  background:white;
+  padding:30px;
+  border-radius:22px;
+  box-shadow:0 8px 30px rgba(20,40,70,.08);
+  transition:.3s;
+  border:1px solid #edf0f5;
+}
+
+.card:hover{
+  transform:translateY(-7px);
+  box-shadow:0 15px 35px rgba(20,40,70,.13);
+}
+
+.icon{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.card h3{
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.card p{
+  color:#69717c;
+}
+
+/* ABOUT */
+.about{
+  background:white;
+}
+
+.about-box{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+
+.about h2{
+  font-size:40px;
+  margin-bottom:20px;
+}
+
+.about p{
+  color:#626b78;
+  font-size:18px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.stat{
+  background:#eef7ff;
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:38px;
+  color:#1976d2;
+}
+
+/* CTA */
+.cta{
+  background:#1976d2;
+  color:white;
+  text-align:center;
+  padding:90px 7%;
+}
+
+.cta h2{
+  font-size:45px;
+  margin-bottom:15px;
+}
+
+.cta p{
+  font-size:20px;
+  margin-bottom:30px;
+}
+
+.cta .btn{
+  background:white;
+  color:#1976d2;
+}
+
+/* FOOTER */
+footer{
+  background:#101827;
+  color:#b9c2cf;
+  text-align:center;
+  padding:35px 20px;
+}
+
+footer strong{
+  color:white;
+}
+
+/* MOBILE */
+@media(max-width:850px){
+
+  header{
+    padding:16px 5%;
+  }
+
+  nav{
+    display:none;
+  }
+
+  .hero{
+    padding:55px 5%;
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .hero h1{
+    font-size:42px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
+  .buttons{
+    justify-content:center;
+  }
+
+  .person-area{
+    transform:scale(.85);
+    margin-top:-20px;
+  }
+
+  .features{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:60px 5%;
+  }
+
+  .section-title{
+    font-size:34px;
+  }
+
+  .about-box{
+    grid-template-columns:1fr;
+  }
+
+  .cta h2{
+    font-size:35px;
+  }
+}
+
+@media(min-width:851px) and (max-width:1100px){
+  .features{
+    grid-template-columns:1fr 1fr;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <header>
-    <div class="logo">LifeBridge</div>
+<header>
+  <div class="logo">LifeBridge</div>
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="#jobs">Jobs</a>
-      <a href="#skills">Skills</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
 
-  <section class="hero">
-    <h1>Build Your <span>Better Future</span></h1>
+
+<!-- HERO -->
+<section class="hero" id="home">
+
+  <div class="hero-text">
+    <h1>
+      Build Your <span>Better Future</span>
+    </h1>
 
     <p>
       LifeBridge connects people with jobs, skills,
@@ -204,60 +436,307 @@
     </p>
 
     <div class="buttons">
-      <a href="#jobs" class="btn primary">Find Jobs</a>
-      <a href="#skills" class="btn secondary">Learn Skills</a>
+      <a href="#features" class="btn primary">Find Opportunities</a>
+      <a href="#features" class="btn secondary">Explore Skills</a>
     </div>
-  </section>
+  </div>
 
-  <section class="section" id="jobs">
-    <h2>What LifeBridge Offers</h2>
 
-    <div class="cards">
+  <!-- HUMAN GRAPHIC -->
+  <div class="person-area">
 
-      <div class="card">
-        <div class="icon">💼</div>
-        <h3>Find Jobs</h3>
-        <p>
-          Discover job opportunities that match
-          your skills and career goals.
-        </p>
+    <div class="person">
+
+      <div class="head">
+        <div class="hair"></div>
+        <div class="eye left"></div>
+        <div class="eye right"></div>
+        <div class="smile"></div>
       </div>
 
-      <div class="card" id="skills">
-        <div class="icon">📚</div>
-        <h3>Learn Skills</h3>
-        <p>
-          Improve your skills and prepare yourself
-          for better career opportunities.
-        </p>
-      </div>
+      <div class="body">
 
-      <div class="card">
-        <div class="icon">🚀</div>
-        <h3>Grow Your Career</h3>
-        <p>
-          Find useful resources and opportunities
-          to build a successful career.
-        </p>
+        <div class="arm left"></div>
+        <div class="arm right"></div>
+
+        <div class="laptop"></div>
+
       </div>
 
     </div>
-  </section>
 
-  <section class="cta" id="contact">
-    <h2>Your Future Starts Here</h2>
+  </div>
 
-    <p>
-      Join LifeBridge and take the next step
-      toward your career.
-    </p>
+</section>
 
-    <a href="#" class="btn">Get Started</a>
-  </section>
 
-  <footer>
-    <p>© 2026 LifeBridge. All rights reserved.</p>
-  </footer>
+<!-- FEATURES -->
+<section id="features">
+
+  <h2 class="section-title">
+    What LifeBridge Offers
+  </h2>
+
+  <p class="section-subtitle">
+    Everything you need to discover opportunities,
+    improve your skills and build a successful career.
+  </p>
+
+
+  <div class="features">
+
+    <div class="card">
+      <div class="icon">💼</div>
+      <h3>Find Jobs</h3>
+      <p>Discover job opportunities matching your skills and goals.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📚</div>
+      <h3>Learn Skills</h3>
+      <p>Improve your skills with useful learning resources.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🚀</div>
+      <h3>Career Growth</h3>
+      <p>Build a clear path toward your dream career.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">👤</div>
+      <h3>Create Profile</h3>
+      <p>Create your professional LifeBridge profile.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📄</div>
+      <h3>CV Builder</h3>
+      <p>Create a professional CV that stands out.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔍</div>
+      <h3>Job Search</h3>
+      <p>Search opportunities by role, skill and location.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎯</div>
+      <h3>Recommended Jobs</h3>
+      <p>Get opportunities based on your profile.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏢</div>
+      <h3>Company Directory</h3>
+      <p>Explore companies and career opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💻</div>
+      <h3>Remote Jobs</h3>
+      <p>Find work-from-anywhere career opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🌍</div>
+      <h3>Jobs Abroad</h3>
+      <p>Explore international career opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎓</div>
+      <h3>Online Courses</h3>
+      <p>Discover courses to improve your knowledge.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏆</div>
+      <h3>Certificates</h3>
+      <p>Build your credibility with skill certificates.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧠</div>
+      <h3>Skill Assessment</h3>
+      <p>Test your skills and discover areas to improve.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🤝</div>
+      <h3>Career Mentorship</h3>
+      <p>Connect with mentors for career guidance.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💬</div>
+      <h3>Career Community</h3>
+      <p>Connect and share experiences with others.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📢</div>
+      <h3>Job Alerts</h3>
+      <p>Never miss important new opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">❤️</div>
+      <h3>Saved Jobs</h3>
+      <p>Save interesting jobs and apply later.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📊</div>
+      <h3>Career Dashboard</h3>
+      <p>Manage your career activities in one place.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💰</div>
+      <h3>Salary Guide</h3>
+      <p>Understand salary ranges and career value.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📝</div>
+      <h3>Interview Preparation</h3>
+      <p>Prepare yourself for important interviews.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🎤</div>
+      <h3>Mock Interview</h3>
+      <p>Practice interview questions and improve confidence.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">💡</div>
+      <h3>Career Advice</h3>
+      <p>Get useful tips for your professional journey.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🧑‍🎓</div>
+      <h3>Student Corner</h3>
+      <p>Resources and opportunities for students.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">👩‍💻</div>
+      <h3>Freelance Jobs</h3>
+      <p>Discover freelance and independent work.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🏠</div>
+      <h3>Work From Home</h3>
+      <p>Find flexible work-from-home opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📈</div>
+      <h3>Career Roadmap</h3>
+      <p>Create a step-by-step plan for your career.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🔔</div>
+      <h3>Notifications</h3>
+      <p>Stay updated about your career activities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">📱</div>
+      <h3>Mobile Profile</h3>
+      <p>Access your professional profile from any device.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🛡️</div>
+      <h3>Verified Opportunities</h3>
+      <p>Discover safer and more reliable opportunities.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon">🆘</div>
+      <h3>Career Help</h3>
+      <p>Get guidance when you need help with your career.</p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ABOUT -->
+<section class="about" id="about">
+
+  <div class="about-box">
+
+    <div>
+      <h2>Why LifeBridge?</h2>
+
+      <p>
+        LifeBridge is designed to connect people with
+        opportunities, skills and career resources.
+        Our goal is to help people take the next step
+        toward a better future.
+      </p>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong>30+</strong>
+        Features
+      </div>
+
+      <div class="stat">
+        <strong>24/7</strong>
+        Opportunities
+      </div>
+
+      <div class="stat">
+        <strong>∞</strong>
+        Possibilities
+      </div>
+
+      <div class="stat">
+        <strong>1</strong>
+        Better Future
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="cta" id="contact">
+
+  <h2>Your Future Starts Here</h2>
+
+  <p>
+    Join LifeBridge and take the next step toward
+    your career.
+  </p>
+
+  <a href="#features" class="btn">
+    Get Started
+  </a>
+
+</section>
+
+
+<footer>
+  <p>
+    © 2026 <strong>LifeBridge</strong> —
+    Connecting people with opportunities.
+  </p>
+</footer>
 
 </body>
 </html>
