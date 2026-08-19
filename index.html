@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="LifeBridge — Connecting people with jobs, skills, learning resources and opportunities.">
+<meta name="description" content="LifeBridge — Connecting people with jobs, skills, learning resources, products, services and opportunities.">
 <meta name="theme-color" content="#2563eb">
 
 <title>LifeBridge — Build Your Better Future</title>
@@ -82,7 +82,7 @@ header{
 nav{
   display:flex;
   align-items:center;
-  gap:28px;
+  gap:22px;
 }
 
 nav a{
@@ -302,7 +302,6 @@ nav a:hover{
 .progress span{
   display:block;
   height:100%;
-  width:78%;
   background:linear-gradient(90deg,var(--primary),var(--secondary));
   border-radius:10px;
 }
@@ -355,7 +354,7 @@ section{
   font-size:18px;
 }
 
-/* ================= FEATURES SEARCH ================= */
+/* ================= SEARCH ================= */
 
 .feature-tools{
   max-width:600px;
@@ -461,6 +460,23 @@ section{
 .no-results h3{
   color:var(--dark);
   margin-bottom:5px;
+}
+
+/* ================= CATEGORIES ================= */
+
+.categories-section{
+  background:#f8fafc;
+}
+
+.category-tools{
+  max-width:600px;
+  margin:0 auto 35px;
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
 }
 
 /* ================= ABOUT ================= */
@@ -635,7 +651,8 @@ footer p{
     font-size:48px;
   }
 
-  .features{
+  .features,
+  .category-grid{
     grid-template-columns:1fr 1fr;
   }
 
@@ -704,7 +721,8 @@ footer p{
     font-size:16px;
   }
 
-  .features{
+  .features,
+  .category-grid{
     grid-template-columns:1fr;
   }
 
@@ -775,6 +793,8 @@ input:focus-visible{
 
       <a href="#features" onclick="closeMenu()">Features</a>
 
+      <a href="#categories" onclick="closeMenu()">Categories</a>
+
       <a href="#about" onclick="closeMenu()">About</a>
 
       <a href="#contact" class="nav-btn" onclick="closeMenu()">
@@ -807,8 +827,8 @@ input:focus-visible{
 
       <p>
         LifeBridge connects you with jobs, skills,
-        learning resources and career opportunities —
-        all in one place.
+        learning resources, products, services and
+        career opportunities — all in one place.
       </p>
 
       <div class="buttons">
@@ -817,16 +837,14 @@ input:focus-visible{
           Explore Opportunities →
         </a>
 
-        <a href="#about" class="btn secondary">
-          Learn More
+        <a href="#categories" class="btn secondary">
+          Explore Categories
         </a>
 
       </div>
 
     </div>
 
-
-    <!-- HERO VISUAL -->
 
     <div class="hero-visual">
 
@@ -933,7 +951,6 @@ input:focus-visible{
 
     </div>
 
-
     <div class="feature-tools">
 
       <div class="search-wrapper">
@@ -964,461 +981,187 @@ input:focus-visible{
 
     <div class="features" id="featureList">
 
-
-      <!-- 01 -->
-
       <div class="card">
-
         <div class="icon">💼</div>
-
         <h3>Find Jobs</h3>
-
-        <p>
-          Discover job opportunities matching your skills and goals.
-        </p>
-
+        <p>Discover job opportunities matching your skills and goals.</p>
       </div>
 
-
-      <!-- 02 -->
-
       <div class="card">
-
         <div class="icon">📚</div>
-
         <h3>Learn Skills</h3>
-
-        <p>
-          Improve your skills with useful learning resources.
-        </p>
-
+        <p>Improve your skills with useful learning resources.</p>
       </div>
 
-
-      <!-- 03 -->
-
       <div class="card">
-
         <div class="icon">🚀</div>
-
         <h3>Career Growth</h3>
-
-        <p>
-          Build a clear path toward your dream career.
-        </p>
-
+        <p>Build a clear path toward your dream career.</p>
       </div>
 
-
-      <!-- 04 -->
-
       <div class="card">
-
         <div class="icon">👤</div>
-
         <h3>Create Profile</h3>
-
-        <p>
-          Create your professional LifeBridge profile.
-        </p>
-
+        <p>Create your professional LifeBridge profile.</p>
       </div>
 
-
-      <!-- 05 -->
-
       <div class="card">
-
         <div class="icon">📄</div>
-
         <h3>CV Builder</h3>
-
-        <p>
-          Create a professional CV that stands out.
-        </p>
-
+        <p>Create a professional CV that stands out.</p>
       </div>
 
-
-      <!-- 06 -->
-
       <div class="card">
-
         <div class="icon">🔍</div>
-
         <h3>Job Search</h3>
-
-        <p>
-          Search opportunities by role, skill and location.
-        </p>
-
+        <p>Search opportunities by role, skill and location.</p>
       </div>
 
-
-      <!-- 07 -->
-
       <div class="card">
-
         <div class="icon">🎯</div>
-
         <h3>Recommended Jobs</h3>
-
-        <p>
-          Get opportunities based on your profile.
-        </p>
-
+        <p>Get opportunities based on your profile.</p>
       </div>
 
-
-      <!-- 08 -->
-
       <div class="card">
-
         <div class="icon">🏢</div>
-
         <h3>Company Directory</h3>
-
-        <p>
-          Explore companies and career opportunities.
-        </p>
-
+        <p>Explore companies and career opportunities.</p>
       </div>
 
-
-      <!-- 09 -->
-
       <div class="card">
-
         <div class="icon">💻</div>
-
         <h3>Remote Jobs</h3>
-
-        <p>
-          Find work-from-anywhere career opportunities.
-        </p>
-
+        <p>Find work-from-anywhere career opportunities.</p>
       </div>
 
-
-      <!-- 10 -->
-
       <div class="card">
-
         <div class="icon">🌍</div>
-
         <h3>Jobs Abroad</h3>
-
-        <p>
-          Explore international career opportunities.
-        </p>
-
+        <p>Explore international career opportunities.</p>
       </div>
 
-
-      <!-- 11 -->
-
       <div class="card">
-
         <div class="icon">🎓</div>
-
         <h3>Online Courses</h3>
-
-        <p>
-          Discover courses to improve your knowledge.
-        </p>
-
+        <p>Discover courses to improve your knowledge.</p>
       </div>
 
-
-      <!-- 12 -->
-
       <div class="card">
-
         <div class="icon">🏆</div>
-
         <h3>Certificates</h3>
-
-        <p>
-          Build your credibility with skill certificates.
-        </p>
-
+        <p>Build your credibility with skill certificates.</p>
       </div>
 
-
-      <!-- 13 -->
-
       <div class="card">
-
         <div class="icon">🧠</div>
-
         <h3>Skill Assessment</h3>
-
-        <p>
-          Test your skills and discover areas to improve.
-        </p>
-
+        <p>Test your skills and discover areas to improve.</p>
       </div>
 
-
-      <!-- 14 -->
-
       <div class="card">
-
         <div class="icon">🤝</div>
-
         <h3>Career Mentorship</h3>
-
-        <p>
-          Connect with mentors for career guidance.
-        </p>
-
+        <p>Connect with mentors for career guidance.</p>
       </div>
 
-
-      <!-- 15 -->
-
       <div class="card">
-
         <div class="icon">💬</div>
-
         <h3>Career Community</h3>
-
-        <p>
-          Connect and share experiences with others.
-        </p>
-
+        <p>Connect and share experiences with others.</p>
       </div>
 
-
-      <!-- 16 -->
-
       <div class="card">
-
         <div class="icon">📢</div>
-
         <h3>Job Alerts</h3>
-
-        <p>
-          Never miss important new opportunities.
-        </p>
-
+        <p>Never miss important new opportunities.</p>
       </div>
 
-
-      <!-- 17 -->
-
       <div class="card">
-
         <div class="icon">❤️</div>
-
         <h3>Saved Jobs</h3>
-
-        <p>
-          Save interesting jobs and apply later.
-        </p>
-
+        <p>Save interesting jobs and apply later.</p>
       </div>
 
-
-      <!-- 18 -->
-
       <div class="card">
-
         <div class="icon">📊</div>
-
         <h3>Career Dashboard</h3>
-
-        <p>
-          Manage your career activities in one place.
-        </p>
-
+        <p>Manage your career activities in one place.</p>
       </div>
 
-
-      <!-- 19 -->
-
       <div class="card">
-
         <div class="icon">💰</div>
-
         <h3>Salary Guide</h3>
-
-        <p>
-          Understand salary ranges and career value.
-        </p>
-
+        <p>Understand salary ranges and career value.</p>
       </div>
 
-
-      <!-- 20 -->
-
       <div class="card">
-
         <div class="icon">📝</div>
-
         <h3>Interview Preparation</h3>
-
-        <p>
-          Prepare yourself for important interviews.
-        </p>
-
+        <p>Prepare yourself for important interviews.</p>
       </div>
 
-
-      <!-- 21 -->
-
       <div class="card">
-
         <div class="icon">🎤</div>
-
         <h3>Mock Interview</h3>
-
-        <p>
-          Practice interview questions and improve confidence.
-        </p>
-
+        <p>Practice interview questions and improve confidence.</p>
       </div>
 
-
-      <!-- 22 -->
-
       <div class="card">
-
         <div class="icon">💡</div>
-
         <h3>Career Advice</h3>
-
-        <p>
-          Get useful tips for your professional journey.
-        </p>
-
+        <p>Get useful tips for your professional journey.</p>
       </div>
 
-
-      <!-- 23 -->
-
       <div class="card">
-
         <div class="icon">🧑‍🎓</div>
-
         <h3>Student Corner</h3>
-
-        <p>
-          Resources and opportunities for students.
-        </p>
-
+        <p>Resources and opportunities for students.</p>
       </div>
 
-
-      <!-- 24 -->
-
       <div class="card">
-
         <div class="icon">👩‍💻</div>
-
         <h3>Freelance Jobs</h3>
-
-        <p>
-          Discover freelance and independent work.
-        </p>
-
+        <p>Discover freelance and independent work.</p>
       </div>
 
-
-      <!-- 25 -->
-
       <div class="card">
-
         <div class="icon">🏠</div>
-
         <h3>Work From Home</h3>
-
-        <p>
-          Find flexible work-from-home opportunities.
-        </p>
-
+        <p>Find flexible work-from-home opportunities.</p>
       </div>
 
-
-      <!-- 26 -->
-
       <div class="card">
-
         <div class="icon">📈</div>
-
         <h3>Career Roadmap</h3>
-
-        <p>
-          Create a step-by-step plan for your career.
-        </p>
-
+        <p>Create a step-by-step plan for your career.</p>
       </div>
 
-
-      <!-- 27 -->
-
       <div class="card">
-
         <div class="icon">🔔</div>
-
         <h3>Notifications</h3>
-
-        <p>
-          Stay updated about your career activities.
-        </p>
-
+        <p>Stay updated about your career activities.</p>
       </div>
 
-
-      <!-- 28 -->
-
       <div class="card">
-
         <div class="icon">📱</div>
-
         <h3>Mobile Profile</h3>
-
-        <p>
-          Access your professional profile from any device.
-        </p>
-
+        <p>Access your professional profile from any device.</p>
       </div>
 
-
-      <!-- 29 -->
-
       <div class="card">
-
         <div class="icon">🛡️</div>
-
         <h3>Verified Opportunities</h3>
-
-        <p>
-          Discover safer and more reliable opportunities.
-        </p>
-
+        <p>Discover safer and more reliable opportunities.</p>
       </div>
-
-
-      <!-- 30 -->
 
       <div class="card">
-
         <div class="icon">🆘</div>
-
         <h3>Career Help</h3>
-
-        <p>
-          Get guidance when you need help with your career.
-        </p>
-
+        <p>Get guidance when you need help with your career.</p>
       </div>
-
 
     </div>
-
-
-    <!-- NO SEARCH RESULT -->
 
     <div class="no-results" id="noResults">
 
@@ -1428,6 +1171,263 @@ input:focus-visible{
 
       <h3>
         No features found
+      </h3>
+
+      <p>
+        Try another search term.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= 30 CATEGORIES ================= -->
+
+<section class="categories-section" id="categories">
+
+  <div class="container">
+
+    <div class="section-heading">
+
+      <div class="badge">
+        🌉 LifeBridge Categories
+      </div>
+
+      <h2>
+        Explore LifeBridge
+      </h2>
+
+      <p>
+        Find jobs, products, services, businesses and helpful opportunities
+        in one place.
+      </p>
+
+    </div>
+
+
+    <div class="category-tools">
+
+      <div class="search-wrapper">
+
+        <span class="search-icon">
+          🔎
+        </span>
+
+        <input
+          type="text"
+          id="categorySearch"
+          class="search"
+          placeholder="Search categories..."
+          autocomplete="off"
+          aria-label="Search LifeBridge categories"
+        >
+
+      </div>
+
+      <div
+        id="categoryStatus"
+        class="search-status"
+        aria-live="polite">
+      </div>
+
+    </div>
+
+
+    <div class="category-grid" id="categoryList">
+
+      <div class="card">
+        <div class="icon">💼</div>
+        <h3>Jobs</h3>
+        <p>Find jobs and career opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💻</div>
+        <h3>Freelancing</h3>
+        <p>Find freelance work and projects.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛍️</div>
+        <h3>Products</h3>
+        <p>Buy and sell products online.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛠️</div>
+        <h3>Services</h3>
+        <p>Discover useful services near you.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏢</div>
+        <h3>Business</h3>
+        <p>Discover businesses and opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏠</div>
+        <h3>Property & Rent</h3>
+        <p>Find property, homes and rental opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚗</div>
+        <h3>Vehicles</h3>
+        <p>Explore vehicles and transport options.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📚</div>
+        <h3>Education</h3>
+        <p>Find education and learning opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎓</div>
+        <h3>Courses & Training</h3>
+        <p>Learn new skills through courses and training.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💰</div>
+        <h3>Finance</h3>
+        <p>Explore finance and accounting services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">👨‍💻</div>
+        <h3>Technology</h3>
+        <p>Technology products, services and opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📱</div>
+        <h3>Mobile & Electronics</h3>
+        <p>Find phones, electronics and accessories.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏥</div>
+        <h3>Health & Care</h3>
+        <p>Find health and care related services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🩸</div>
+        <h3>Blood Donor</h3>
+        <p>Find blood donors and blood requests.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚨</div>
+        <h3>Emergency</h3>
+        <p>Get help during emergency situations.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤝</div>
+        <h3>Volunteer</h3>
+        <p>Join volunteer activities and help others.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🏛️</div>
+        <h3>Organizations</h3>
+        <p>Discover organizations and community groups.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧑‍🌾</div>
+        <h3>Agriculture</h3>
+        <p>Explore agriculture products and opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🍔</div>
+        <h3>Food & Restaurant</h3>
+        <p>Find food, restaurants and delivery services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🛒</div>
+        <h3>Buy & Sell</h3>
+        <p>Buy and sell items in your area.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">👷</div>
+        <h3>Daily Work</h3>
+        <p>Find workers and daily work opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🎨</div>
+        <h3>Creative & Design</h3>
+        <p>Find creative professionals and design services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📸</div>
+        <h3>Media & Photography</h3>
+        <p>Photography, video and media services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚚</div>
+        <h3>Delivery & Transport</h3>
+        <p>Find delivery and transportation services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧑‍🏫</div>
+        <h3>Tutor & Coaching</h3>
+        <p>Find tutors and coaching opportunities.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🧰</div>
+        <h3>Repair & Maintenance</h3>
+        <p>Find repair and maintenance services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">👗</div>
+        <h3>Fashion & Lifestyle</h3>
+        <p>Explore fashion and lifestyle products.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🐄</div>
+        <h3>Animals & Livestock</h3>
+        <p>Find livestock, animals and related services.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🌱</div>
+        <h3>Community & Social Help</h3>
+        <p>Connect with people and community support.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📢</div>
+        <h3>Other / General</h3>
+        <p>Explore other useful LifeBridge opportunities.</p>
+      </div>
+
+    </div>
+
+    <div class="no-results" id="categoryNoResults">
+
+      <div class="no-results-icon">
+        🔎
+      </div>
+
+      <h3>
+        No categories found
       </h3>
 
       <p>
@@ -1489,38 +1489,23 @@ input:focus-visible{
       <div class="stats">
 
         <div class="stat">
-
           <strong>30+</strong>
-
           Features
-
         </div>
 
+        <div class="stat">
+          <strong>30</strong>
+          Categories
+        </div>
 
         <div class="stat">
-
           <strong>24/7</strong>
-
           Opportunities
-
         </div>
 
-
         <div class="stat">
-
           <strong>∞</strong>
-
           Possibilities
-
-        </div>
-
-
-        <div class="stat">
-
-          <strong>1</strong>
-
-          Better Future
-
         </div>
 
       </div>
@@ -1546,7 +1531,7 @@ input:focus-visible{
       Take the next step toward a better career with LifeBridge.
     </p>
 
-    <a href="#features" class="btn">
+    <a href="#categories" class="btn">
       Get Started →
     </a>
 
@@ -1587,7 +1572,10 @@ function toggleMenu(){
 
   const isOpen = nav.classList.contains("active");
 
-  button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  button.setAttribute(
+    "aria-expanded",
+    isOpen ? "true" : "false"
+  );
 
   button.setAttribute(
     "aria-label",
@@ -1632,24 +1620,22 @@ function searchFeatures(){
   const searchStatus =
     document.getElementById("searchStatus");
 
-
   const searchText =
     inputElement.value
       .trim()
       .toLowerCase();
 
-
   let visibleCount = 0;
-
 
   cards.forEach(function(card){
 
     const text =
-      card.innerText
-        .toLowerCase();
+      card.innerText.toLowerCase();
 
-
-    if(searchText === "" || text.includes(searchText)){
+    if(
+      searchText === "" ||
+      text.includes(searchText)
+    ){
 
       card.style.display = "";
 
@@ -1662,7 +1648,6 @@ function searchFeatures(){
     }
 
   });
-
 
   if(visibleCount === 0){
 
@@ -1683,7 +1668,8 @@ function searchFeatures(){
     }else{
 
       searchStatus.textContent =
-        "Showing " + visibleCount + " matching feature" +
+        "Showing " + visibleCount +
+        " matching feature" +
         (visibleCount === 1 ? "." : "s.");
 
     }
@@ -1693,36 +1679,128 @@ function searchFeatures(){
 }
 
 
-/* ================= SEARCH EVENT ================= */
+/* ================= CATEGORY SEARCH ================= */
 
-document.addEventListener("DOMContentLoaded", function(){
+function searchCategories(){
 
-  const searchInput =
-    document.getElementById("featureSearch");
+  const inputElement =
+    document.getElementById("categorySearch");
 
+  const categoryList =
+    document.getElementById("categoryList");
 
-  searchInput.addEventListener(
-    "input",
-    searchFeatures
-  );
+  const cards =
+    categoryList.querySelectorAll(".card");
 
+  const noResults =
+    document.getElementById("categoryNoResults");
 
-  searchFeatures();
+  const status =
+    document.getElementById("categoryStatus");
 
-});
+  const searchText =
+    inputElement.value
+      .trim()
+      .toLowerCase();
 
+  let visibleCount = 0;
 
-/* ================= ESC KEY MENU ================= */
+  cards.forEach(function(card){
 
-document.addEventListener("keydown", function(event){
+    const text =
+      card.innerText.toLowerCase();
 
-  if(event.key === "Escape"){
+    if(
+      searchText === "" ||
+      text.includes(searchText)
+    ){
 
-    closeMenu();
+      card.style.display = "";
+
+      visibleCount++;
+
+    }else{
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+  if(visibleCount === 0){
+
+    noResults.style.display = "block";
+
+    status.textContent =
+      "No matching categories found.";
+
+  }else{
+
+    noResults.style.display = "none";
+
+    if(searchText === ""){
+
+      status.textContent =
+        "Showing all " + visibleCount + " categories.";
+
+    }else{
+
+      status.textContent =
+        "Showing " + visibleCount +
+        " matching categor" +
+        (visibleCount === 1 ? "y." : "ies.");
+
+    }
 
   }
 
-});
+}
+
+
+/* ================= PAGE READY ================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
+
+    const featureSearch =
+      document.getElementById("featureSearch");
+
+    const categorySearch =
+      document.getElementById("categorySearch");
+
+    featureSearch.addEventListener(
+      "input",
+      searchFeatures
+    );
+
+    categorySearch.addEventListener(
+      "input",
+      searchCategories
+    );
+
+    searchFeatures();
+
+    searchCategories();
+
+  }
+);
+
+
+/* ================= ESC KEY ================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      closeMenu();
+
+    }
+
+  }
+);
 
 </script>
 
