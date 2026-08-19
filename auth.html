@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>LifeBridge — Login & Sign Up</title>
+<title>Kormiva — Login & Sign Up</title>
 
 <style>
 *{
@@ -230,7 +230,7 @@ input:focus{
 <div class="auth-container">
 
   <div class="logo">
-    Life<span>Bridge</span>
+    Kormiva
   </div>
 
   <p class="subtitle">
@@ -398,7 +398,7 @@ input:focus{
       </div>
 
       <h2>
-        Welcome to LifeBridge!
+        Welcome to Kormiva!
       </h2>
 
       <p id="userEmail"></p>
@@ -414,7 +414,7 @@ input:focus{
   </div>
 
   <a href="index.html" class="back-home">
-    ← Back to LifeBridge Home
+    ← Back to Kormiva Home
   </a>
 
 </div>
@@ -508,6 +508,7 @@ function showMessage(text,type){
     document.getElementById("message");
 
   message.textContent = text;
+
   message.className =
     "message " + type;
 
@@ -519,6 +520,7 @@ function clearMessage(){
     document.getElementById("message");
 
   message.textContent = "";
+
   message.className = "message";
 
 }
@@ -545,7 +547,9 @@ document
       document.getElementById("signupButton");
 
     button.disabled = true;
-    button.textContent = "Creating account...";
+
+    button.textContent =
+      "Creating account...";
 
     clearMessage();
 
@@ -574,7 +578,9 @@ document
       );
 
       button.disabled = false;
-      button.textContent = "Create Account";
+
+      button.textContent =
+        "Create Account";
 
       return;
 
@@ -590,7 +596,9 @@ document
       .reset();
 
     button.disabled = false;
-    button.textContent = "Create Account";
+
+    button.textContent =
+      "Create Account";
 
   });
 
@@ -613,7 +621,9 @@ document
       document.getElementById("loginButton");
 
     button.disabled = true;
-    button.textContent = "Logging in...";
+
+    button.textContent =
+      "Logging in...";
 
     clearMessage();
 
@@ -634,7 +644,9 @@ document
       );
 
       button.disabled = false;
-      button.textContent = "Login";
+
+      button.textContent =
+        "Login";
 
       return;
 
@@ -645,7 +657,9 @@ document
     );
 
     button.disabled = false;
-    button.textContent = "Login";
+
+    button.textContent =
+      "Login";
 
   });
 
