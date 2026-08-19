@@ -4,9 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<meta name="description" content="LifeBridge — Connecting people with jobs, skills, learning resources and opportunities.">
+<meta name="theme-color" content="#2563eb">
+
 <title>LifeBridge — Build Your Better Future</title>
 
 <style>
+
 *{
   margin:0;
   padding:0;
@@ -27,6 +31,7 @@ html{
   --light:#f8fafc;
   --white:#ffffff;
   --border:#e2e8f0;
+  --success:#22c55e;
 }
 
 body{
@@ -34,6 +39,11 @@ body{
   background:var(--light);
   color:var(--dark);
   line-height:1.6;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
 }
 
 /* ================= HEADER ================= */
@@ -42,7 +52,7 @@ header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.94);
+  background:rgba(255,255,255,.95);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(226,232,240,.8);
 }
@@ -54,6 +64,7 @@ header{
   display:flex;
   align-items:center;
   justify-content:space-between;
+  position:relative;
 }
 
 .logo{
@@ -61,6 +72,7 @@ header{
   font-weight:900;
   color:var(--primary);
   text-decoration:none;
+  letter-spacing:-1px;
 }
 
 .logo span{
@@ -174,6 +186,7 @@ nav a:hover{
   font-size:16px;
   font-weight:700;
   transition:.25s;
+  cursor:pointer;
 }
 
 .primary{
@@ -210,7 +223,7 @@ nav a:hover{
 
 .visual-card{
   width:340px;
-  height:390px;
+  min-height:390px;
   background:white;
   border:1px solid var(--border);
   border-radius:35px;
@@ -234,7 +247,7 @@ nav a:hover{
   width:12px;
   height:12px;
   border-radius:50%;
-  background:#22c55e;
+  background:var(--success);
 }
 
 .profile{
@@ -261,6 +274,7 @@ nav a:hover{
 .profile p{
   font-size:14px;
   color:var(--muted);
+  margin:0;
 }
 
 .progress-box{
@@ -301,6 +315,7 @@ nav a:hover{
   padding:14px 18px;
   box-shadow:0 15px 35px rgba(15,23,42,.12);
   font-weight:700;
+  z-index:2;
 }
 
 .float-one{
@@ -340,27 +355,51 @@ section{
   font-size:18px;
 }
 
-/* ================= FEATURES ================= */
+/* ================= FEATURES SEARCH ================= */
 
 .feature-tools{
   max-width:600px;
   margin:0 auto 35px;
 }
 
+.search-wrapper{
+  position:relative;
+}
+
 .search{
   width:100%;
-  padding:16px 20px;
+  padding:16px 20px 16px 48px;
   border:1px solid var(--border);
   border-radius:14px;
   outline:none;
   font-size:16px;
   background:white;
+  transition:.25s;
 }
 
 .search:focus{
   border-color:var(--primary);
   box-shadow:0 0 0 4px rgba(37,99,235,.1);
 }
+
+.search-icon{
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:19px;
+  pointer-events:none;
+}
+
+.search-status{
+  text-align:center;
+  color:var(--muted);
+  font-size:14px;
+  margin-top:12px;
+  min-height:21px;
+}
+
+/* ================= FEATURES ================= */
 
 .features{
   display:grid;
@@ -402,6 +441,26 @@ section{
 .card p{
   color:var(--muted);
   font-size:15px;
+}
+
+.no-results{
+  display:none;
+  text-align:center;
+  background:white;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:45px 20px;
+  color:var(--muted);
+}
+
+.no-results-icon{
+  font-size:45px;
+  margin-bottom:12px;
+}
+
+.no-results h3{
+  color:var(--dark);
+  margin-bottom:5px;
 }
 
 /* ================= ABOUT ================= */
@@ -533,7 +592,7 @@ footer p{
   nav{
     display:none;
     position:absolute;
-    top:72px;
+    top:78px;
     left:0;
     right:0;
     background:white;
@@ -542,6 +601,7 @@ footer p{
     align-items:stretch;
     gap:5px;
     box-shadow:0 15px 30px rgba(15,23,42,.1);
+    border-bottom:1px solid var(--border);
   }
 
   nav.active{
@@ -582,6 +642,7 @@ footer p{
   .about-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:600px){
@@ -608,11 +669,18 @@ footer p{
 
   .hero-visual{
     min-height:390px;
+    margin-top:20px;
   }
 
   .visual-card{
     width:290px;
-    height:360px;
+    min-height:360px;
+    padding:22px;
+  }
+
+  .floating{
+    font-size:13px;
+    padding:11px 13px;
   }
 
   .float-one{
@@ -630,6 +698,10 @@ footer p{
   .section-heading h2,
   .about-content h2{
     font-size:32px;
+  }
+
+  .section-heading p{
+    font-size:16px;
   }
 
   .features{
@@ -660,34 +732,64 @@ footer p{
     flex-direction:column;
     text-align:center;
   }
+
 }
+
+/* ================= ACCESSIBILITY ================= */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible{
+  outline:3px solid rgba(37,99,235,.35);
+  outline-offset:3px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
+
 <header>
+
   <div class="navbar">
 
-    <a href="#home" class="logo">
+    <a href="#home" class="logo" aria-label="LifeBridge Home">
       Life<span>Bridge</span>
     </a>
 
-    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <button
+      class="menu-btn"
+      id="menuButton"
+      type="button"
+      aria-label="Open menu"
+      aria-expanded="false"
+      onclick="toggleMenu()">
+      ☰
+    </button>
 
     <nav id="nav">
-      <a href="#home">Home</a>
-      <a href="#features">Features</a>
-      <a href="#about">About</a>
-      <a href="#contact" class="nav-btn">Get Started</a>
+
+      <a href="#home" onclick="closeMenu()">Home</a>
+
+      <a href="#features" onclick="closeMenu()">Features</a>
+
+      <a href="#about" onclick="closeMenu()">About</a>
+
+      <a href="#contact" class="nav-btn" onclick="closeMenu()">
+        Get Started
+      </a>
+
     </nav>
 
   </div>
+
 </header>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
+
 <section class="hero" id="home">
 
   <div class="hero-container">
@@ -710,6 +812,7 @@ footer p{
       </p>
 
       <div class="buttons">
+
         <a href="#features" class="btn primary">
           Explore Opportunities →
         </a>
@@ -717,12 +820,14 @@ footer p{
         <a href="#about" class="btn secondary">
           Learn More
         </a>
+
       </div>
 
     </div>
 
 
     <!-- HERO VISUAL -->
+
     <div class="hero-visual">
 
       <div class="floating float-one">
@@ -732,11 +837,13 @@ footer p{
       <div class="visual-card">
 
         <div class="visual-top">
+
           <div class="visual-title">
             My Career
           </div>
 
           <div class="dot"></div>
+
         </div>
 
         <div class="profile">
@@ -745,7 +852,9 @@ footer p{
             👨‍💻
           </div>
 
-          <h3>Career Profile</h3>
+          <h3>
+            Career Profile
+          </h3>
 
           <p>
             Software & Technology
@@ -761,7 +870,7 @@ footer p{
           </div>
 
           <div class="progress">
-            <span></span>
+            <span style="width:78%"></span>
           </div>
 
         </div>
@@ -805,7 +914,8 @@ footer p{
 </section>
 
 
-<!-- FEATURES -->
+<!-- ================= FEATURES ================= -->
+
 <section id="features">
 
   <div class="container">
@@ -826,198 +936,503 @@ footer p{
 
     <div class="feature-tools">
 
-      <input
-        type="text"
-        id="featureSearch"
-        class="search"
-        placeholder="🔎 Search features..."
-        onkeyup="searchFeatures()"
-      >
+      <div class="search-wrapper">
+
+        <span class="search-icon">
+          🔎
+        </span>
+
+        <input
+          type="text"
+          id="featureSearch"
+          class="search"
+          placeholder="Search features..."
+          autocomplete="off"
+          aria-label="Search LifeBridge features"
+        >
+
+      </div>
+
+      <div
+        id="searchStatus"
+        class="search-status"
+        aria-live="polite">
+      </div>
 
     </div>
 
 
     <div class="features" id="featureList">
 
+
+      <!-- 01 -->
+
       <div class="card">
+
         <div class="icon">💼</div>
+
         <h3>Find Jobs</h3>
-        <p>Discover job opportunities matching your skills and goals.</p>
+
+        <p>
+          Discover job opportunities matching your skills and goals.
+        </p>
+
       </div>
 
+
+      <!-- 02 -->
+
       <div class="card">
+
         <div class="icon">📚</div>
+
         <h3>Learn Skills</h3>
-        <p>Improve your skills with useful learning resources.</p>
+
+        <p>
+          Improve your skills with useful learning resources.
+        </p>
+
       </div>
 
+
+      <!-- 03 -->
+
       <div class="card">
+
         <div class="icon">🚀</div>
+
         <h3>Career Growth</h3>
-        <p>Build a clear path toward your dream career.</p>
+
+        <p>
+          Build a clear path toward your dream career.
+        </p>
+
       </div>
 
+
+      <!-- 04 -->
+
       <div class="card">
+
         <div class="icon">👤</div>
+
         <h3>Create Profile</h3>
-        <p>Create your professional LifeBridge profile.</p>
+
+        <p>
+          Create your professional LifeBridge profile.
+        </p>
+
       </div>
 
+
+      <!-- 05 -->
+
       <div class="card">
+
         <div class="icon">📄</div>
+
         <h3>CV Builder</h3>
-        <p>Create a professional CV that stands out.</p>
+
+        <p>
+          Create a professional CV that stands out.
+        </p>
+
       </div>
 
+
+      <!-- 06 -->
+
       <div class="card">
+
         <div class="icon">🔍</div>
+
         <h3>Job Search</h3>
-        <p>Search opportunities by role, skill and location.</p>
+
+        <p>
+          Search opportunities by role, skill and location.
+        </p>
+
       </div>
 
+
+      <!-- 07 -->
+
       <div class="card">
+
         <div class="icon">🎯</div>
+
         <h3>Recommended Jobs</h3>
-        <p>Get opportunities based on your profile.</p>
+
+        <p>
+          Get opportunities based on your profile.
+        </p>
+
       </div>
 
+
+      <!-- 08 -->
+
       <div class="card">
+
         <div class="icon">🏢</div>
+
         <h3>Company Directory</h3>
-        <p>Explore companies and career opportunities.</p>
+
+        <p>
+          Explore companies and career opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 09 -->
+
       <div class="card">
+
         <div class="icon">💻</div>
+
         <h3>Remote Jobs</h3>
-        <p>Find work-from-anywhere career opportunities.</p>
+
+        <p>
+          Find work-from-anywhere career opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 10 -->
+
       <div class="card">
+
         <div class="icon">🌍</div>
+
         <h3>Jobs Abroad</h3>
-        <p>Explore international career opportunities.</p>
+
+        <p>
+          Explore international career opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 11 -->
+
       <div class="card">
+
         <div class="icon">🎓</div>
+
         <h3>Online Courses</h3>
-        <p>Discover courses to improve your knowledge.</p>
+
+        <p>
+          Discover courses to improve your knowledge.
+        </p>
+
       </div>
 
+
+      <!-- 12 -->
+
       <div class="card">
+
         <div class="icon">🏆</div>
+
         <h3>Certificates</h3>
-        <p>Build your credibility with skill certificates.</p>
+
+        <p>
+          Build your credibility with skill certificates.
+        </p>
+
       </div>
 
+
+      <!-- 13 -->
+
       <div class="card">
+
         <div class="icon">🧠</div>
+
         <h3>Skill Assessment</h3>
-        <p>Test your skills and discover areas to improve.</p>
+
+        <p>
+          Test your skills and discover areas to improve.
+        </p>
+
       </div>
 
+
+      <!-- 14 -->
+
       <div class="card">
+
         <div class="icon">🤝</div>
+
         <h3>Career Mentorship</h3>
-        <p>Connect with mentors for career guidance.</p>
+
+        <p>
+          Connect with mentors for career guidance.
+        </p>
+
       </div>
 
+
+      <!-- 15 -->
+
       <div class="card">
+
         <div class="icon">💬</div>
+
         <h3>Career Community</h3>
-        <p>Connect and share experiences with others.</p>
+
+        <p>
+          Connect and share experiences with others.
+        </p>
+
       </div>
 
+
+      <!-- 16 -->
+
       <div class="card">
+
         <div class="icon">📢</div>
+
         <h3>Job Alerts</h3>
-        <p>Never miss important new opportunities.</p>
+
+        <p>
+          Never miss important new opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 17 -->
+
       <div class="card">
+
         <div class="icon">❤️</div>
+
         <h3>Saved Jobs</h3>
-        <p>Save interesting jobs and apply later.</p>
+
+        <p>
+          Save interesting jobs and apply later.
+        </p>
+
       </div>
 
+
+      <!-- 18 -->
+
       <div class="card">
+
         <div class="icon">📊</div>
+
         <h3>Career Dashboard</h3>
-        <p>Manage your career activities in one place.</p>
+
+        <p>
+          Manage your career activities in one place.
+        </p>
+
       </div>
 
+
+      <!-- 19 -->
+
       <div class="card">
+
         <div class="icon">💰</div>
+
         <h3>Salary Guide</h3>
-        <p>Understand salary ranges and career value.</p>
+
+        <p>
+          Understand salary ranges and career value.
+        </p>
+
       </div>
 
+
+      <!-- 20 -->
+
       <div class="card">
+
         <div class="icon">📝</div>
+
         <h3>Interview Preparation</h3>
-        <p>Prepare yourself for important interviews.</p>
+
+        <p>
+          Prepare yourself for important interviews.
+        </p>
+
       </div>
 
+
+      <!-- 21 -->
+
       <div class="card">
+
         <div class="icon">🎤</div>
+
         <h3>Mock Interview</h3>
-        <p>Practice interview questions and improve confidence.</p>
+
+        <p>
+          Practice interview questions and improve confidence.
+        </p>
+
       </div>
 
+
+      <!-- 22 -->
+
       <div class="card">
+
         <div class="icon">💡</div>
+
         <h3>Career Advice</h3>
-        <p>Get useful tips for your professional journey.</p>
+
+        <p>
+          Get useful tips for your professional journey.
+        </p>
+
       </div>
 
+
+      <!-- 23 -->
+
       <div class="card">
+
         <div class="icon">🧑‍🎓</div>
+
         <h3>Student Corner</h3>
-        <p>Resources and opportunities for students.</p>
+
+        <p>
+          Resources and opportunities for students.
+        </p>
+
       </div>
 
+
+      <!-- 24 -->
+
       <div class="card">
+
         <div class="icon">👩‍💻</div>
+
         <h3>Freelance Jobs</h3>
-        <p>Discover freelance and independent work.</p>
+
+        <p>
+          Discover freelance and independent work.
+        </p>
+
       </div>
 
+
+      <!-- 25 -->
+
       <div class="card">
+
         <div class="icon">🏠</div>
+
         <h3>Work From Home</h3>
-        <p>Find flexible work-from-home opportunities.</p>
+
+        <p>
+          Find flexible work-from-home opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 26 -->
+
       <div class="card">
+
         <div class="icon">📈</div>
+
         <h3>Career Roadmap</h3>
-        <p>Create a step-by-step plan for your career.</p>
+
+        <p>
+          Create a step-by-step plan for your career.
+        </p>
+
       </div>
 
+
+      <!-- 27 -->
+
       <div class="card">
+
         <div class="icon">🔔</div>
+
         <h3>Notifications</h3>
-        <p>Stay updated about your career activities.</p>
+
+        <p>
+          Stay updated about your career activities.
+        </p>
+
       </div>
 
+
+      <!-- 28 -->
+
       <div class="card">
+
         <div class="icon">📱</div>
+
         <h3>Mobile Profile</h3>
-        <p>Access your professional profile from any device.</p>
+
+        <p>
+          Access your professional profile from any device.
+        </p>
+
       </div>
 
+
+      <!-- 29 -->
+
       <div class="card">
+
         <div class="icon">🛡️</div>
+
         <h3>Verified Opportunities</h3>
-        <p>Discover safer and more reliable opportunities.</p>
+
+        <p>
+          Discover safer and more reliable opportunities.
+        </p>
+
       </div>
 
+
+      <!-- 30 -->
+
       <div class="card">
+
         <div class="icon">🆘</div>
+
         <h3>Career Help</h3>
-        <p>Get guidance when you need help with your career.</p>
+
+        <p>
+          Get guidance when you need help with your career.
+        </p>
+
       </div>
+
+
+    </div>
+
+
+    <!-- NO SEARCH RESULT -->
+
+    <div class="no-results" id="noResults">
+
+      <div class="no-results-icon">
+        🔎
+      </div>
+
+      <h3>
+        No features found
+      </h3>
+
+      <p>
+        Try another search term.
+      </p>
 
     </div>
 
@@ -1026,7 +1441,8 @@ footer p{
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
+
 <section class="about" id="about">
 
   <div class="container">
@@ -1049,10 +1465,21 @@ footer p{
 
         <ul class="check-list">
 
-          <li>Discover jobs that match your goals</li>
-          <li>Build valuable professional skills</li>
-          <li>Plan your career with confidence</li>
-          <li>Connect with a growing career community</li>
+          <li>
+            Discover jobs that match your goals
+          </li>
+
+          <li>
+            Build valuable professional skills
+          </li>
+
+          <li>
+            Plan your career with confidence
+          </li>
+
+          <li>
+            Connect with a growing career community
+          </li>
 
         </ul>
 
@@ -1062,23 +1489,38 @@ footer p{
       <div class="stats">
 
         <div class="stat">
+
           <strong>30+</strong>
+
           Features
+
         </div>
 
+
         <div class="stat">
+
           <strong>24/7</strong>
+
           Opportunities
+
         </div>
 
+
         <div class="stat">
+
           <strong>∞</strong>
+
           Possibilities
+
         </div>
 
+
         <div class="stat">
+
           <strong>1</strong>
+
           Better Future
+
         </div>
 
       </div>
@@ -1090,7 +1532,8 @@ footer p{
 </section>
 
 
-<!-- CTA -->
+<!-- ================= CTA ================= -->
+
 <section class="cta" id="contact">
 
   <div class="container">
@@ -1112,7 +1555,8 @@ footer p{
 </section>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
+
 <footer>
 
   <div class="footer-container">
@@ -1132,39 +1576,153 @@ footer p{
 
 <script>
 
+/* ================= MOBILE MENU ================= */
+
 function toggleMenu(){
 
   const nav = document.getElementById("nav");
+  const button = document.getElementById("menuButton");
 
   nav.classList.toggle("active");
+
+  const isOpen = nav.classList.contains("active");
+
+  button.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+  button.setAttribute(
+    "aria-label",
+    isOpen ? "Close menu" : "Open menu"
+  );
 
 }
 
 
+/* ================= CLOSE MOBILE MENU ================= */
+
+function closeMenu(){
+
+  const nav = document.getElementById("nav");
+  const button = document.getElementById("menuButton");
+
+  nav.classList.remove("active");
+
+  button.setAttribute("aria-expanded","false");
+
+  button.setAttribute("aria-label","Open menu");
+
+}
+
+
+/* ================= FEATURE SEARCH ================= */
+
 function searchFeatures(){
 
-  const input =
-    document.getElementById("featureSearch")
-    .value
-    .toLowerCase();
+  const inputElement =
+    document.getElementById("featureSearch");
+
+  const featureList =
+    document.getElementById("featureList");
 
   const cards =
-    document.querySelectorAll("#featureList .card");
+    featureList.querySelectorAll(".card");
 
-  cards.forEach(card => {
+  const noResults =
+    document.getElementById("noResults");
+
+  const searchStatus =
+    document.getElementById("searchStatus");
+
+
+  const searchText =
+    inputElement.value
+      .trim()
+      .toLowerCase();
+
+
+  let visibleCount = 0;
+
+
+  cards.forEach(function(card){
 
     const text =
-      card.innerText.toLowerCase();
+      card.innerText
+        .toLowerCase();
 
-    if(text.includes(input)){
+
+    if(searchText === "" || text.includes(searchText)){
+
       card.style.display = "";
+
+      visibleCount++;
+
     }else{
+
       card.style.display = "none";
+
     }
 
   });
 
+
+  if(visibleCount === 0){
+
+    noResults.style.display = "block";
+
+    searchStatus.textContent =
+      "No matching features found.";
+
+  }else{
+
+    noResults.style.display = "none";
+
+    if(searchText === ""){
+
+      searchStatus.textContent =
+        "Showing all " + visibleCount + " features.";
+
+    }else{
+
+      searchStatus.textContent =
+        "Showing " + visibleCount + " matching feature" +
+        (visibleCount === 1 ? "." : "s.");
+
+    }
+
+  }
+
 }
+
+
+/* ================= SEARCH EVENT ================= */
+
+document.addEventListener("DOMContentLoaded", function(){
+
+  const searchInput =
+    document.getElementById("featureSearch");
+
+
+  searchInput.addEventListener(
+    "input",
+    searchFeatures
+  );
+
+
+  searchFeatures();
+
+});
+
+
+/* ================= ESC KEY MENU ================= */
+
+document.addEventListener("keydown", function(event){
+
+  if(event.key === "Escape"){
+
+    closeMenu();
+
+  }
+
+});
 
 </script>
 
