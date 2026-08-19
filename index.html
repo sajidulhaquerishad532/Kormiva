@@ -10,7 +10,6 @@
 <title>Kormiva — Build Your Better Future</title>
 
 <style>
-
 *{
   margin:0;
   padding:0;
@@ -46,13 +45,11 @@ a{
   color:inherit;
 }
 
-/* ================= HEADER ================= */
-
 header{
   position:sticky;
   top:0;
   z-index:1000;
-  background:rgba(255,255,255,.95);
+  background:rgba(255,255,255,.96);
   backdrop-filter:blur(12px);
   border-bottom:1px solid rgba(226,232,240,.8);
 }
@@ -82,29 +79,35 @@ header{
 nav{
   display:flex;
   align-items:center;
-  gap:22px;
+  gap:10px;
 }
 
 nav a{
   text-decoration:none;
   color:var(--text);
   font-weight:600;
+  padding:10px 13px;
+  border-radius:9px;
   transition:.25s;
 }
 
 nav a:hover{
   color:var(--primary);
+  background:#eff6ff;
 }
 
 .nav-btn{
   background:var(--primary);
   color:white !important;
-  padding:11px 20px;
-  border-radius:10px;
+  padding:11px 18px !important;
 }
 
 .nav-btn:hover{
-  background:var(--primary-dark);
+  background:var(--primary-dark) !important;
+}
+
+.settings-btn{
+  background:#f1f5f9;
 }
 
 .menu-btn{
@@ -119,7 +122,7 @@ nav a:hover{
   cursor:pointer;
 }
 
-/* ================= HERO ================= */
+/* HERO */
 
 .hero{
   min-height:650px;
@@ -211,7 +214,7 @@ nav a:hover{
   background:#eff6ff;
 }
 
-/* ================= HERO VISUAL ================= */
+/* HERO VISUAL */
 
 .hero-visual{
   position:relative;
@@ -327,7 +330,7 @@ nav a:hover{
   bottom:55px;
 }
 
-/* ================= SECTIONS ================= */
+/* SECTIONS */
 
 section{
   padding:90px 25px;
@@ -354,9 +357,10 @@ section{
   font-size:18px;
 }
 
-/* ================= SEARCH ================= */
+/* SEARCH */
 
-.feature-tools{
+.feature-tools,
+.category-tools{
   max-width:600px;
   margin:0 auto 35px;
 }
@@ -373,7 +377,6 @@ section{
   outline:none;
   font-size:16px;
   background:white;
-  transition:.25s;
 }
 
 .search:focus{
@@ -398,9 +401,10 @@ section{
   min-height:21px;
 }
 
-/* ================= FEATURES ================= */
+/* CARDS */
 
-.features{
+.features,
+.category-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:22px;
@@ -452,34 +456,13 @@ section{
   color:var(--muted);
 }
 
-.no-results-icon{
-  font-size:45px;
-  margin-bottom:12px;
-}
-
-.no-results h3{
-  color:var(--dark);
-  margin-bottom:5px;
-}
-
-/* ================= CATEGORIES ================= */
+/* CATEGORIES */
 
 .categories-section{
   background:#f8fafc;
 }
 
-.category-tools{
-  max-width:600px;
-  margin:0 auto 35px;
-}
-
-.category-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:22px;
-}
-
-/* ================= ABOUT ================= */
+/* ABOUT */
 
 .about{
   background:white;
@@ -539,7 +522,7 @@ section{
   color:var(--primary);
 }
 
-/* ================= CTA ================= */
+/* CTA */
 
 .cta{
   background:
@@ -566,11 +549,7 @@ section{
   color:var(--primary);
 }
 
-.cta .btn:hover{
-  transform:translateY(-3px);
-}
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 footer{
   background:#0f172a;
@@ -593,15 +572,13 @@ footer{
   font-weight:800;
 }
 
-.footer-logo span{
-  color:#22d3ee;
+.footer-link{
+  color:#60a5fa;
+  text-decoration:none;
+  font-weight:700;
 }
 
-footer p{
-  font-size:14px;
-}
-
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:900px){
 
@@ -626,7 +603,6 @@ footer p{
 
   nav a{
     padding:13px;
-    margin:0;
   }
 
   .menu-btn{
@@ -659,7 +635,6 @@ footer p{
   .about-grid{
     grid-template-columns:1fr;
   }
-
 }
 
 @media(max-width:600px){
@@ -750,10 +725,7 @@ footer p{
     flex-direction:column;
     text-align:center;
   }
-
 }
-
-/* ================= ACCESSIBILITY ================= */
 
 button:focus-visible,
 a:focus-visible,
@@ -761,19 +733,18 @@ input:focus-visible{
   outline:3px solid rgba(37,99,235,.35);
   outline-offset:3px;
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<!-- HEADER -->
 
 <header>
 
   <div class="navbar">
 
-    <a href="#home" class="logo" aria-label="Kormiva Home">
+    <a href="#home" class="logo">
       Kormiva
     </a>
 
@@ -789,16 +760,28 @@ input:focus-visible{
 
     <nav id="nav">
 
-      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#home" onclick="closeMenu()">
+        🏠 Home
+      </a>
 
-      <a href="#features" onclick="closeMenu()">Features</a>
+      <a href="#features" onclick="closeMenu()">
+        ⚡ Features
+      </a>
 
-      <a href="#categories" onclick="closeMenu()">Categories</a>
+      <a href="#categories" onclick="closeMenu()">
+        📂 Categories
+      </a>
 
-      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#about" onclick="closeMenu()">
+        ℹ️ About
+      </a>
 
-      <a href="#contact" class="nav-btn" onclick="closeMenu()">
-        Get Started
+      <a href="auth.html" onclick="closeMenu()">
+        🔐 Login / Sign Up
+      </a>
+
+      <a href="settings.html" class="settings-btn" onclick="closeMenu()">
+        ⚙️ Settings
       </a>
 
     </nav>
@@ -808,7 +791,7 @@ input:focus-visible{
 </header>
 
 
-<!-- ================= HERO ================= -->
+<!-- HERO -->
 
 <section class="hero" id="home">
 
@@ -833,8 +816,8 @@ input:focus-visible{
 
       <div class="buttons">
 
-        <a href="#features" class="btn primary">
-          Explore Opportunities →
+        <a href="auth.html" class="btn primary">
+          Login / Sign Up →
         </a>
 
         <a href="#categories" class="btn secondary">
@@ -932,7 +915,7 @@ input:focus-visible{
 </section>
 
 
-<!-- ================= FEATURES ================= -->
+<!-- FEATURES -->
 
 <section id="features">
 
@@ -955,29 +938,23 @@ input:focus-visible{
 
       <div class="search-wrapper">
 
-        <span class="search-icon">
-          🔎
-        </span>
+        <span class="search-icon">🔎</span>
 
         <input
           type="text"
           id="featureSearch"
           class="search"
           placeholder="Search features..."
-          autocomplete="off"
-          aria-label="Search Kormiva features"
-        >
+          autocomplete="off">
 
       </div>
 
       <div
         id="searchStatus"
-        class="search-status"
-        aria-live="polite">
+        class="search-status">
       </div>
 
     </div>
-
 
     <div class="features" id="featureList">
 
@@ -1164,19 +1141,8 @@ input:focus-visible{
     </div>
 
     <div class="no-results" id="noResults">
-
-      <div class="no-results-icon">
-        🔎
-      </div>
-
-      <h3>
-        No features found
-      </h3>
-
-      <p>
-        Try another search term.
-      </p>
-
+      <h3>No features found</h3>
+      <p>Try another search term.</p>
     </div>
 
   </div>
@@ -1184,7 +1150,7 @@ input:focus-visible{
 </section>
 
 
-<!-- ================= 30 CATEGORIES ================= -->
+<!-- CATEGORIES -->
 
 <section class="categories-section" id="categories">
 
@@ -1207,233 +1173,66 @@ input:focus-visible{
 
     </div>
 
-
     <div class="category-tools">
 
       <div class="search-wrapper">
 
-        <span class="search-icon">
-          🔎
-        </span>
+        <span class="search-icon">🔎</span>
 
         <input
           type="text"
           id="categorySearch"
           class="search"
           placeholder="Search categories..."
-          autocomplete="off"
-          aria-label="Search Kormiva categories"
-        >
+          autocomplete="off">
 
       </div>
 
       <div
         id="categoryStatus"
-        class="search-status"
-        aria-live="polite">
+        class="search-status">
       </div>
 
     </div>
 
-
     <div class="category-grid" id="categoryList">
 
-      <div class="card">
-        <div class="icon">💼</div>
-        <h3>Jobs</h3>
-        <p>Find jobs and career opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">💻</div>
-        <h3>Freelancing</h3>
-        <p>Find freelance work and projects.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🛍️</div>
-        <h3>Products</h3>
-        <p>Buy and sell products online.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🛠️</div>
-        <h3>Services</h3>
-        <p>Discover useful services near you.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🏢</div>
-        <h3>Business</h3>
-        <p>Discover businesses and opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🏠</div>
-        <h3>Property & Rent</h3>
-        <p>Find property, homes and rental opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🚗</div>
-        <h3>Vehicles</h3>
-        <p>Explore vehicles and transport options.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">📚</div>
-        <h3>Education</h3>
-        <p>Find education and learning opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🎓</div>
-        <h3>Courses & Training</h3>
-        <p>Learn new skills through courses and training.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">💰</div>
-        <h3>Finance</h3>
-        <p>Explore finance and accounting services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">👨‍💻</div>
-        <h3>Technology</h3>
-        <p>Technology products, services and opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">📱</div>
-        <h3>Mobile & Electronics</h3>
-        <p>Find phones, electronics and accessories.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🏥</div>
-        <h3>Health & Care</h3>
-        <p>Find health and care related services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🩸</div>
-        <h3>Blood Donor</h3>
-        <p>Find blood donors and blood requests.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🚨</div>
-        <h3>Emergency</h3>
-        <p>Get help during emergency situations.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🤝</div>
-        <h3>Volunteer</h3>
-        <p>Join volunteer activities and help others.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🏛️</div>
-        <h3>Organizations</h3>
-        <p>Discover organizations and community groups.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🧑‍🌾</div>
-        <h3>Agriculture</h3>
-        <p>Explore agriculture products and opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🍔</div>
-        <h3>Food & Restaurant</h3>
-        <p>Find food, restaurants and delivery services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🛒</div>
-        <h3>Buy & Sell</h3>
-        <p>Buy and sell items in your area.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">👷</div>
-        <h3>Daily Work</h3>
-        <p>Find workers and daily work opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🎨</div>
-        <h3>Creative & Design</h3>
-        <p>Find creative professionals and design services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">📸</div>
-        <h3>Media & Photography</h3>
-        <p>Photography, video and media services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🚚</div>
-        <h3>Delivery & Transport</h3>
-        <p>Find delivery and transportation services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🧑‍🏫</div>
-        <h3>Tutor & Coaching</h3>
-        <p>Find tutors and coaching opportunities.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🧰</div>
-        <h3>Repair & Maintenance</h3>
-        <p>Find repair and maintenance services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">👗</div>
-        <h3>Fashion & Lifestyle</h3>
-        <p>Explore fashion and lifestyle products.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🐄</div>
-        <h3>Animals & Livestock</h3>
-        <p>Find livestock, animals and related services.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">🌱</div>
-        <h3>Community & Social Help</h3>
-        <p>Connect with people and community support.</p>
-      </div>
-
-      <div class="card">
-        <div class="icon">📢</div>
-        <h3>Other / General</h3>
-        <p>Explore other useful Kormiva opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">💼</div><h3>Jobs</h3><p>Find jobs and career opportunities.</p></div>
+      <div class="card"><div class="icon">💻</div><h3>Freelancing</h3><p>Find freelance work and projects.</p></div>
+      <div class="card"><div class="icon">🛍️</div><h3>Products</h3><p>Buy and sell products online.</p></div>
+      <div class="card"><div class="icon">🛠️</div><h3>Services</h3><p>Discover useful services near you.</p></div>
+      <div class="card"><div class="icon">🏢</div><h3>Business</h3><p>Discover businesses and opportunities.</p></div>
+      <div class="card"><div class="icon">🏠</div><h3>Property & Rent</h3><p>Find property, homes and rental opportunities.</p></div>
+      <div class="card"><div class="icon">🚗</div><h3>Vehicles</h3><p>Explore vehicles and transport options.</p></div>
+      <div class="card"><div class="icon">📚</div><h3>Education</h3><p>Find education and learning opportunities.</p></div>
+      <div class="card"><div class="icon">🎓</div><h3>Courses & Training</h3><p>Learn new skills through courses and training.</p></div>
+      <div class="card"><div class="icon">💰</div><h3>Finance</h3><p>Explore finance and accounting services.</p></div>
+      <div class="card"><div class="icon">👨‍💻</div><h3>Technology</h3><p>Technology products, services and opportunities.</p></div>
+      <div class="card"><div class="icon">📱</div><h3>Mobile & Electronics</h3><p>Find phones, electronics and accessories.</p></div>
+      <div class="card"><div class="icon">🏥</div><h3>Health & Care</h3><p>Find health and care related services.</p></div>
+      <div class="card"><div class="icon">🩸</div><h3>Blood Donor</h3><p>Find blood donors and blood requests.</p></div>
+      <div class="card"><div class="icon">🚨</div><h3>Emergency</h3><p>Get help during emergency situations.</p></div>
+      <div class="card"><div class="icon">🤝</div><h3>Volunteer</h3><p>Join volunteer activities and help others.</p></div>
+      <div class="card"><div class="icon">🏛️</div><h3>Organizations</h3><p>Discover organizations and community groups.</p></div>
+      <div class="card"><div class="icon">🧑‍🌾</div><h3>Agriculture</h3><p>Explore agriculture products and opportunities.</p></div>
+      <div class="card"><div class="icon">🍔</div><h3>Food & Restaurant</h3><p>Find food, restaurants and delivery services.</p></div>
+      <div class="card"><div class="icon">🛒</div><h3>Buy & Sell</h3><p>Buy and sell items in your area.</p></div>
+      <div class="card"><div class="icon">👷</div><h3>Daily Work</h3><p>Find workers and daily work opportunities.</p></div>
+      <div class="card"><div class="icon">🎨</div><h3>Creative & Design</h3><p>Find creative professionals and design services.</p></div>
+      <div class="card"><div class="icon">📸</div><h3>Media & Photography</h3><p>Photography, video and media services.</p></div>
+      <div class="card"><div class="icon">🚚</div><h3>Delivery & Transport</h3><p>Find delivery and transportation services.</p></div>
+      <div class="card"><div class="icon">🧑‍🏫</div><h3>Tutor & Coaching</h3><p>Find tutors and coaching opportunities.</p></div>
+      <div class="card"><div class="icon">🧰</div><h3>Repair & Maintenance</h3><p>Find repair and maintenance services.</p></div>
+      <div class="card"><div class="icon">👗</div><h3>Fashion & Lifestyle</h3><p>Explore fashion and lifestyle products.</p></div>
+      <div class="card"><div class="icon">🐄</div><h3>Animals & Livestock</h3><p>Find livestock, animals and related services.</p></div>
+      <div class="card"><div class="icon">🌱</div><h3>Community & Social Help</h3><p>Connect with people and community support.</p></div>
+      <div class="card"><div class="icon">📢</div><h3>Other / General</h3><p>Explore other useful Kormiva opportunities.</p></div>
 
     </div>
 
     <div class="no-results" id="categoryNoResults">
-
-      <div class="no-results-icon">
-        🔎
-      </div>
-
-      <h3>
-        No categories found
-      </h3>
-
-      <p>
-        Try another search term.
-      </p>
-
+      <h3>No categories found</h3>
+      <p>Try another search term.</p>
     </div>
 
   </div>
@@ -1441,7 +1240,7 @@ input:focus-visible{
 </section>
 
 
-<!-- ================= ABOUT ================= -->
+<!-- ABOUT -->
 
 <section class="about" id="about">
 
@@ -1465,26 +1264,14 @@ input:focus-visible{
 
         <ul class="check-list">
 
-          <li>
-            Discover jobs that match your goals
-          </li>
-
-          <li>
-            Build valuable professional skills
-          </li>
-
-          <li>
-            Plan your career with confidence
-          </li>
-
-          <li>
-            Connect with a growing career community
-          </li>
+          <li>Discover jobs that match your goals</li>
+          <li>Build valuable professional skills</li>
+          <li>Plan your career with confidence</li>
+          <li>Connect with a growing career community</li>
 
         </ul>
 
       </div>
-
 
       <div class="stats">
 
@@ -1517,7 +1304,7 @@ input:focus-visible{
 </section>
 
 
-<!-- ================= CTA ================= -->
+<!-- CTA -->
 
 <section class="cta" id="contact">
 
@@ -1531,8 +1318,8 @@ input:focus-visible{
       Take the next step toward a better career with Kormiva.
     </p>
 
-    <a href="#categories" class="btn">
-      Get Started →
+    <a href="auth.html" class="btn">
+      Login / Sign Up →
     </a>
 
   </div>
@@ -1540,7 +1327,7 @@ input:focus-visible{
 </section>
 
 
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -1549,6 +1336,14 @@ input:focus-visible{
     <div class="footer-logo">
       Kormiva
     </div>
+
+    <a href="auth.html" class="footer-link">
+      🔐 Login / Sign Up
+    </a>
+
+    <a href="settings.html" class="footer-link">
+      ⚙️ Settings
+    </a>
 
     <p>
       © 2026 Kormiva — Connecting people with opportunities.
@@ -1561,16 +1356,20 @@ input:focus-visible{
 
 <script>
 
-/* ================= MOBILE MENU ================= */
+/* MOBILE MENU */
 
 function toggleMenu(){
 
-  const nav = document.getElementById("nav");
-  const button = document.getElementById("menuButton");
+  const nav =
+    document.getElementById("nav");
+
+  const button =
+    document.getElementById("menuButton");
 
   nav.classList.toggle("active");
 
-  const isOpen = nav.classList.contains("active");
+  const isOpen =
+    nav.classList.contains("active");
 
   button.setAttribute(
     "aria-expanded",
@@ -1581,49 +1380,54 @@ function toggleMenu(){
     "aria-label",
     isOpen ? "Close menu" : "Open menu"
   );
-
 }
 
 
-/* ================= CLOSE MOBILE MENU ================= */
+/* CLOSE MENU */
 
 function closeMenu(){
 
-  const nav = document.getElementById("nav");
-  const button = document.getElementById("menuButton");
+  const nav =
+    document.getElementById("nav");
+
+  const button =
+    document.getElementById("menuButton");
 
   nav.classList.remove("active");
 
-  button.setAttribute("aria-expanded","false");
+  button.setAttribute(
+    "aria-expanded",
+    "false"
+  );
 
-  button.setAttribute("aria-label","Open menu");
-
+  button.setAttribute(
+    "aria-label",
+    "Open menu"
+  );
 }
 
 
-/* ================= FEATURE SEARCH ================= */
+/* FEATURE SEARCH */
 
 function searchFeatures(){
 
-  const inputElement =
+  const input =
     document.getElementById("featureSearch");
 
-  const featureList =
+  const list =
     document.getElementById("featureList");
 
   const cards =
-    featureList.querySelectorAll(".card");
+    list.querySelectorAll(".card");
 
   const noResults =
     document.getElementById("noResults");
 
-  const searchStatus =
+  const status =
     document.getElementById("searchStatus");
 
   const searchText =
-    inputElement.value
-      .trim()
-      .toLowerCase();
+    input.value.trim().toLowerCase();
 
   let visibleCount = 0;
 
@@ -1638,7 +1442,6 @@ function searchFeatures(){
     ){
 
       card.style.display = "";
-
       visibleCount++;
 
     }else{
@@ -1653,7 +1456,7 @@ function searchFeatures(){
 
     noResults.style.display = "block";
 
-    searchStatus.textContent =
+    status.textContent =
       "No matching features found.";
 
   }else{
@@ -1662,35 +1465,37 @@ function searchFeatures(){
 
     if(searchText === ""){
 
-      searchStatus.textContent =
-        "Showing all " + visibleCount + " features.";
+      status.textContent =
+        "Showing all " +
+        visibleCount +
+        " features.";
 
     }else{
 
-      searchStatus.textContent =
-        "Showing " + visibleCount +
+      status.textContent =
+        "Showing " +
+        visibleCount +
         " matching feature" +
         (visibleCount === 1 ? "." : "s.");
 
     }
 
   }
-
 }
 
 
-/* ================= CATEGORY SEARCH ================= */
+/* CATEGORY SEARCH */
 
 function searchCategories(){
 
-  const inputElement =
+  const input =
     document.getElementById("categorySearch");
 
-  const categoryList =
+  const list =
     document.getElementById("categoryList");
 
   const cards =
-    categoryList.querySelectorAll(".card");
+    list.querySelectorAll(".card");
 
   const noResults =
     document.getElementById("categoryNoResults");
@@ -1699,9 +1504,7 @@ function searchCategories(){
     document.getElementById("categoryStatus");
 
   const searchText =
-    inputElement.value
-      .trim()
-      .toLowerCase();
+    input.value.trim().toLowerCase();
 
   let visibleCount = 0;
 
@@ -1716,7 +1519,6 @@ function searchCategories(){
     ){
 
       card.style.display = "";
-
       visibleCount++;
 
     }else{
@@ -1741,23 +1543,25 @@ function searchCategories(){
     if(searchText === ""){
 
       status.textContent =
-        "Showing all " + visibleCount + " categories.";
+        "Showing all " +
+        visibleCount +
+        " categories.";
 
     }else{
 
       status.textContent =
-        "Showing " + visibleCount +
+        "Showing " +
+        visibleCount +
         " matching categor" +
         (visibleCount === 1 ? "y." : "ies.");
 
     }
 
   }
-
 }
 
 
-/* ================= PAGE READY ================= */
+/* PAGE READY */
 
 document.addEventListener(
   "DOMContentLoaded",
@@ -1787,16 +1591,14 @@ document.addEventListener(
 );
 
 
-/* ================= ESC KEY ================= */
+/* ESC KEY */
 
 document.addEventListener(
   "keydown",
   function(event){
 
     if(event.key === "Escape"){
-
       closeMenu();
-
     }
 
   }
