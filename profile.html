@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kormiva — My Profile</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  color:#0f172a;
+
+  background:
+    radial-gradient(circle at 10% 10%,rgba(37,99,235,.12),transparent 30%),
+    radial-gradient(circle at 90% 90%,rgba(6,182,212,.12),transparent 30%),
+    linear-gradient(135deg,#eff6ff,#ffffff);
+
+  padding:25px 16px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar{
+  width:100%;
+  max-width:1100px;
+  margin:0 auto 25px;
+
+  background:rgba(255,255,255,.9);
+  backdrop-filter:blur(12px);
+
+  border:1px solid #e2e8f0;
+  border-radius:18px;
+
+  padding:15px 20px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  box-shadow:0 10px 35px rgba(15,23,42,.08);
+}
+
+.logo{
+  font-size:27px;
+  font-weight:900;
+  color:#2563eb;
+}
+
+.logo span{
+  color:#06b6d4;
+}
+
+.nav-actions{
+  display:flex;
+  gap:10px;
+}
+
+.nav-btn{
+  border:0;
+  padding:10px 15px;
+  border-radius:9px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.home-btn{
+  background:#eff6ff;
+  color:#2563eb;
+}
+
+.logout-btn{
+  background:#fee2e2;
+  color:#dc2626;
+}
+
+/* =========================
+   PROFILE CONTAINER
+========================= */
+
+.profile-wrapper{
+  width:100%;
+  max-width:900px;
+  margin:0 auto;
+}
+
+.profile-card{
+  background:white;
+  border:1px solid #e2e8f0;
+  border-radius:28px;
+  overflow:hidden;
+
+  box-shadow:
+    0 25px 70px rgba(15,23,42,.12);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.profile-header{
+  height:170px;
+
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.35),transparent 25%),
+    linear-gradient(135deg,#2563eb,#06b6d4);
+
+  position:relative;
+}
+
+/* =========================
+   PROFILE IMAGE
+========================= */
+
+.avatar-area{
+  position:relative;
+
+  width:150px;
+  height:150px;
+
+  margin:-75px auto 15px;
+
+  z-index:2;
+}
+
+.avatar{
+  width:150px;
+  height:150px;
+
+  border-radius:50%;
+
+  object-fit:cover;
+
+  background:#e2e8f0;
+
+  border:6px solid white;
+
+  box-shadow:
+    0 12px 30px rgba(15,23,42,.2);
+}
+
+.avatar-placeholder{
+  width:150px;
+  height:150px;
+
+  border-radius:50%;
+
+  background:#f1f5f9;
+
+  border:6px solid white;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:65px;
+
+  box-shadow:
+    0 12px 30px rgba(15,23,42,.2);
+}
+
+.change-photo{
+  position:absolute;
+
+  right:0;
+  bottom:8px;
+
+  width:42px;
+  height:42px;
+
+  border:4px solid white;
+
+  border-radius:50%;
+
+  background:#2563eb;
+  color:white;
+
+  cursor:pointer;
+
+  font-size:18px;
+}
+
+#photoInput{
+  display:none;
+}
+
+/* =========================
+   TITLE
+========================= */
+
+.profile-title{
+  text-align:center;
+  padding:0 20px 25px;
+}
+
+.profile-title h1{
+  font-size:27px;
+  margin-bottom:6px;
+}
+
+.profile-title p{
+  color:#64748b;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.profile-content{
+  padding:30px;
+}
+
+.section-title{
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.form-group{
+  margin-bottom:18px;
+}
+
+.form-group.full{
+  grid-column:1 / -1;
+}
+
+label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+input,
+textarea,
+select{
+  width:100%;
+
+  padding:14px 15px;
+
+  border:1px solid #cbd5e1;
+  border-radius:11px;
+
+  font-size:16px;
+
+  outline:none;
+
+  background:white;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+  border-color:#2563eb;
+
+  box-shadow:
+    0 0 0 4px rgba(37,99,235,.1);
+}
+
+input[readonly]{
+  background:#f8fafc;
+  color:#64748b;
+}
+
+textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+/* =========================
+   SAVE
+========================= */
+
+.save-area{
+  margin-top:10px;
+  display:flex;
+  justify-content:flex-end;
+}
+
+.save-btn{
+  border:0;
+
+  background:linear-gradient(135deg,#2563eb,#06b6d4);
+
+  color:white;
+
+  padding:14px 28px;
+
+  border-radius:11px;
+
+  font-size:16px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 10px 25px rgba(37,99,235,.2);
+}
+
+.save-btn:hover{
+  transform:translateY(-1px);
+}
+
+.save-btn:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+/* =========================
+   MESSAGE
+========================= */
+
+.message{
+  display:none;
+
+  padding:13px 15px;
+
+  border-radius:10px;
+
+  margin-bottom:20px;
+
+  font-size:14px;
+  font-weight:700;
+}
+
+.message.success{
+  display:block;
+  background:#dcfce7;
+  color:#166534;
+}
+
+.message.error{
+  display:block;
+  background:#fee2e2;
+  color:#991b1b;
+}
+
+.message.info{
+  display:block;
+  background:#dbeafe;
+  color:#1d4ed8;
+}
+
+/* =========================
+   LOADING
+========================= */
+
+.loading{
+  text-align:center;
+  padding:60px 20px;
+  color:#64748b;
+}
+
+.spinner{
+  width:40px;
+  height:40px;
+
+  border:4px solid #e2e8f0;
+  border-top-color:#2563eb;
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+
+  margin:0 auto 15px;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:650px){
+
+  body{
+    padding:12px;
+  }
+
+  .navbar{
+    padding:13px;
+  }
+
+  .logo{
+    font-size:23px;
+  }
+
+  .nav-btn{
+    padding:8px 10px;
+    font-size:13px;
+  }
+
+  .profile-header{
+    height:130px;
+  }
+
+  .avatar-area{
+    width:130px;
+    height:130px;
+    margin:-65px auto 15px;
+  }
+
+  .avatar,
+  .avatar-placeholder{
+    width:130px;
+    height:130px;
+  }
+
+  .profile-content{
+    padding:22px 18px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .save-area{
+    display:block;
+  }
+
+  .save-btn{
+    width:100%;
+  }
+
+  .profile-title h1{
+    font-size:23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<nav class="navbar">
+
+  <div class="logo">
+    Kormi<span>va</span>
+  </div>
+
+  <div class="nav-actions">
+
+    <button
+      class="nav-btn home-btn"
+      onclick="window.location.href='index.html'">
+      ← Home
+    </button>
+
+    <button
+      class="nav-btn logout-btn"
+      onclick="logout()">
+      Logout
+    </button>
+
+  </div>
+
+</nav>
+
+
+<!-- =========================
+     PROFILE
+========================= -->
+
+<main class="profile-wrapper">
+
+  <div class="profile-card">
+
+    <div class="profile-header"></div>
+
+
+    <!-- AVATAR -->
+
+    <div class="avatar-area">
+
+      <div
+        id="avatarPlaceholder"
+        class="avatar-placeholder">
+        👤
+      </div>
+
+      <img
+        id="avatar"
+        class="avatar"
+        style="display:none"
+        alt="Profile Picture">
+
+      <button
+        type="button"
+        class="change-photo"
+        onclick="document.getElementById('photoInput').click()">
+
+        📷
+
+      </button>
+
+      <input
+        type="file"
+        id="photoInput"
+        accept="image/*">
+
+    </div>
+
+
+    <!-- TITLE -->
+
+    <div class="profile-title">
+
+      <h1 id="profileName">
+        My Profile
+      </h1>
+
+      <p>
+        Manage your Kormiva profile
+      </p>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div class="profile-content">
+
+      <div
+        id="message"
+        class="message">
+      </div>
+
+
+      <div
+        id="loading"
+        class="loading">
+
+        <div class="spinner"></div>
+
+        Loading your profile...
+
+      </div>
+
+
+      <div
+        id="profileFormArea"
+        style="display:none">
+
+        <h2 class="section-title">
+          Personal Information
+        </h2>
+
+
+        <div class="form-grid">
+
+          <!-- FULL NAME -->
+
+          <div class="form-group">
+
+            <label for="fullName">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Your full name">
+
+          </div>
+
+
+          <!-- EMAIL -->
+
+          <div class="form-group">
+
+            <label for="email">
+              Email
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              readonly>
+
+          </div>
+
+
+          <!-- PHONE -->
+
+          <div class="form-group">
+
+            <label for="phone">
+              Phone
+            </label>
+
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Your phone number">
+
+          </div>
+
+
+          <!-- ROLE -->
+
+          <div class="form-group">
+
+            <label for="role">
+              Role
+            </label>
+
+            <input
+              type="text"
+              id="role"
+              placeholder="e.g. Student, Developer, Designer">
+
+          </div>
+
+
+          <!-- BIO -->
+
+          <div class="form-group full">
+
+            <label for="bio">
+              Bio
+            </label>
+
+            <textarea
+              id="bio"
+              placeholder="Tell people a little about yourself..."></textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- SAVE -->
+
+        <div class="save-area">
+
+          <button
+            id="saveButton"
+            class="save-btn"
+            onclick="saveProfile()">
+
+            💾 Save Changes
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+
+<!-- =========================
+     SUPABASE
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+/* =========================================
+   SUPABASE CONNECTION
+========================================= */
+
+const SUPABASE_URL =
+  "https://jobhfmjbvxstyjlpxnpp.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================================
+   VARIABLES
+========================================= */
+
+let currentUser = null;
+let currentProfile = null;
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+function showMessage(text,type){
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent = text;
+
+  message.className =
+    "message " + type;
+}
+
+function clearMessage(){
+
+  const message =
+    document.getElementById("message");
+
+  message.textContent = "";
+
+  message.className = "message";
+}
+
+
+/* =========================================
+   LOAD PROFILE
+========================================= */
+
+async function loadProfile(){
+
+  try{
+
+    const {
+      data: {
+        user
+      },
+      error: authError
+    } =
+      await supabaseClient.auth.getUser();
+
+
+    if(authError || !user){
+
+      window.location.href =
+        "auth.html";
+
+      return;
+
+    }
+
+
+    currentUser = user;
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("Profile")
+        .select("*")
+        .eq("Id",user.id)
+        .maybeSingle();
+
+
+    if(error){
+
+      console.error(error);
+
+      showMessage(
+        "Could not load your profile.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(!data){
+
+      showMessage(
+        "Profile not found. Please login again.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    currentProfile = data;
+
+
+    /* =========================
+       FILL FORM
+    ========================= */
+
+    document.getElementById("fullName").value =
+      data["Full Name"] || "";
+
+    document.getElementById("email").value =
+      data.email || user.email || "";
+
+    document.getElementById("phone").value =
+      data.Phone || "";
+
+    document.getElementById("role").value =
+      data.role || "";
+
+    document.getElementById("bio").value =
+      data.bio || "";
+
+
+    document.getElementById("profileName").textContent =
+      data["Full Name"] ||
+      "My Profile";
+
+
+    /* =========================
+       AVATAR
+    ========================= */
+
+    if(data.avatar_url){
+
+      const avatar =
+        document.getElementById("avatar");
+
+      avatar.src =
+        data.avatar_url;
+
+      avatar.style.display =
+        "block";
+
+      document.getElementById(
+        "avatarPlaceholder"
+      ).style.display =
+        "none";
+
+    }
+
+
+    document.getElementById("loading")
+      .style.display =
+      "none";
+
+    document.getElementById("profileFormArea")
+      .style.display =
+      "block";
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Something went wrong while loading your profile.",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   SAVE PROFILE
+========================================= */
+
+async function saveProfile(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const button =
+    document.getElementById("saveButton");
+
+
+  const fullName =
+    document
+      .getElementById("fullName")
+      .value
+      .trim();
+
+  const phone =
+    document
+      .getElementById("phone")
+      .value
+      .trim();
+
+  const role =
+    document
+      .getElementById("role")
+      .value
+      .trim();
+
+  const bio =
+    document
+      .getElementById("bio")
+      .value
+      .trim();
+
+
+  button.disabled = true;
+  button.textContent =
+    "Saving...";
+
+  clearMessage();
+
+
+  try{
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("Profile")
+        .update({
+
+          "Full Name":
+            fullName,
+
+          Phone:
+            phone || null,
+
+          role:
+            role || null,
+
+          bio:
+            bio || null
+
+        })
+        .eq(
+          "Id",
+          currentUser.id
+        );
+
+
+    if(error){
+
+      console.error(error);
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    document.getElementById(
+      "profileName"
+    ).textContent =
+      fullName || "My Profile";
+
+
+    showMessage(
+      "Profile updated successfully! ✓",
+      "success"
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Could not save your profile.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+
+    button.textContent =
+      "💾 Save Changes";
+
+  }
+
+}
+
+
+/* =========================================
+   PROFILE PHOTO
+========================================= */
+
+document
+  .getElementById("photoInput")
+  .addEventListener(
+    "change",
+    async function(event){
+
+      const file =
+        event.target.files[0];
+
+      if(!file){
+        return;
+      }
+
+
+      if(!currentUser){
+        showMessage(
+          "Please login first.",
+          "error"
+        );
+        return;
+      }
+
+
+      /* =========================
+         FILE VALIDATION
+      ========================= */
+
+      if(!file.type.startsWith("image/")){
+
+        showMessage(
+          "Please select an image file.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if(file.size > 5 * 1024 * 1024){
+
+        showMessage(
+          "Image must be smaller than 5MB.",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      showMessage(
+        "Uploading profile picture...",
+        "info"
+      );
+
+
+      try{
+
+        const extension =
+          file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+        const filePath =
+          currentUser.id +
+          "/avatar." +
+          extension;
+
+
+        /* =========================
+           UPLOAD
+        ========================= */
+
+        const {
+          error: uploadError
+        } =
+          await supabaseClient
+            .storage
+            .from("avatars")
+            .upload(
+              filePath,
+              file,
+              {
+                upsert:true,
+                contentType:file.type
+              }
+            );
+
+
+        if(uploadError){
+
+          console.error(uploadError);
+
+          showMessage(
+            uploadError.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* =========================
+           PUBLIC URL
+        ========================= */
+
+        const {
+          data: publicData
+        } =
+          supabaseClient
+            .storage
+            .from("avatars")
+            .getPublicUrl(
+              filePath
+            );
+
+
+        const avatarUrl =
+          publicData.publicUrl;
+
+
+        /* =========================
+           SAVE URL TO PROFILE
+        ========================= */
+
+        const {
+          error: updateError
+        } =
+          await supabaseClient
+            .from("Profile")
+            .update({
+
+              avatar_url:
+                avatarUrl
+
+            })
+            .eq(
+              "Id",
+              currentUser.id
+            );
+
+
+        if(updateError){
+
+          console.error(updateError);
+
+          showMessage(
+            updateError.message,
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* =========================
+           SHOW IMAGE
+        ========================= */
+
+        const avatar =
+          document.getElementById("avatar");
+
+        avatar.src =
+          avatarUrl +
+          "?t=" +
+          Date.now();
+
+        avatar.style.display =
+          "block";
+
+
+        document.getElementById(
+          "avatarPlaceholder"
+        ).style.display =
+        "none";
+
+
+        showMessage(
+          "Profile picture updated successfully! ✓",
+          "success"
+        );
+
+
+      }catch(error){
+
+        console.error(error);
+
+        showMessage(
+          error.message ||
+          "Upload failed.",
+          "error"
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+async function logout(){
+
+  await supabaseClient.auth.signOut();
+
+  window.location.href =
+    "auth.html";
+}
+
+
+/* =========================================
+   START
+========================================= */
+
+loadProfile();
+
+</script>
+
+</body>
+</html>
