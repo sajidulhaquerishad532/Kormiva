@@ -69,11 +69,8 @@ body{
 
 .auth-card{
   background:white;
-
   border:1px solid #e2e8f0;
-
   border-radius:25px;
-
   padding:32px;
 
   box-shadow:
@@ -82,37 +79,25 @@ body{
 
 .tabs{
   display:grid;
-
   grid-template-columns:1fr 1fr;
-
   background:#f1f5f9;
-
   padding:5px;
-
   border-radius:12px;
-
   margin-bottom:25px;
 }
 
 .tab{
   border:0;
-
   background:transparent;
-
   padding:12px;
-
   border-radius:9px;
-
   font-weight:700;
-
   color:#64748b;
-
   cursor:pointer;
 }
 
 .tab.active{
   background:white;
-
   color:#2563eb;
 
   box-shadow:
@@ -133,25 +118,19 @@ body{
 
 label{
   display:block;
-
   font-weight:700;
-
   margin-bottom:7px;
-
   font-size:14px;
 }
 
 input{
   width:100%;
-
   padding:14px 15px;
 
   border:1px solid #cbd5e1;
-
   border-radius:11px;
 
   font-size:16px;
-
   outline:none;
 }
 
@@ -174,19 +153,15 @@ input:focus{
   position:absolute;
 
   right:10px;
-
   top:50%;
 
   transform:translateY(-50%);
 
   border:0;
-
   background:#eff6ff;
-
   color:#2563eb;
 
   padding:7px 9px;
-
   border-radius:7px;
 
   cursor:pointer;
@@ -196,21 +171,16 @@ input:focus{
   width:100%;
 
   border:0;
-
   background:#2563eb;
-
   color:white;
 
   padding:15px;
-
   border-radius:11px;
 
   font-size:16px;
-
   font-weight:800;
 
   cursor:pointer;
-
   margin-top:5px;
 }
 
@@ -220,7 +190,6 @@ input:focus{
 
 .submit-btn:disabled{
   opacity:.6;
-
   cursor:not-allowed;
 }
 
@@ -228,29 +197,23 @@ input:focus{
   display:none;
 
   padding:12px 14px;
-
   border-radius:10px;
 
   margin-bottom:17px;
 
   font-size:14px;
-
   font-weight:600;
 }
 
 .message.success{
   display:block;
-
   background:#dcfce7;
-
   color:#166534;
 }
 
 .message.error{
   display:block;
-
   background:#fee2e2;
-
   color:#991b1b;
 }
 
@@ -258,11 +221,9 @@ input:focus{
   display:block;
 
   text-align:center;
-
   margin-top:20px;
 
   color:#2563eb;
-
   text-decoration:none;
 
   font-weight:700;
@@ -287,26 +248,24 @@ input:focus{
 
 <div class="auth-container">
 
-  <!-- KORMIVA LOGO -->
-
   <div class="logo">
-    Kormiva
+    Kormi<span>va</span>
   </div>
 
   <p class="subtitle">
     Connect. Learn. Grow. Build your better future.
   </p>
 
-
-  <!-- AUTH CARD -->
-
   <div class="auth-card">
+
+    <!-- TABS -->
 
     <div class="tabs">
 
       <button
         class="tab active"
         id="loginTab"
+        type="button"
         onclick="showForm('login')">
 
         Login
@@ -316,6 +275,7 @@ input:focus{
       <button
         class="tab"
         id="signupTab"
+        type="button"
         onclick="showForm('signup')">
 
         Sign Up
@@ -333,7 +293,7 @@ input:focus{
     </div>
 
 
-    <!-- LOGIN FORM -->
+    <!-- LOGIN -->
 
     <form
       id="loginForm"
@@ -349,6 +309,7 @@ input:focus{
           type="email"
           id="loginEmail"
           placeholder="Enter your email"
+          autocomplete="email"
           required
         >
 
@@ -367,16 +328,14 @@ input:focus{
             type="password"
             id="loginPassword"
             placeholder="Enter your password"
+            autocomplete="current-password"
             required
           >
 
           <button
             type="button"
             class="show-password"
-            onclick="togglePassword(
-              'loginPassword',
-              this
-            )">
+            onclick="togglePassword('loginPassword',this)">
 
             👁️
 
@@ -399,7 +358,7 @@ input:focus{
     </form>
 
 
-    <!-- SIGN UP FORM -->
+    <!-- SIGN UP -->
 
     <form
       id="signupForm"
@@ -415,6 +374,7 @@ input:focus{
           type="text"
           id="signupName"
           placeholder="Enter your full name"
+          autocomplete="name"
           required
         >
 
@@ -431,6 +391,7 @@ input:focus{
           type="email"
           id="signupEmail"
           placeholder="Enter your email"
+          autocomplete="email"
           required
         >
 
@@ -450,16 +411,14 @@ input:focus{
             id="signupPassword"
             placeholder="Minimum 6 characters"
             minlength="6"
+            autocomplete="new-password"
             required
           >
 
           <button
             type="button"
             class="show-password"
-            onclick="togglePassword(
-              'signupPassword',
-              this
-            )">
+            onclick="togglePassword('signupPassword',this)">
 
             👁️
 
@@ -501,11 +460,10 @@ input:focus{
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <script>
 
 /* =========================================
-   SUPABASE
+   SUPABASE CONNECTION
 ========================================= */
 
 const SUPABASE_URL =
@@ -528,63 +486,34 @@ const supabaseClient =
 function showForm(type){
 
   const loginForm =
-    document.getElementById(
-      "loginForm"
-    );
+    document.getElementById("loginForm");
 
   const signupForm =
-    document.getElementById(
-      "signupForm"
-    );
+    document.getElementById("signupForm");
 
   const loginTab =
-    document.getElementById(
-      "loginTab"
-    );
+    document.getElementById("loginTab");
 
   const signupTab =
-    document.getElementById(
-      "signupTab"
-    );
+    document.getElementById("signupTab");
 
   clearMessage();
 
-
   if(type === "login"){
 
-    loginForm.classList.add(
-      "active"
-    );
+    loginForm.classList.add("active");
+    signupForm.classList.remove("active");
 
-    signupForm.classList.remove(
-      "active"
-    );
-
-    loginTab.classList.add(
-      "active"
-    );
-
-    signupTab.classList.remove(
-      "active"
-    );
+    loginTab.classList.add("active");
+    signupTab.classList.remove("active");
 
   }else{
 
-    signupForm.classList.add(
-      "active"
-    );
+    signupForm.classList.add("active");
+    loginForm.classList.remove("active");
 
-    loginForm.classList.remove(
-      "active"
-    );
-
-    signupTab.classList.add(
-      "active"
-    );
-
-    loginTab.classList.remove(
-      "active"
-    );
+    signupTab.classList.add("active");
+    loginTab.classList.remove("active");
 
   }
 
@@ -595,32 +524,20 @@ function showForm(type){
    PASSWORD SHOW / HIDE
 ========================================= */
 
-function togglePassword(
-  inputId,
-  button
-){
+function togglePassword(inputId,button){
 
   const input =
-    document.getElementById(
-      inputId
-    );
+    document.getElementById(inputId);
 
-
-  if(
-    input.type === "password"
-  ){
+  if(input.type === "password"){
 
     input.type = "text";
-
-    button.textContent =
-      "🙈";
+    button.textContent = "🙈";
 
   }else{
 
     input.type = "password";
-
-    button.textContent =
-      "👁️";
+    button.textContent = "👁️";
 
   }
 
@@ -631,37 +548,26 @@ function togglePassword(
    MESSAGE
 ========================================= */
 
-function showMessage(
-  text,
-  type
-){
+function showMessage(text,type){
 
   const message =
-    document.getElementById(
-      "message"
-    );
+    document.getElementById("message");
 
-  message.textContent =
-    text;
+  message.textContent = text;
 
   message.className =
     "message " + type;
 
 }
 
-
 function clearMessage(){
 
   const message =
-    document.getElementById(
-      "message"
-    );
+    document.getElementById("message");
 
-  message.textContent =
-    "";
+  message.textContent = "";
 
-  message.className =
-    "message";
+  message.className = "message";
 
 }
 
@@ -678,70 +584,49 @@ document
 
       event.preventDefault();
 
-
       const name =
         document
-          .getElementById(
-            "signupName"
-          )
+          .getElementById("signupName")
           .value
           .trim();
-
 
       const email =
         document
-          .getElementById(
-            "signupEmail"
-          )
+          .getElementById("signupEmail")
           .value
           .trim();
 
-
       const password =
-        document.getElementById(
-          "signupPassword"
-        ).value;
-
+        document
+          .getElementById("signupPassword")
+          .value;
 
       const button =
-        document.getElementById(
-          "signupButton"
-        );
+        document.getElementById("signupButton");
 
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Creating account...";
-
+      button.disabled = true;
+      button.textContent = "Creating account...";
 
       clearMessage();
 
-
       try{
 
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .auth
-            .signUp({
+        const { data, error } =
+          await supabaseClient.auth.signUp({
 
-              email:email,
+            email: email,
 
-              password:password,
+            password: password,
 
-              options:{
+            options: {
 
-                data:{
-                  full_name:name
-                }
-
+              data: {
+                full_name: name
               }
 
-            });
+            }
+
+          });
 
 
         if(error){
@@ -751,60 +636,50 @@ document
             "error"
           );
 
-          button.disabled =
-            false;
-
-          button.textContent =
-            "Create Account";
-
           return;
 
         }
 
 
         /*
-          Email confirmation OFF থাকলে
-          session পাওয়া যাবে।
+          Email confirmation ON থাকলে
+          session পাওয়া যাবে না।
         */
 
         if(data.session){
 
           showMessage(
-            "Account created successfully! Opening Kormiva...",
-            "success"
-          );
-
-
-          setTimeout(
-            function(){
-
-              window.location.href =
-                "index.html";
-
-            },
-            800
-          );
-
-        }else{
-
-          showMessage(
-            "Account created successfully! Please login.",
+            "Account created successfully!",
             "success"
           );
 
           document
-            .getElementById(
-              "signupForm"
-            )
+            .getElementById("signupForm")
             .reset();
 
-          button.disabled =
-            false;
+          setTimeout(function(){
 
-          button.textContent =
-            "Create Account";
+            window.location.href =
+              "index.html";
 
-          showForm("login");
+          },1000);
+
+        }else{
+
+          showMessage(
+            "Account created! Please check your email to confirm your account, then login.",
+            "success"
+          );
+
+          document
+            .getElementById("signupForm")
+            .reset();
+
+          setTimeout(function(){
+
+            showForm("login");
+
+          },1200);
 
         }
 
@@ -812,15 +687,14 @@ document
 
         showMessage(
           error.message ||
-          "Something went wrong.",
+          "Something went wrong. Please try again.",
           "error"
         );
 
-        button.disabled =
-          false;
+      }finally{
 
-        button.textContent =
-          "Create Account";
+        button.disabled = false;
+        button.textContent = "Create Account";
 
       }
 
@@ -840,53 +714,35 @@ document
 
       event.preventDefault();
 
-
       const email =
         document
-          .getElementById(
-            "loginEmail"
-          )
+          .getElementById("loginEmail")
           .value
           .trim();
 
-
       const password =
-        document.getElementById(
-          "loginPassword"
-        ).value;
-
+        document
+          .getElementById("loginPassword")
+          .value;
 
       const button =
-        document.getElementById(
-          "loginButton"
-        );
+        document.getElementById("loginButton");
 
-
-      button.disabled =
-        true;
-
-      button.textContent =
-        "Logging in...";
-
+      button.disabled = true;
+      button.textContent = "Logging in...";
 
       clearMessage();
 
-
       try{
 
-        const {
-          data,
-          error
-        } =
-          await supabaseClient
-            .auth
-            .signInWithPassword({
+        const { data, error } =
+          await supabaseClient.auth.signInWithPassword({
 
-              email:email,
+            email: email,
 
-              password:password
+            password: password
 
-            });
+          });
 
 
         if(error){
@@ -896,21 +752,10 @@ document
             "error"
           );
 
-          button.disabled =
-            false;
-
-          button.textContent =
-            "Login";
-
           return;
 
         }
 
-
-        /*
-          Login সফল হলে
-          সরাসরি Kormiva Home
-        */
 
         showMessage(
           "Login successful! Opening Kormiva...",
@@ -918,29 +763,25 @@ document
         );
 
 
-        setTimeout(
-          function(){
+        setTimeout(function(){
 
-            window.location.href =
-              "index.html";
+          window.location.href =
+            "index.html";
 
-          },
-          700
-        );
+        },800);
 
       }catch(error){
 
         showMessage(
           error.message ||
-          "Something went wrong.",
+          "Login failed. Please try again.",
           "error"
         );
 
-        button.disabled =
-          false;
+      }finally{
 
-        button.textContent =
-          "Login";
+        button.disabled = false;
+        button.textContent = "Login";
 
       }
 
@@ -949,97 +790,19 @@ document
 
 
 /* =========================================
-   CHECK CURRENT SESSION
+   IMPORTANT:
+   এখানে আর automatic redirect নেই।
+   
+   তাই auth.html খুললেই
+   user-কে index.html-এ পাঠাবে না।
 ========================================= */
-
-async function checkSession(){
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .auth
-        .getSession();
-
-
-    if(
-      error
-    ){
-
-      console.error(
-        error
-      );
-
-      return;
-
-    }
-
-
-    /*
-      যদি আগে থেকেই Login করা থাকে,
-      তাহলে Login page না দেখিয়ে
-      সরাসরি Home page-এ যাবে।
-    */
-
-    if(
-      data.session
-    ){
-
-      window.location.href =
-        "index.html";
-
-    }
-
-  }catch(error){
-
-    console.error(
-      error
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   AUTH STATE CHANGE
-========================================= */
-
-supabaseClient
-  .auth
-  .onAuthStateChange(
-    function(
-      event,
-      session
-    ){
-
-      /*
-        SIGNED_IN হলে Home page
-      */
-
-      if(
-        event ===
-        "SIGNED_IN" &&
-        session
-      ){
-
-        window.location.href =
-          "index.html";
-
-      }
-
-    }
-  );
 
 
 /* =========================================
    START
 ========================================= */
 
-checkSession();
+console.log("Kormiva authentication page loaded.");
 
 </script>
 
