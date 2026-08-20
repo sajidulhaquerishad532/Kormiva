@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="Kormiva — Jobs, skills, products, services and opportunities in one place.">
+<meta name="theme-color" content="#2563eb">
 <title>Kormiva — Build Your Better Future</title>
-<meta name="description" content="Kormiva — Jobs, skills, learning, products, services and opportunities.">
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -12,118 +13,251 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 :root{
- --primary:#16a34a;
- --primary2:#22c55e;
- --dark:#0f172a;
- --text:#334155;
- --muted:#64748b;
- --bg:#f8fafc;
- --white:#fff;
- --border:#e2e8f0;
+--primary:#2563eb;--primary2:#06b6d4;--dark:#0f172a;
+--text:#334155;--muted:#64748b;--bg:#f8fafc;--white:#fff;
+--border:#e2e8f0;--danger:#ef4444;--success:#16a34a
 }
-body{font-family:Arial,sans-serif;background:var(--bg);color:var(--dark)}
+body{
+font-family:Arial,Helvetica,sans-serif;background:var(--bg);
+color:var(--dark);line-height:1.6;overflow-x:hidden
+}
+body.dark{
+--dark:#f8fafc;--text:#cbd5e1;--muted:#94a3b8;
+--bg:#020617;--white:#0f172a;--border:#334155
+}
+button,input{font:inherit}
+a{color:inherit}
 header{
- position:sticky;top:0;z-index:1000;background:#fff;
- border-bottom:1px solid var(--border)
+position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.96);
+backdrop-filter:blur(12px);border-bottom:1px solid var(--border)
 }
-.nav{
- max-width:1200px;margin:auto;padding:15px 20px;
- display:flex;align-items:center;justify-content:space-between
+body.dark header{background:rgba(15,23,42,.96)}
+.navbar{
+max-width:1200px;margin:auto;padding:14px 20px;display:flex;
+align-items:center;justify-content:space-between;position:relative
 }
-.logo{font-size:28px;font-weight:900;color:var(--primary);text-decoration:none}
-nav{display:flex;gap:8px;align-items:center}
-nav a{
- text-decoration:none;color:var(--text);font-weight:700;
- padding:10px 13px;border-radius:9px
+.logo{
+font-size:28px;font-weight:900;color:var(--primary);
+text-decoration:none
 }
-nav a:hover{background:#dcfce7;color:var(--primary)}
-.auth-btn{background:var(--primary);color:white!important}
-.menu{display:none;border:0;background:#dcfce7;color:var(--primary);font-size:25px;padding:8px 12px;border-radius:9px}
+.logo span{color:var(--primary2)}
+nav{display:flex;gap:7px;align-items:center}
+nav a,nav button{
+border:0;background:none;text-decoration:none;color:var(--text);
+font-weight:700;padding:10px 13px;border-radius:9px;cursor:pointer
+}
+nav a:hover,nav button:hover{background:#eff6ff;color:var(--primary)}
+.nav-auth{background:var(--primary)!important;color:white!important}
+.menu{
+display:none;border:0;background:#eff6ff;color:var(--primary);
+font-size:25px;width:44px;height:44px;border-radius:10px
+}
 
 .hero{
- padding:80px 20px;
- background:linear-gradient(135deg,#ecfdf5,#fff)
+padding:80px 20px;min-height:610px;
+background:
+radial-gradient(circle at 85% 20%,rgba(37,99,235,.16),transparent 30%),
+radial-gradient(circle at 10% 80%,rgba(6,182,212,.13),transparent 30%),
+linear-gradient(135deg,#eff6ff,#fff)
+}
+body.dark .hero{
+background:
+radial-gradient(circle at 85% 20%,rgba(37,99,235,.2),transparent 30%),
+linear-gradient(135deg,#020617,#0f172a)
 }
 .hero-inner{
- max-width:1200px;margin:auto;
- display:grid;grid-template-columns:1fr 1fr;
- gap:50px;align-items:center
+max-width:1200px;margin:auto;display:grid;
+grid-template-columns:1.1fr .9fr;gap:60px;align-items:center
 }
 .badge{
- display:inline-block;background:#dcfce7;color:#15803d;
- padding:8px 14px;border-radius:30px;font-weight:700;margin-bottom:20px
+display:inline-block;background:#dbeafe;color:#1d4ed8;
+padding:8px 15px;border-radius:30px;font-weight:800;font-size:14px;
+margin-bottom:18px
 }
-h1{font-size:60px;line-height:1.05;margin-bottom:20px}
-h1 span{color:var(--primary)}
-.hero p{font-size:19px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.hero h1{font-size:60px;line-height:1.05;margin-bottom:20px}
+.hero h1 span{color:var(--primary)}
+.hero p{font-size:19px;color:var(--muted);max-width:650px;margin-bottom:30px}
 .buttons{display:flex;gap:12px;flex-wrap:wrap}
 .btn{
- display:inline-block;padding:14px 22px;border-radius:12px;
- text-decoration:none;font-weight:800;border:0;cursor:pointer
+display:inline-flex;align-items:center;justify-content:center;
+padding:14px 22px;border-radius:11px;text-decoration:none;
+font-weight:800;border:0;cursor:pointer
 }
 .primary{background:var(--primary);color:#fff}
-.secondary{background:#fff;color:var(--primary);border:1px solid #bbf7d0}
+.secondary{background:#fff;color:var(--primary);border:1px solid #bfdbfe}
+body.dark .secondary{background:#0f172a;border-color:#334155}
 
 .profile-card{
- background:#fff;border:1px solid var(--border);border-radius:28px;
- padding:30px;box-shadow:0 20px 50px rgba(15,23,42,.1)
+background:var(--white);border:1px solid var(--border);
+border-radius:30px;padding:28px;box-shadow:0 25px 70px rgba(15,23,42,.13)
 }
-.profile-top{display:flex;align-items:center;gap:18px;margin-bottom:25px}
+.user-area{text-align:center}
 .home-avatar{
- width:78px;height:78px;border-radius:50%;object-fit:cover;
- background:#dcfce7;display:flex;align-items:center;justify-content:center;
- font-size:35px;font-weight:bold;color:var(--primary)
+width:105px;height:105px;border-radius:50%;object-fit:cover;
+display:block;margin:0 auto 12px;border:5px solid #dbeafe;
+background:linear-gradient(135deg,#bfdbfe,#67e8f9)
 }
-.user-name{font-size:23px;font-weight:800}
-.user-role{color:var(--muted);margin-top:4px}
-.login-message{
- padding:18px;background:#f0fdf4;border-radius:15px;color:#166534
+.home-name{font-size:22px;font-weight:900}
+.home-role{color:var(--muted);margin-bottom:20px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini-stat{
+background:#f8fafc;border:1px solid var(--border);
+border-radius:14px;padding:15px;text-align:center
 }
-.section{padding:80px 20px}
+body.dark .mini-stat{background:#1e293b}
+.mini-stat strong{display:block;font-size:22px;color:var(--primary)}
+
+section{padding:80px 20px}
 .container{max-width:1200px;margin:auto}
-.heading{text-align:center;max-width:700px;margin:0 auto 45px}
+.heading{text-align:center;max-width:750px;margin:0 auto 40px}
 .heading h2{font-size:40px;margin-bottom:10px}
 .heading p{color:var(--muted);font-size:17px}
+.search-box{max-width:650px;margin:0 auto 30px;position:relative}
+.search-box input{
+width:100%;padding:15px 18px 15px 48px;border:1px solid var(--border);
+border-radius:14px;background:var(--white);color:var(--dark);outline:none
+}
+.search-box span{position:absolute;left:17px;top:12px;font-size:20px}
+.status{text-align:center;color:var(--muted);margin:10px}
+
 .grid{
- display:grid;grid-template-columns:repeat(3,1fr);gap:20px
+display:grid;grid-template-columns:repeat(3,1fr);gap:18px
 }
 .card{
- background:#fff;border:1px solid var(--border);border-radius:18px;
- padding:25px;transition:.25s
+background:var(--white);border:1px solid var(--border);
+border-radius:18px;padding:23px;cursor:pointer;transition:.25s
 }
-.card:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(0,0,0,.08)}
+.card:hover{
+transform:translateY(-5px);border-color:#93c5fd;
+box-shadow:0 15px 35px rgba(15,23,42,.09)
+}
 .icon{
- width:52px;height:52px;background:#dcfce7;border-radius:14px;
- display:flex;align-items:center;justify-content:center;
- font-size:25px;margin-bottom:15px
+width:52px;height:52px;border-radius:14px;background:#eff6ff;
+display:flex;align-items:center;justify-content:center;
+font-size:25px;margin-bottom:14px
 }
-.card h3{margin-bottom:7px}
+.card h3{font-size:19px;margin-bottom:6px}
 .card p{color:var(--muted);font-size:14px}
-.categories{background:#f0fdf4}
-.cta{
- background:linear-gradient(135deg,#16a34a,#0891b2);
- color:#fff;text-align:center;padding:80px 20px
-}
-.cta h2{font-size:42px;margin-bottom:12px}
-.cta p{margin-bottom:25px}
-.cta .btn{background:#fff;color:#16a34a}
-footer{background:#0f172a;color:#94a3b8;padding:35px 20px;text-align:center}
-.footer-logo{font-size:23px;font-weight:900;color:#fff;margin-bottom:8px}
+.categories{background:#f1f5f9}
+body.dark .categories{background:#020617}
 
-@media(max-width:800px){
- nav{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:15px;flex-direction:column}
- nav.active{display:flex}
- nav a{width:100%}
- .menu{display:block}
- .hero-inner{grid-template-columns:1fr;text-align:center}
- .buttons{justify-content:center}
- h1{font-size:44px}
- .grid{grid-template-columns:1fr 1fr}
+.about{
+background:var(--white)
 }
-@media(max-width:550px){
- .grid{grid-template-columns:1fr}
- h1{font-size:38px}
- .heading h2{font-size:31px}
+.about-grid{
+display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center
+}
+.about h2{font-size:40px;margin-bottom:15px}
+.about p{color:var(--muted);font-size:17px;margin-bottom:20px}
+.check{list-style:none}
+.check li{margin:12px 0;font-weight:700}
+.check li:before{content:"✓";color:var(--success);margin-right:10px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.stat{
+padding:28px;border-radius:18px;background:#eff6ff;
+border:1px solid #dbeafe;text-align:center
+}
+.stat strong{display:block;font-size:35px;color:var(--primary)}
+
+.cta{
+background:linear-gradient(135deg,#2563eb,#0891b2);
+color:#fff;text-align:center
+}
+.cta h2{font-size:40px;margin-bottom:10px}
+.cta p{margin-bottom:25px;opacity:.9}
+.cta .btn{background:#fff;color:#2563eb}
+
+footer{
+background:#0f172a;color:#94a3b8;padding:40px 20px
+}
+.footer-inner{
+max-width:1200px;margin:auto;display:flex;
+justify-content:space-between;gap:20px;align-items:center
+}
+.footer-logo{color:#fff;font-size:24px;font-weight:900}
+
+.overlay{
+display:none;position:fixed;inset:0;background:rgba(15,23,42,.6);
+z-index:3000;align-items:center;justify-content:center;padding:20px
+}
+.overlay.active{display:flex}
+.dialog{
+width:100%;max-width:500px;background:var(--white);
+color:var(--dark);border-radius:20px;padding:25px;
+box-shadow:0 25px 70px rgba(0,0,0,.25)
+}
+.dialog h2{margin-bottom:8px}
+.dialog p{color:var(--muted);margin-bottom:20px}
+.dialog-actions{display:flex;justify-content:flex-end;gap:10px}
+.close-btn{
+border:0;padding:10px 16px;border-radius:9px;
+background:#e2e8f0;cursor:pointer;font-weight:700
+}
+
+.settings{
+position:fixed;inset:0;background:rgba(15,23,42,.6);
+z-index:4000;display:none
+}
+.settings.active{display:block}
+.settings-panel{
+position:absolute;right:0;top:0;width:390px;max-width:100%;
+height:100%;overflow:auto;background:var(--white);color:var(--dark)
+}
+.settings-head{
+padding:20px;border-bottom:1px solid var(--border);
+display:flex;justify-content:space-between;align-items:center
+}
+.settings-head button{
+border:0;background:#fee2e2;color:#991b1b;
+width:40px;height:40px;border-radius:9px;cursor:pointer
+}
+.settings-body{padding:18px}
+.settings-title{
+font-size:12px;color:var(--muted);font-weight:900;
+text-transform:uppercase;margin:17px 4px 8px
+}
+.setting{
+width:100%;display:flex;align-items:center;gap:12px;
+padding:14px;border:1px solid var(--border);background:var(--white);
+color:var(--dark);border-radius:13px;margin-bottom:9px;cursor:pointer;
+text-align:left
+}
+.setting:hover{background:#eff6ff}
+.setting-icon{
+width:40px;height:40px;border-radius:10px;background:#eff6ff;
+display:flex;align-items:center;justify-content:center
+}
+.setting-text{flex:1}
+.setting-text strong{display:block}
+.setting-text small{color:var(--muted)}
+.switch{
+width:44px;height:23px;background:#cbd5e1;border-radius:20px;position:relative
+}
+.switch:after{
+content:"";position:absolute;width:17px;height:17px;
+background:#fff;border-radius:50%;top:3px;left:3px;transition:.2s
+}
+.switch.on{background:var(--primary)}
+.switch.on:after{left:24px}
+
+@media(max-width:900px){
+nav{display:none;position:absolute;top:70px;left:0;right:0;
+background:var(--white);padding:15px;flex-direction:column}
+nav.active{display:flex}
+nav a,nav button{width:100%;text-align:left}
+.menu{display:block}
+.hero-inner,.about-grid{grid-template-columns:1fr}
+.hero{text-align:center}
+.hero p{margin-left:auto;margin-right:auto}
+.buttons{justify-content:center}
+.grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+.hero h1{font-size:40px}
+section{padding:60px 17px}
+.grid{grid-template-columns:1fr}
+.heading h2,.about h2,.cta h2{font-size:31px}
+.footer-inner{flex-direction:column;text-align:center}
 }
 </style>
 </head>
@@ -131,8 +265,8 @@ footer{background:#0f172a;color:#94a3b8;padding:35px 20px;text-align:center}
 <body>
 
 <header>
-<div class="nav">
-<a href="index.html" class="logo">Kormiva</a>
+<div class="navbar">
+<a class="logo" href="#home">Kor<span>miva</span></a>
 
 <button class="menu" onclick="toggleMenu()">☰</button>
 
@@ -141,8 +275,10 @@ footer{background:#0f172a;color:#94a3b8;padding:35px 20px;text-align:center}
 <a href="#features" onclick="closeMenu()">Features</a>
 <a href="#categories" onclick="closeMenu()">Categories</a>
 <a href="#about" onclick="closeMenu()">About</a>
-<a href="profile.html" id="profileLink">Profile</a>
-<a href="auth.html" class="auth-btn" id="authLink">Login / Sign Up</a>
+
+<a id="authLink" class="nav-auth" href="auth.html">Login / Sign Up</a>
+
+<button onclick="openSettings()">⚙️ Settings</button>
 </nav>
 </div>
 </header>
@@ -151,245 +287,444 @@ footer{background:#0f172a;color:#94a3b8;padding:35px 20px;text-align:center}
 <div class="hero-inner">
 
 <div>
-<div class="badge">✨ Welcome to Kormiva</div>
+<div class="badge">✨ Kormiva — Your Opportunity Platform</div>
 
 <h1>Build Your <span>Better Future</span></h1>
 
 <p>
-Kormiva connects people with jobs, skills, learning,
-services, products and career opportunities — all in one place.
+Find jobs, learn skills, discover products and services,
+connect with businesses and explore opportunities — all in Kormiva.
 </p>
 
 <div class="buttons">
-<a href="auth.html" class="btn primary" id="heroAuth">
-Login / Sign Up →
-</a>
-
-<a href="#categories" class="btn secondary">
-Explore Categories
-</a>
+<a class="btn primary" href="auth.html" id="heroAuth">Login / Sign Up →</a>
+<a class="btn secondary" href="#categories">Explore Categories</a>
 </div>
 </div>
 
 <div class="profile-card">
+<div class="user-area">
 
-<div id="loggedOutBox">
-<div class="profile-top">
-<div class="home-avatar">👤</div>
-<div>
-<div class="user-name">Welcome to Kormiva</div>
-<div class="user-role">Create your professional profile</div>
-</div>
-</div>
+<img id="homeAvatar" class="home-avatar"
+src="https://ui-avatars.com/api/?name=Kormiva&background=2563eb&color=fff"
+alt="Profile">
 
-<div class="login-message">
-Login or create an account to show your profile,
-name and profile picture here.
-</div>
-</div>
+<div id="homeName" class="home-name">Welcome to Kormiva</div>
+<div id="homeRole" class="home-role">Create your profile to get started</div>
 
-<div id="loggedInBox" style="display:none">
-
-<div class="profile-top">
-
-<img id="homeAvatar" class="home-avatar" src="" alt="Profile">
-
-<div>
-<div class="user-name" id="homeName">User</div>
-<div class="user-role" id="homeRole">Kormiva Member</div>
-</div>
-
-</div>
-
-<div class="login-message">
-🎉 Welcome back! Your Kormiva profile is connected successfully.
+<div class="stat-row">
+<div class="mini-stat"><strong>30</strong>Features</div>
+<div class="mini-stat"><strong>30</strong>Categories</div>
+<div class="mini-stat"><strong>24/7</strong>Access</div>
 </div>
 
 <br>
 
-<a href="profile.html" class="btn primary">
-Manage Profile →
+<a href="profile.html" class="btn primary" id="profileButton" style="width:100%">
+Create / Manage Profile
 </a>
 
 </div>
+</div>
+
+</div>
+</section>
+
+<section id="features">
+<div class="container">
+
+<div class="heading">
+<h2>30 Powerful Features</h2>
+<p>Click any feature to explore what Kormiva can provide.</p>
+</div>
+
+<div class="search-box">
+<span>🔎</span>
+<input id="featureSearch" placeholder="Search features...">
+</div>
+
+<div id="featureStatus" class="status"></div>
+
+<div class="grid" id="featureGrid">
+
+<div class="card" onclick="featureOpen('Find Jobs','Search and discover suitable job opportunities.')"><div class="icon">💼</div><h3>Find Jobs</h3><p>Discover job opportunities.</p></div>
+<div class="card" onclick="featureOpen('Learn Skills','Find learning resources and develop valuable skills.')"><div class="icon">📚</div><h3>Learn Skills</h3><p>Improve your skills.</p></div>
+<div class="card" onclick="featureOpen('Career Growth','Plan and improve your professional career journey.')"><div class="icon">🚀</div><h3>Career Growth</h3><p>Grow your career.</p></div>
+<div class="card" onclick="featureOpen('Create Profile','Create your professional Kormiva profile.')"><div class="icon">👤</div><h3>Create Profile</h3><p>Build your profile.</p></div>
+<div class="card" onclick="featureOpen('CV Builder','Create and manage your professional CV.')"><div class="icon">📄</div><h3>CV Builder</h3><p>Build a CV.</p></div>
+<div class="card" onclick="featureOpen('Job Search','Search jobs using role, skills and location.')"><div class="icon">🔍</div><h3>Job Search</h3><p>Search opportunities.</p></div>
+<div class="card" onclick="featureOpen('Recommended Jobs','Get job recommendations based on your profile.')"><div class="icon">🎯</div><h3>Recommended Jobs</h3><p>Personalized jobs.</p></div>
+<div class="card" onclick="featureOpen('Company Directory','Explore companies and organizations.')"><div class="icon">🏢</div><h3>Company Directory</h3><p>Explore companies.</p></div>
+<div class="card" onclick="featureOpen('Remote Jobs','Explore work-from-anywhere opportunities.')"><div class="icon">💻</div><h3>Remote Jobs</h3><p>Find remote work.</p></div>
+<div class="card" onclick="featureOpen('Jobs Abroad','Explore international employment opportunities.')"><div class="icon">🌍</div><h3>Jobs Abroad</h3><p>International jobs.</p></div>
+
+<div class="card" onclick="featureOpen('Online Courses','Find useful online courses and learning materials.')"><div class="icon">🎓</div><h3>Online Courses</h3><p>Learn online.</p></div>
+<div class="card" onclick="featureOpen('Certificates','Track certificates and professional achievements.')"><div class="icon">🏆</div><h3>Certificates</h3><p>Build credibility.</p></div>
+<div class="card" onclick="featureOpen('Skill Assessment','Assess your skills and identify improvement areas.')"><div class="icon">🧠</div><h3>Skill Assessment</h3><p>Test your skills.</p></div>
+<div class="card" onclick="featureOpen('Career Mentorship','Connect with mentors and receive career guidance.')"><div class="icon">🤝</div><h3>Career Mentorship</h3><p>Get guidance.</p></div>
+<div class="card" onclick="featureOpen('Career Community','Connect with people and share career experiences.')"><div class="icon">💬</div><h3>Career Community</h3><p>Join the community.</p></div>
+<div class="card" onclick="featureOpen('Job Alerts','Stay informed about new opportunities.')"><div class="icon">📢</div><h3>Job Alerts</h3><p>Never miss jobs.</p></div>
+<div class="card" onclick="featureOpen('Saved Jobs','Save jobs and return to them later.')"><div class="icon">❤️</div><h3>Saved Jobs</h3><p>Save opportunities.</p></div>
+<div class="card" onclick="featureOpen('Career Dashboard','Manage career activities from one place.')"><div class="icon">📊</div><h3>Career Dashboard</h3><p>Your dashboard.</p></div>
+<div class="card" onclick="featureOpen('Salary Guide','Understand salary ranges and career value.')"><div class="icon">💰</div><h3>Salary Guide</h3><p>Salary information.</p></div>
+<div class="card" onclick="featureOpen('Interview Preparation','Prepare for job interviews.')"><div class="icon">📝</div><h3>Interview Preparation</h3><p>Prepare better.</p></div>
+
+<div class="card" onclick="featureOpen('Mock Interview','Practice interview questions and answers.')"><div class="icon">🎤</div><h3>Mock Interview</h3><p>Practice interviews.</p></div>
+<div class="card" onclick="featureOpen('Career Advice','Get useful career guidance and tips.')"><div class="icon">💡</div><h3>Career Advice</h3><p>Career guidance.</p></div>
+<div class="card" onclick="featureOpen('Student Corner','Find resources and opportunities for students.')"><div class="icon">🧑‍🎓</div><h3>Student Corner</h3><p>Student resources.</p></div>
+<div class="card" onclick="featureOpen('Freelance Jobs','Find freelance projects and independent work.')"><div class="icon">👩‍💻</div><h3>Freelance Jobs</h3><p>Freelance opportunities.</p></div>
+<div class="card" onclick="featureOpen('Work From Home','Find flexible work-from-home opportunities.')"><div class="icon">🏠</div><h3>Work From Home</h3><p>Flexible work.</p></div>
+<div class="card" onclick="featureOpen('Career Roadmap','Build a step-by-step career plan.')"><div class="icon">📈</div><h3>Career Roadmap</h3><p>Plan your career.</p></div>
+<div class="card" onclick="featureOpen('Notifications','Manage important Kormiva updates.')"><div class="icon">🔔</div><h3>Notifications</h3><p>Stay updated.</p></div>
+<div class="card" onclick="featureOpen('Mobile Profile','Access your profile from mobile devices.')"><div class="icon">📱</div><h3>Mobile Profile</h3><p>Mobile friendly.</p></div>
+<div class="card" onclick="featureOpen('Verified Opportunities','Find opportunities that can be reviewed and verified.')"><div class="icon">🛡️</div><h3>Verified Opportunities</h3><p>Safer opportunities.</p></div>
+<div class="card" onclick="featureOpen('Career Help','Get help with your career journey.')"><div class="icon">🆘</div><h3>Career Help</h3><p>Get career help.</p></div>
 
 </div>
 </div>
 </section>
 
-<section class="section" id="features">
+<section class="categories" id="categories">
 <div class="container">
 
 <div class="heading">
-<h2>Everything You Need</h2>
-<p>Explore the main features available on Kormiva.</p>
+<h2>30 Kormiva Categories</h2>
+<p>Explore jobs, products, services, business and community opportunities.</p>
 </div>
 
-<div class="grid">
+<div class="search-box">
+<span>🔎</span>
+<input id="categorySearch" placeholder="Search categories...">
+</div>
 
-<div class="card"><div class="icon">💼</div><h3>Find Jobs</h3><p>Discover jobs matching your skills and goals.</p></div>
-<div class="card"><div class="icon">📚</div><h3>Learn Skills</h3><p>Improve your knowledge with useful resources.</p></div>
-<div class="card"><div class="icon">🚀</div><h3>Career Growth</h3><p>Build your path toward your dream career.</p></div>
-<div class="card"><div class="icon">📄</div><h3>CV Builder</h3><p>Create a professional CV.</p></div>
-<div class="card"><div class="icon">🎯</div><h3>Recommended Jobs</h3><p>Find opportunities based on your profile.</p></div>
-<div class="card"><div class="icon">🏢</div><h3>Companies</h3><p>Explore companies and career opportunities.</p></div>
-<div class="card"><div class="icon">💻</div><h3>Remote Jobs</h3><p>Find work-from-home opportunities.</p></div>
-<div class="card"><div class="icon">🎓</div><h3>Courses</h3><p>Discover courses and training.</p></div>
-<div class="card"><div class="icon">🤝</div><h3>Mentorship</h3><p>Connect with career mentors.</p></div>
+<div id="categoryStatus" class="status"></div>
+
+<div class="grid" id="categoryGrid">
+
+<div class="card" onclick="categoryOpen('Jobs')"><div class="icon">💼</div><h3>Jobs</h3><p>Find jobs and career opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Freelancing')"><div class="icon">💻</div><h3>Freelancing</h3><p>Find freelance work.</p></div>
+<div class="card" onclick="categoryOpen('Products')"><div class="icon">🛍️</div><h3>Products</h3><p>Buy and sell products.</p></div>
+<div class="card" onclick="categoryOpen('Services')"><div class="icon">🛠️</div><h3>Services</h3><p>Discover services.</p></div>
+<div class="card" onclick="categoryOpen('Business')"><div class="icon">🏢</div><h3>Business</h3><p>Explore businesses.</p></div>
+<div class="card" onclick="categoryOpen('Property & Rent')"><div class="icon">🏠</div><h3>Property & Rent</h3><p>Property and rental opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Vehicles')"><div class="icon">🚗</div><h3>Vehicles</h3><p>Vehicles and transport.</p></div>
+<div class="card" onclick="categoryOpen('Education')"><div class="icon">📚</div><h3>Education</h3><p>Education opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Courses & Training')"><div class="icon">🎓</div><h3>Courses & Training</h3><p>Courses and training.</p></div>
+<div class="card" onclick="categoryOpen('Finance')"><div class="icon">💰</div><h3>Finance</h3><p>Finance related services.</p></div>
+<div class="card" onclick="categoryOpen('Technology')"><div class="icon">👨‍💻</div><h3>Technology</h3><p>Technology opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Mobile & Electronics')"><div class="icon">📱</div><h3>Mobile & Electronics</h3><p>Phones and electronics.</p></div>
+<div class="card" onclick="categoryOpen('Health & Care')"><div class="icon">🏥</div><h3>Health & Care</h3><p>Health and care services.</p></div>
+<div class="card" onclick="categoryOpen('Blood Donor')"><div class="icon">🩸</div><h3>Blood Donor</h3><p>Blood donor opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Emergency')"><div class="icon">🚨</div><h3>Emergency</h3><p>Emergency support.</p></div>
+<div class="card" onclick="categoryOpen('Volunteer')"><div class="icon">🤝</div><h3>Volunteer</h3><p>Volunteer opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Organizations')"><div class="icon">🏛️</div><h3>Organizations</h3><p>Organizations and groups.</p></div>
+<div class="card" onclick="categoryOpen('Agriculture')"><div class="icon">🧑‍🌾</div><h3>Agriculture</h3><p>Agriculture opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Food & Restaurant')"><div class="icon">🍔</div><h3>Food & Restaurant</h3><p>Food and restaurant services.</p></div>
+<div class="card" onclick="categoryOpen('Buy & Sell')"><div class="icon">🛒</div><h3>Buy & Sell</h3><p>Buy and sell locally.</p></div>
+<div class="card" onclick="categoryOpen('Daily Work')"><div class="icon">👷</div><h3>Daily Work</h3><p>Daily work opportunities.</p></div>
+<div class="card" onclick="categoryOpen('Creative & Design')"><div class="icon">🎨</div><h3>Creative & Design</h3><p>Creative and design services.</p></div>
+<div class="card" onclick="categoryOpen('Media & Photography')"><div class="icon">📸</div><h3>Media & Photography</h3><p>Media and photography.</p></div>
+<div class="card" onclick="categoryOpen('Delivery & Transport')"><div class="icon">🚚</div><h3>Delivery & Transport</h3><p>Delivery and transportation.</p></div>
+<div class="card" onclick="categoryOpen('Tutor & Coaching')"><div class="icon">🧑‍🏫</div><h3>Tutor & Coaching</h3><p>Tutors and coaching.</p></div>
+<div class="card" onclick="categoryOpen('Repair & Maintenance')"><div class="icon">🧰</div><h3>Repair & Maintenance</h3><p>Repair services.</p></div>
+<div class="card" onclick="categoryOpen('Fashion & Lifestyle')"><div class="icon">👗</div><h3>Fashion & Lifestyle</h3><p>Fashion and lifestyle.</p></div>
+<div class="card" onclick="categoryOpen('Animals & Livestock')"><div class="icon">🐄</div><h3>Animals & Livestock</h3><p>Animals and livestock.</p></div>
+<div class="card" onclick="categoryOpen('Community & Social Help')"><div class="icon">🌱</div><h3>Community & Social Help</h3><p>Community support.</p></div>
+<div class="card" onclick="categoryOpen('Other / General')"><div class="icon">📢</div><h3>Other / General</h3><p>Other Kormiva opportunities.</p></div>
 
 </div>
 </div>
 </section>
 
-<section class="section categories" id="categories">
+<section class="about" id="about">
 <div class="container">
+<div class="about-grid">
 
-<div class="heading">
-<h2>Explore Categories</h2>
-<p>Find useful opportunities across different categories.</p>
-</div>
-
-<div class="grid">
-
-<div class="card"><div class="icon">💼</div><h3>Jobs</h3><p>Find job opportunities.</p></div>
-<div class="card"><div class="icon">💻</div><h3>Freelancing</h3><p>Find freelance work and projects.</p></div>
-<div class="card"><div class="icon">🛍️</div><h3>Products</h3><p>Buy and sell products.</p></div>
-<div class="card"><div class="icon">🛠️</div><h3>Services</h3><p>Discover useful services.</p></div>
-<div class="card"><div class="icon">🏢</div><h3>Business</h3><p>Discover businesses.</p></div>
-<div class="card"><div class="icon">🏠</div><h3>Property & Rent</h3><p>Find property and rental opportunities.</p></div>
-<div class="card"><div class="icon">🚗</div><h3>Vehicles</h3><p>Explore vehicles.</p></div>
-<div class="card"><div class="icon">📚</div><h3>Education</h3><p>Education and learning opportunities.</p></div>
-<div class="card"><div class="icon">🎓</div><h3>Courses & Training</h3><p>Learn new skills.</p></div>
-<div class="card"><div class="icon">💰</div><h3>Finance</h3><p>Finance and accounting services.</p></div>
-<div class="card"><div class="icon">👨‍💻</div><h3>Technology</h3><p>Technology opportunities.</p></div>
-<div class="card"><div class="icon">📱</div><h3>Mobile & Electronics</h3><p>Phones and electronics.</p></div>
-<div class="card"><div class="icon">🏥</div><h3>Health & Care</h3><p>Health-related services.</p></div>
-<div class="card"><div class="icon">🩸</div><h3>Blood Donor</h3><p>Blood donors and requests.</p></div>
-<div class="card"><div class="icon">🤝</div><h3>Volunteer</h3><p>Volunteer opportunities.</p></div>
-
-</div>
-</div>
-</section>
-
-<section class="section" id="about">
-<div class="container">
-
-<div class="heading">
+<div>
 <h2>One Platform. Many Opportunities.</h2>
 <p>
-Kormiva is designed to connect people with meaningful
-opportunities, useful skills and career resources.
+Kormiva is designed to connect people with jobs, skills,
+products, services, businesses and useful opportunities.
 </p>
+<ul class="check">
+<li>Find suitable opportunities</li>
+<li>Build your professional profile</li>
+<li>Discover useful services</li>
+<li>Connect with the community</li>
+</ul>
 </div>
 
-<div class="grid">
-<div class="card"><div class="icon">🔎</div><h3>Discover</h3><p>Find opportunities that match your goals.</p></div>
-<div class="card"><div class="icon">🧠</div><h3>Develop</h3><p>Build valuable professional skills.</p></div>
-<div class="card"><div class="icon">🚀</div><h3>Grow</h3><p>Move forward toward a better future.</p></div>
+<div class="stats">
+<div class="stat"><strong>30</strong>Features</div>
+<div class="stat"><strong>30</strong>Categories</div>
+<div class="stat"><strong>24/7</strong>Access</div>
+<div class="stat"><strong>∞</strong>Possibilities</div>
 </div>
 
+</div>
 </div>
 </section>
 
 <section class="cta">
+<div class="container">
 <h2>Your Future Starts Here</h2>
-<p>Take the next step with Kormiva.</p>
-<a href="auth.html" class="btn">Login / Sign Up →</a>
+<p>Join Kormiva and build your better future.</p>
+<a class="btn" href="auth.html">Login / Sign Up →</a>
+</div>
 </section>
 
 <footer>
+<div class="footer-inner">
 <div class="footer-logo">Kormiva</div>
-<p>© 2026 Kormiva — Connecting people with opportunities.</p>
+<div>© 2026 Kormiva — Connecting people with opportunities.</div>
+</div>
 </footer>
 
+<!-- SETTINGS -->
+
+<div class="settings" id="settings" onclick="closeSettingsOutside(event)">
+<div class="settings-panel" onclick="event.stopPropagation()">
+
+<div class="settings-head">
+<h2>⚙️ Settings</h2>
+<button onclick="closeSettings()">✕</button>
+</div>
+
+<div class="settings-body">
+
+<div class="settings-title">Account</div>
+
+<button class="setting" onclick="goProfile()">
+<div class="setting-icon">👤</div>
+<div class="setting-text"><strong>Account</strong><small>Manage your profile</small></div>›
+</button>
+
+<button class="setting" onclick="location.href='auth.html'">
+<div class="setting-icon">🔐</div>
+<div class="setting-text"><strong>Login & Sign Up</strong><small>Account access</small></div>›
+</button>
+
+<div class="settings-title">Preferences</div>
+
+<button class="setting" onclick="toggleDark()">
+<div class="setting-icon">🌙</div>
+<div class="setting-text"><strong>Dark Mode</strong><small>Change appearance</small></div>
+<div class="switch" id="darkSwitch"></div>
+</button>
+
+<button class="setting" onclick="info('Language','Language selection can be connected as Kormiva expands.')">
+<div class="setting-icon">🌐</div>
+<div class="setting-text"><strong>Language</strong><small>Choose language</small></div>›
+</button>
+
+<button class="setting" onclick="info('Notifications','Manage your Kormiva notifications and alerts.')">
+<div class="setting-icon">🔔</div>
+<div class="setting-text"><strong>Notifications</strong><small>Manage notifications</small></div>›
+</button>
+
+<button class="setting" onclick="info('Email Preferences','Manage email updates and career notifications.')">
+<div class="setting-icon">📧</div>
+<div class="setting-text"><strong>Email Preferences</strong><small>Manage emails</small></div>›
+</button>
+
+<div class="settings-title">Privacy & Security</div>
+
+<button class="setting" onclick="info('Privacy','Manage how your information is displayed on Kormiva.')">
+<div class="setting-icon">🔒</div>
+<div class="setting-text"><strong>Privacy</strong><small>Privacy preferences</small></div>›
+</button>
+
+<button class="setting" onclick="info('Security','Keep your Kormiva account secure.')">
+<div class="setting-icon">🛡️</div>
+<div class="setting-text"><strong>Security</strong><small>Account security</small></div>›
+</button>
+
+<div class="settings-title">Help</div>
+
+<button class="setting" onclick="info('Help & Support','Kormiva support and help center.')">
+<div class="setting-icon">❓</div>
+<div class="setting-text"><strong>Help & Support</strong><small>Get help</small></div>›
+</button>
+
+<button class="setting" onclick="info('About Kormiva','Kormiva connects people with opportunities.')">
+<div class="setting-icon">ℹ️</div>
+<div class="setting-text"><strong>About Kormiva</strong><small>About the platform</small></div>›
+</button>
+
+<button class="setting" onclick="logout()" id="logoutButton">
+<div class="setting-icon">🚪</div>
+<div class="setting-text"><strong>Logout</strong><small>Sign out of your account</small></div>›
+</button>
+
+</div>
+</div>
+</div>
+
+<!-- DIALOG -->
+
+<div class="overlay" id="dialog">
+<div class="dialog">
+<h2 id="dialogTitle">Kormiva</h2>
+<p id="dialogText"></p>
+<div class="dialog-actions">
+<button class="close-btn" onclick="closeDialog()">Close</button>
+</div>
+</div>
+</div>
+
 <script>
-const SUPABASE_URL =
-"https://jobhfmjbvxstyjlpxnpp.supabase.co";
-
-const SUPABASE_ANON_KEY =
-"sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
-
-const supabaseClient =
-supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+const SUPABASE_URL="https://jobhfmjbvxstyjlpxnpp.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+const supabaseClient=supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
 function toggleMenu(){
 document.getElementById("nav").classList.toggle("active");
 }
-
 function closeMenu(){
 document.getElementById("nav").classList.remove("active");
 }
 
-function getInitial(name){
-return (name || "U").trim().charAt(0).toUpperCase();
+function openSettings(){
+closeMenu();
+document.getElementById("settings").classList.add("active");
+document.body.style.overflow="hidden";
+}
+function closeSettings(){
+document.getElementById("settings").classList.remove("active");
+document.body.style.overflow="";
+}
+function closeSettingsOutside(e){
+if(e.target.id==="settings")closeSettings();
+}
+
+function info(title,text){
+document.getElementById("dialogTitle").textContent=title;
+document.getElementById("dialogText").textContent=text;
+document.getElementById("dialog").classList.add("active");
+}
+function closeDialog(){
+document.getElementById("dialog").classList.remove("active");
+}
+
+function featureOpen(title,text){
+if(title==="Create Profile"){
+location.href="profile.html";
+return;
+}
+info(title,text+" This Kormiva feature is ready for connection to its dedicated module.");
+}
+
+function categoryOpen(title){
+info(title,title+" is a Kormiva category. You can use this category to discover related posts, opportunities, products or services.");
+}
+
+async function goProfile(){
+const {data}=await supabaseClient.auth.getSession();
+if(data.session)location.href="profile.html";
+else location.href="auth.html";
+}
+
+async function logout(){
+await supabaseClient.auth.signOut();
+location.reload();
+}
+
+function toggleDark(){
+document.body.classList.toggle("dark");
+const on=document.body.classList.contains("dark");
+localStorage.setItem("kormivaDark",on?"on":"off");
+document.getElementById("darkSwitch").classList.toggle("on",on);
+}
+function loadDark(){
+const on=localStorage.getItem("kormivaDark")==="on";
+document.body.classList.toggle("dark",on);
+document.getElementById("darkSwitch").classList.toggle("on",on);
 }
 
 async function loadHomeProfile(){
 
-const {data:{user}} =
-await supabaseClient.auth.getUser();
+const {data:{session}}=await supabaseClient.auth.getSession();
 
-if(!user){
-document.getElementById("loggedOutBox").style.display="block";
-document.getElementById("loggedInBox").style.display="none";
+if(!session){
+document.getElementById("homeName").textContent="Welcome to Kormiva";
+document.getElementById("homeRole").textContent="Create your profile to get started";
 return;
 }
 
-document.getElementById("loggedOutBox").style.display="none";
-document.getElementById("loggedInBox").style.display="block";
+document.getElementById("authLink").textContent="Profile";
+document.getElementById("authLink").href="profile.html";
+document.getElementById("heroAuth").textContent="My Profile →";
+document.getElementById("heroAuth").href="profile.html";
 
-document.getElementById("authLink").textContent="Logout";
-document.getElementById("authLink").href="#";
-document.getElementById("authLink").onclick=async function(e){
-e.preventDefault();
-await supabaseClient.auth.signOut();
-location.reload();
-};
-
-const {data:profile} =
-await supabaseClient
+const {data,error}=await supabaseClient
 .from("Profile")
-.select("*")
-.eq("user_id",user.id)
+.select('*')
+.eq("id",session.user.id)
 .maybeSingle();
 
-const name =
-profile?.full_name ||
-profile?.name ||
-user.user_metadata?.full_name ||
-user.user_metadata?.name ||
-" Kormiva Member";
+if(error){
+console.log(error.message);
+return;
+}
 
-const role =
-profile?.role ||
-"Kormiva Member";
+if(!data)return;
 
-const avatar =
-profile?.avatar_url ||
-profile?.profile_image ||
-profile?.profile_picture ||
-user.user_metadata?.avatar_url ||
-"";
+const name=data["full name"] || data.full_name || session.user.user_metadata?.full_name || "Kormiva User";
+const role=data.role || "Kormiva Member";
+const avatar=data.avatar_url;
 
-document.getElementById("homeName").textContent=name.trim();
+document.getElementById("homeName").textContent=name;
 document.getElementById("homeRole").textContent=role;
 
-const img=document.getElementById("homeAvatar");
-
 if(avatar){
-img.src=avatar;
-img.style.display="block";
+document.getElementById("homeAvatar").src=avatar;
 }else{
-img.style.display="flex";
-img.alt=getInitial(name);
-img.src="";
-img.outerHTML=
-`<div id="homeAvatar" class="home-avatar">${getInitial(name)}</div>`;
+document.getElementById("homeAvatar").src=
+"https://ui-avatars.com/api/?name="+encodeURIComponent(name)+"&background=2563eb&color=fff";
 }
 
+document.getElementById("profileButton").textContent="Manage My Profile";
 }
 
-document.addEventListener("DOMContentLoaded",loadHomeProfile);
+function searchCards(inputId,gridId,statusId){
+const input=document.getElementById(inputId);
+const cards=document.getElementById(gridId).querySelectorAll(".card");
+const status=document.getElementById(statusId);
+
+function run(){
+const q=input.value.trim().toLowerCase();
+let count=0;
+
+cards.forEach(card=>{
+const text=card.innerText.toLowerCase();
+const show=!q||text.includes(q);
+card.style.display=show?"":"none";
+if(show)count++;
+});
+
+status.textContent=q
+?"Showing "+count+" matching item"+(count===1?"":"s")+"."
+:"Showing all "+count+" items.";
+}
+
+input.addEventListener("input",run);
+run();
+}
+
+document.addEventListener("keydown",e=>{
+if(e.key==="Escape"){
+closeSettings();
+closeDialog();
+closeMenu();
+}
+});
+
+document.addEventListener("DOMContentLoaded",async()=>{
+loadDark();
+searchCards("featureSearch","featureGrid","featureStatus");
+searchCards("categorySearch","categoryGrid","categoryStatus");
+await loadHomeProfile();
+});
 </script>
 
 </body>
