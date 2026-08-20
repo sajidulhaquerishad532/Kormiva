@@ -1,809 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Kormiva — Login / Sign Up</title>
 
-<title>Kormiva — Login & Sign Up</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(37,99,235,.15),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 90%,
-      rgba(6,182,212,.15),
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #eff6ff,
-      #ffffff
-    );
-
-  color:#0f172a;
+font-family:Arial,sans-serif;
+min-height:100vh;
+background:linear-gradient(135deg,#ecfdf5,#eff6ff);
+display:flex;
+align-items:center;
+justify-content:center;
+padding:20px
 }
-
-.auth-wrapper{
-  width:100%;
-  max-width:460px;
+.box{
+width:100%;max-width:460px;background:#fff;
+border-radius:25px;padding:32px;
+box-shadow:0 25px 70px rgba(15,23,42,.12)
 }
-
 .logo{
-  text-align:center;
-  font-size:35px;
-  font-weight:900;
-  color:#2563eb;
-  margin-bottom:20px;
+display:block;text-align:center;text-decoration:none;
+font-size:32px;font-weight:900;color:#16a34a;margin-bottom:8px
 }
-
-.logo span{
-  color:#06b6d4;
-}
-
-.card{
-  background:white;
-  border:1px solid #e2e8f0;
-  border-radius:25px;
-  padding:30px;
-
-  box-shadow:
-    0 25px 70px rgba(15,23,42,.12);
-}
-
-.tabs{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  background:#f1f5f9;
-  padding:5px;
-  border-radius:12px;
-  margin-bottom:25px;
-}
-
+.subtitle{text-align:center;color:#64748b;margin-bottom:25px}
+.tabs{display:flex;gap:5px;background:#f1f5f9;padding:5px;border-radius:12px;margin-bottom:25px}
 .tab{
-  border:0;
-  background:transparent;
-  padding:12px;
-  border-radius:9px;
-  font-weight:800;
-  cursor:pointer;
-  color:#64748b;
+flex:1;border:0;background:transparent;padding:12px;
+font-weight:800;border-radius:9px;cursor:pointer
 }
-
-.tab.active{
-  background:white;
-  color:#2563eb;
-  box-shadow:0 2px 8px rgba(15,23,42,.08);
-}
-
-h1{
-  font-size:28px;
-  margin-bottom:8px;
-}
-
-.subtitle{
-  color:#64748b;
-  margin-bottom:25px;
-}
-
-.form-group{
-  margin-bottom:17px;
-}
-
-label{
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:7px;
-}
-
+.tab.active{background:#16a34a;color:white}
+label{display:block;font-weight:700;margin:13px 0 6px}
 input{
-  width:100%;
-  padding:14px;
-  border:1px solid #cbd5e1;
-  border-radius:11px;
-  outline:none;
-  font-size:16px;
+width:100%;padding:13px 14px;border:1px solid #cbd5e1;
+border-radius:10px;font-size:15px;outline:none
 }
-
-input:focus{
-  border-color:#2563eb;
-  box-shadow:
-    0 0 0 4px rgba(37,99,235,.1);
+input:focus{border-color:#16a34a;box-shadow:0 0 0 3px #dcfce7}
+button.submit{
+width:100%;margin-top:20px;padding:14px;border:0;
+border-radius:11px;background:#16a34a;color:white;
+font-size:16px;font-weight:800;cursor:pointer
 }
-
-.submit{
-  width:100%;
-  border:0;
-  padding:14px;
-  border-radius:11px;
-  background:linear-gradient(
-    135deg,
-    #2563eb,
-    #06b6d4
-  );
-  color:white;
-  font-weight:800;
-  font-size:16px;
-  cursor:pointer;
-}
-
-.submit:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
+button.submit:disabled{opacity:.6}
 .message{
-  display:none;
-  padding:13px;
-  border-radius:10px;
-  margin-bottom:17px;
-  font-size:14px;
-  font-weight:700;
+display:none;margin-top:15px;padding:12px;border-radius:10px;
+font-size:14px
 }
-
-.message.show{
-  display:block;
+.success{display:block;background:#dcfce7;color:#166534}
+.error{display:block;background:#fee2e2;color:#991b1b}
+.back{
+display:block;text-align:center;margin-top:20px;
+color:#16a34a;text-decoration:none;font-weight:700
 }
-
-.success{
-  background:#dcfce7;
-  color:#166534;
-}
-
-.error{
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.info{
-  background:#dbeafe;
-  color:#1d4ed8;
-}
-
-.home{
-  display:block;
-  text-align:center;
-  margin-top:20px;
-  color:#2563eb;
-  text-decoration:none;
-  font-weight:700;
-}
-
-.password-wrap{
-  position:relative;
-}
-
-.password-wrap input{
-  padding-right:55px;
-}
-
-.password-btn{
-  position:absolute;
-  right:5px;
-  top:5px;
-  bottom:5px;
-  width:45px;
-  border:0;
-  background:#f1f5f9;
-  border-radius:8px;
-  cursor:pointer;
-}
-
+.hidden{display:none}
 </style>
-
 </head>
 
 <body>
 
-<div class="auth-wrapper">
+<div class="box">
 
-  <div class="logo">
-    Kormi<span>va</span>
-  </div>
+<a href="index.html" class="logo">Kormiva</a>
+<p class="subtitle">Build your better future</p>
 
-  <div class="card">
+<div class="tabs">
+<button class="tab active" id="loginTab" onclick="showLogin()">Login</button>
+<button class="tab" id="signupTab" onclick="showSignup()">Sign Up</button>
+</div>
 
-    <div class="tabs">
+<form id="loginForm">
 
-      <button
-        class="tab active"
-        id="loginTab"
-        onclick="showLogin()">
-        Login
-      </button>
+<label>Email</label>
+<input id="loginEmail" type="email" required placeholder="Enter your email">
 
-      <button
-        class="tab"
-        id="signupTab"
-        onclick="showSignup()">
-        Sign Up
-      </button>
+<label>Password</label>
+<input id="loginPassword" type="password" required placeholder="Enter your password">
 
-    </div>
+<button class="submit" type="submit">Login</button>
 
+</form>
 
-    <div
-      id="message"
-      class="message">
-    </div>
+<form id="signupForm" class="hidden">
 
+<label>Full Name</label>
+<input id="signupName" type="text" required placeholder="Your full name">
 
-    <!-- LOGIN -->
+<label>Email</label>
+<input id="signupEmail" type="email" required placeholder="Your email">
 
-    <div id="loginBox">
+<label>Password</label>
+<input id="signupPassword" type="password" minlength="6" required placeholder="Minimum 6 characters">
 
-      <h1>Welcome Back 👋</h1>
+<label>Phone</label>
+<input id="signupPhone" type="tel" placeholder="Phone number">
 
-      <p class="subtitle">
-        Login to your Kormiva account.
-      </p>
+<label>Role</label>
+<input id="signupRole" type="text" placeholder="e.g. Student, Job Seeker">
 
-      <div class="form-group">
+<button class="submit" type="submit">Create Account</button>
 
-        <label>Email</label>
+</form>
 
-        <input
-          type="email"
-          id="loginEmail"
-          placeholder="you@example.com"
-          autocomplete="email">
+<div id="message" class="message"></div>
 
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Password</label>
-
-        <div class="password-wrap">
-
-          <input
-            type="password"
-            id="loginPassword"
-            placeholder="Your password"
-            autocomplete="current-password">
-
-          <button
-            type="button"
-            class="password-btn"
-            onclick="togglePassword('loginPassword',this)">
-            👁️
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="submit"
-        id="loginButton"
-        onclick="login()">
-
-        Login
-
-      </button>
-
-    </div>
-
-
-    <!-- SIGNUP -->
-
-    <div
-      id="signupBox"
-      style="display:none;">
-
-      <h1>Create Account 🚀</h1>
-
-      <p class="subtitle">
-        Join Kormiva and build your future.
-      </p>
-
-
-      <div class="form-group">
-
-        <label>Full Name</label>
-
-        <input
-          type="text"
-          id="signupName"
-          placeholder="Your full name"
-          autocomplete="name">
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Email</label>
-
-        <input
-          type="email"
-          id="signupEmail"
-          placeholder="you@example.com"
-          autocomplete="email">
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label>Password</label>
-
-        <div class="password-wrap">
-
-          <input
-            type="password"
-            id="signupPassword"
-            placeholder="Minimum 6 characters"
-            autocomplete="new-password">
-
-          <button
-            type="button"
-            class="password-btn"
-            onclick="togglePassword('signupPassword',this)">
-            👁️
-          </button>
-
-        </div>
-
-      </div>
-
-
-      <button
-        class="submit"
-        id="signupButton"
-        onclick="signup()">
-
-        Create Account
-
-      </button>
-
-    </div>
-
-
-    <a
-      href="index.html"
-      class="home">
-      ← Back to Home
-    </a>
-
-  </div>
+<a href="index.html" class="back">← Back to Home</a>
 
 </div>
 
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-
 const SUPABASE_URL =
-  "https://jobhfmjbvxstyjlpxnpp.supabase.co";
+"https://jobhfmjbvxstyjlpxnpp.supabase.co";
 
-const SUPABASE_KEY =
-  "sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+const SUPABASE_ANON_KEY =
+"sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
+supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
 function showMessage(text,type){
 
-  const message =
-    document.getElementById("message");
+const box=document.getElementById("message");
 
-  message.textContent = text;
-
-  message.className =
-    "message show " + type;
+box.textContent=text;
+box.className="message "+type;
 
 }
-
-
-function clearMessage(){
-
-  const message =
-    document.getElementById("message");
-
-  message.textContent = "";
-
-  message.className = "message";
-
-}
-
 
 function showLogin(){
 
-  document.getElementById("loginBox")
-    .style.display = "block";
+document.getElementById("loginForm").classList.remove("hidden");
+document.getElementById("signupForm").classList.add("hidden");
 
-  document.getElementById("signupBox")
-    .style.display = "none";
+document.getElementById("loginTab").classList.add("active");
+document.getElementById("signupTab").classList.remove("active");
 
-  document.getElementById("loginTab")
-    .classList.add("active");
-
-  document.getElementById("signupTab")
-    .classList.remove("active");
-
-  clearMessage();
-
+document.getElementById("message").className="message";
 }
-
 
 function showSignup(){
 
-  document.getElementById("loginBox")
-    .style.display = "none";
+document.getElementById("loginForm").classList.add("hidden");
+document.getElementById("signupForm").classList.remove("hidden");
 
-  document.getElementById("signupBox")
-    .style.display = "block";
+document.getElementById("loginTab").classList.remove("active");
+document.getElementById("signupTab").classList.add("active");
 
-  document.getElementById("loginTab")
-    .classList.remove("active");
-
-  document.getElementById("signupTab")
-    .classList.add("active");
-
-  clearMessage();
-
+document.getElementById("message").className="message";
 }
 
+document.getElementById("loginForm").addEventListener("submit",async function(e){
 
-function togglePassword(id,button){
+e.preventDefault();
 
-  const input =
-    document.getElementById(id);
+const email=document.getElementById("loginEmail").value.trim();
+const password=document.getElementById("loginPassword").value;
 
-  if(input.type === "password"){
+showMessage("Logging in...","success");
 
-    input.type = "text";
-    button.textContent = "🙈";
+const {data,error}=await supabaseClient.auth.signInWithPassword({
+email,
+password
+});
 
-  }else{
-
-    input.type = "password";
-    button.textContent = "👁️";
-
-  }
-
+if(error){
+showMessage(error.message,"error");
+return;
 }
 
+showMessage("Login successful! Redirecting...","success");
 
-async function login(){
+setTimeout(()=>{
+location.href="profile.html";
+},700);
 
-  const email =
-    document
-      .getElementById("loginEmail")
-      .value
-      .trim();
+});
 
-  const password =
-    document
-      .getElementById("loginPassword")
-      .value;
+document.getElementById("signupForm").addEventListener("submit",async function(e){
 
+e.preventDefault();
 
-  if(!email || !password){
+const name=document.getElementById("signupName").value.trim();
+const email=document.getElementById("signupEmail").value.trim();
+const password=document.getElementById("signupPassword").value;
+const phone=document.getElementById("signupPhone").value.trim();
+const role=document.getElementById("signupRole").value.trim();
 
-    showMessage(
-      "Please enter email and password.",
-      "error"
-    );
+showMessage("Creating your account...","success");
 
-    return;
+const {data,error}=await supabaseClient.auth.signUp({
 
-  }
+email,
+password,
 
-
-  const button =
-    document.getElementById("loginButton");
-
-  button.disabled = true;
-  button.textContent = "Logging in...";
-
-  clearMessage();
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.signInWithPassword({
-        email:email,
-        password:password
-      });
-
-
-    if(error){
-
-      showMessage(
-        error.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    if(!data.user){
-
-      showMessage(
-        "Login failed. Please try again.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    showMessage(
-      "Login successful! Redirecting...",
-      "success"
-    );
-
-
-    setTimeout(
-      function(){
-
-        window.location.href =
-          "profile.html";
-
-      },
-      700
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Something went wrong.",
-      "error"
-    );
-
-  }finally{
-
-    button.disabled = false;
-    button.textContent = "Login";
-
-  }
-
+options:{
+data:{
+full_name:name,
+name:name,
+phone:phone,
+role:role
+}
 }
 
+});
 
-async function signup(){
-
-  const name =
-    document
-      .getElementById("signupName")
-      .value
-      .trim();
-
-  const email =
-    document
-      .getElementById("signupEmail")
-      .value
-      .trim();
-
-  const password =
-    document
-      .getElementById("signupPassword")
-      .value;
-
-
-  if(!name || !email || !password){
-
-    showMessage(
-      "Please fill in all fields.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  if(password.length < 6){
-
-    showMessage(
-      "Password must be at least 6 characters.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  const button =
-    document.getElementById("signupButton");
-
-  button.disabled = true;
-  button.textContent = "Creating account...";
-
-  clearMessage();
-
-
-  try{
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.signUp({
-
-        email:email,
-
-        password:password,
-
-        options:{
-          data:{
-            full_name:name
-          }
-        }
-
-      });
-
-
-    if(error){
-
-      showMessage(
-        error.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    /*
-      If email confirmation is disabled,
-      user will be logged in immediately.
-    */
-
-    if(data.user){
-
-      /*
-        Create Profile row.
-        If RLS blocks this, the user can still
-        login but Profile table policy must
-        be fixed in Supabase.
-      */
-
-      const {
-        error:profileError
-      } =
-        await supabaseClient
-          .from("Profile")
-          .upsert({
-
-            "Id":data.user.id,
-
-            "Full Name":name,
-
-            email:email
-
-          });
-
-
-      if(profileError){
-
-        console.warn(
-          "Profile creation warning:",
-          profileError
-        );
-
-      }
-
-
-      if(data.session){
-
-        showMessage(
-          "Account created successfully! Redirecting...",
-          "success"
-        );
-
-        setTimeout(
-          function(){
-
-            window.location.href =
-              "profile.html";
-
-          },
-          700
-        );
-
-      }else{
-
-        showMessage(
-          "Account created. Please check your email to confirm your account.",
-          "success"
-        );
-
-        showLogin();
-
-      }
-
-    }
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Could not create account.",
-      "error"
-    );
-
-  }finally{
-
-    button.disabled = false;
-    button.textContent = "Create Account";
-
-  }
-
+if(error){
+showMessage(error.message,"error");
+return;
 }
 
+if(!data.user){
+showMessage("Account could not be created.","error");
+return;
+}
 
 /*
-  If already logged in,
-  send user directly to Profile.
+Create profile record.
+This requires public.Profile to have:
+user_id, full_name, email, phone, role, bio, avatar_url
 */
 
-async function checkExistingSession(){
+const {error:profileError}=await supabaseClient
+.from("Profile")
+.insert({
+user_id:data.user.id,
+full_name:name,
+email:email,
+phone:phone,
+role:role,
+bio:"",
+avatar_url:""
+});
 
-  const {
-    data
-  } =
-    await supabaseClient.auth.getSession();
+if(profileError){
+console.log("Profile insert:",profileError.message);
+}
 
-  if(data.session){
+if(data.session){
 
-    window.location.href =
-      "profile.html";
+showMessage("Account created! Opening your profile...","success");
 
-  }
+setTimeout(()=>{
+location.href="profile.html";
+},800);
+
+}else{
+
+showMessage(
+"Account created. Please check your email to verify your account.",
+"success"
+);
 
 }
 
-
-checkExistingSession();
-
+});
 </script>
 
 </body>
