@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1.0">
 
 <title>Kormiva — Login & Sign Up</title>
 
@@ -18,14 +21,20 @@ body{
   min-height:100vh;
   font-family:Arial,Helvetica,sans-serif;
 
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
   background:
     radial-gradient(
-      circle at 10% 20%,
+      circle at 10% 10%,
       rgba(37,99,235,.15),
       transparent 30%
     ),
     radial-gradient(
-      circle at 90% 80%,
+      circle at 90% 90%,
       rgba(6,182,212,.15),
       transparent 30%
     ),
@@ -35,43 +44,31 @@ body{
       #ffffff
     );
 
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:20px;
-
   color:#0f172a;
 }
 
-.auth-container{
+.auth-wrapper{
   width:100%;
-  max-width:450px;
+  max-width:460px;
 }
 
 .logo{
   text-align:center;
-  font-size:32px;
+  font-size:35px;
   font-weight:900;
   color:#2563eb;
-  margin-bottom:8px;
+  margin-bottom:20px;
 }
 
 .logo span{
   color:#06b6d4;
 }
 
-.subtitle{
-  text-align:center;
-  color:#64748b;
-  margin-bottom:25px;
-}
-
-.auth-card{
+.card{
   background:white;
   border:1px solid #e2e8f0;
   border-radius:25px;
-  padding:32px;
+  padding:30px;
 
   box-shadow:
     0 25px 70px rgba(15,23,42,.12);
@@ -91,25 +88,25 @@ body{
   background:transparent;
   padding:12px;
   border-radius:9px;
-  font-weight:700;
-  color:#64748b;
+  font-weight:800;
   cursor:pointer;
+  color:#64748b;
 }
 
 .tab.active{
   background:white;
   color:#2563eb;
-
-  box-shadow:
-    0 3px 10px rgba(15,23,42,.08);
+  box-shadow:0 2px 8px rgba(15,23,42,.08);
 }
 
-.form{
-  display:none;
+h1{
+  font-size:28px;
+  margin-bottom:8px;
 }
 
-.form.active{
-  display:block;
+.subtitle{
+  color:#64748b;
+  margin-bottom:25px;
 }
 
 .form-group{
@@ -118,174 +115,136 @@ body{
 
 label{
   display:block;
+  font-size:14px;
   font-weight:700;
   margin-bottom:7px;
-  font-size:14px;
 }
 
 input{
   width:100%;
-  padding:14px 15px;
-
+  padding:14px;
   border:1px solid #cbd5e1;
   border-radius:11px;
-
-  font-size:16px;
   outline:none;
+  font-size:16px;
 }
 
 input:focus{
   border-color:#2563eb;
-
   box-shadow:
     0 0 0 4px rgba(37,99,235,.1);
 }
 
-.password-box{
-  position:relative;
-}
-
-.password-box input{
-  padding-right:55px;
-}
-
-.show-password{
-  position:absolute;
-
-  right:10px;
-  top:50%;
-
-  transform:translateY(-50%);
-
-  border:0;
-  background:#eff6ff;
-  color:#2563eb;
-
-  padding:7px 9px;
-  border-radius:7px;
-
-  cursor:pointer;
-}
-
-.submit-btn{
+.submit{
   width:100%;
-
   border:0;
-  background:#2563eb;
-  color:white;
-
-  padding:15px;
+  padding:14px;
   border-radius:11px;
-
-  font-size:16px;
+  background:linear-gradient(
+    135deg,
+    #2563eb,
+    #06b6d4
+  );
+  color:white;
   font-weight:800;
-
+  font-size:16px;
   cursor:pointer;
-  margin-top:5px;
 }
 
-.submit-btn:hover{
-  background:#1d4ed8;
-}
-
-.submit-btn:disabled{
+.submit:disabled{
   opacity:.6;
   cursor:not-allowed;
 }
 
 .message{
   display:none;
-
-  padding:12px 14px;
+  padding:13px;
   border-radius:10px;
-
   margin-bottom:17px;
-
   font-size:14px;
-  font-weight:600;
+  font-weight:700;
 }
 
-.message.success{
+.message.show{
   display:block;
+}
+
+.success{
   background:#dcfce7;
   color:#166534;
 }
 
-.message.error{
-  display:block;
+.error{
   background:#fee2e2;
   color:#991b1b;
 }
 
-.back-home{
-  display:block;
+.info{
+  background:#dbeafe;
+  color:#1d4ed8;
+}
 
+.home{
+  display:block;
   text-align:center;
   margin-top:20px;
-
   color:#2563eb;
   text-decoration:none;
-
   font-weight:700;
 }
 
-@media(max-width:500px){
+.password-wrap{
+  position:relative;
+}
 
-  .auth-card{
-    padding:23px;
-  }
+.password-wrap input{
+  padding-right:55px;
+}
 
-  .logo{
-    font-size:28px;
-  }
-
+.password-btn{
+  position:absolute;
+  right:5px;
+  top:5px;
+  bottom:5px;
+  width:45px;
+  border:0;
+  background:#f1f5f9;
+  border-radius:8px;
+  cursor:pointer;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div class="auth-container">
+<div class="auth-wrapper">
 
   <div class="logo">
     Kormi<span>va</span>
   </div>
 
-  <p class="subtitle">
-    Connect. Learn. Grow. Build your better future.
-  </p>
-
-  <div class="auth-card">
-
-    <!-- TABS -->
+  <div class="card">
 
     <div class="tabs">
 
       <button
         class="tab active"
         id="loginTab"
-        type="button"
-        onclick="showForm('login')">
-
+        onclick="showLogin()">
         Login
-
       </button>
 
       <button
         class="tab"
         id="signupTab"
-        type="button"
-        onclick="showForm('signup')">
-
+        onclick="showSignup()">
         Sign Up
-
       </button>
 
     </div>
 
-
-    <!-- MESSAGE -->
 
     <div
       id="message"
@@ -295,50 +254,44 @@ input:focus{
 
     <!-- LOGIN -->
 
-    <form
-      id="loginForm"
-      class="form active">
+    <div id="loginBox">
+
+      <h1>Welcome Back 👋</h1>
+
+      <p class="subtitle">
+        Login to your Kormiva account.
+      </p>
 
       <div class="form-group">
 
-        <label for="loginEmail">
-          Email
-        </label>
+        <label>Email</label>
 
         <input
           type="email"
           id="loginEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required
-        >
+          placeholder="you@example.com"
+          autocomplete="email">
 
       </div>
 
 
       <div class="form-group">
 
-        <label for="loginPassword">
-          Password
-        </label>
+        <label>Password</label>
 
-        <div class="password-box">
+        <div class="password-wrap">
 
           <input
             type="password"
             id="loginPassword"
-            placeholder="Enter your password"
-            autocomplete="current-password"
-            required
-          >
+            placeholder="Your password"
+            autocomplete="current-password">
 
           <button
             type="button"
-            class="show-password"
+            class="password-btn"
             onclick="togglePassword('loginPassword',this)">
-
             👁️
-
           </button>
 
         </div>
@@ -347,81 +300,73 @@ input:focus{
 
 
       <button
-        type="submit"
-        class="submit-btn"
-        id="loginButton">
+        class="submit"
+        id="loginButton"
+        onclick="login()">
 
         Login
 
       </button>
 
-    </form>
+    </div>
 
 
-    <!-- SIGN UP -->
+    <!-- SIGNUP -->
 
-    <form
-      id="signupForm"
-      class="form">
+    <div
+      id="signupBox"
+      style="display:none;">
+
+      <h1>Create Account 🚀</h1>
+
+      <p class="subtitle">
+        Join Kormiva and build your future.
+      </p>
+
 
       <div class="form-group">
 
-        <label for="signupName">
-          Full Name
-        </label>
+        <label>Full Name</label>
 
         <input
           type="text"
           id="signupName"
-          placeholder="Enter your full name"
-          autocomplete="name"
-          required
-        >
+          placeholder="Your full name"
+          autocomplete="name">
 
       </div>
 
 
       <div class="form-group">
 
-        <label for="signupEmail">
-          Email
-        </label>
+        <label>Email</label>
 
         <input
           type="email"
           id="signupEmail"
-          placeholder="Enter your email"
-          autocomplete="email"
-          required
-        >
+          placeholder="you@example.com"
+          autocomplete="email">
 
       </div>
 
 
       <div class="form-group">
 
-        <label for="signupPassword">
-          Password
-        </label>
+        <label>Password</label>
 
-        <div class="password-box">
+        <div class="password-wrap">
 
           <input
             type="password"
             id="signupPassword"
             placeholder="Minimum 6 characters"
-            minlength="6"
-            autocomplete="new-password"
-            required
-          >
+            autocomplete="new-password">
 
           <button
             type="button"
-            class="show-password"
+            class="password-btn"
             onclick="togglePassword('signupPassword',this)">
-
             👁️
-
           </button>
 
         </div>
@@ -430,25 +375,21 @@ input:focus{
 
 
       <button
-        type="submit"
-        class="submit-btn"
-        id="signupButton">
+        class="submit"
+        id="signupButton"
+        onclick="signup()">
 
         Create Account
 
       </button>
 
-    </form>
+    </div>
 
-
-    <!-- BACK HOME -->
 
     <a
       href="index.html"
-      class="back-home">
-
-      ← Back to Kormiva Home
-
+      class="home">
+      ← Back to Home
     </a>
 
   </div>
@@ -456,15 +397,9 @@ input:focus{
 </div>
 
 
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
-/* =========================================
-   SUPABASE CONNECTION
-========================================= */
 
 const SUPABASE_URL =
   "https://jobhfmjbvxstyjlpxnpp.supabase.co";
@@ -479,55 +414,73 @@ const supabaseClient =
   );
 
 
-/* =========================================
-   FORM SWITCH
-========================================= */
+function showMessage(text,type){
 
-function showForm(type){
+  const message =
+    document.getElementById("message");
 
-  const loginForm =
-    document.getElementById("loginForm");
+  message.textContent = text;
 
-  const signupForm =
-    document.getElementById("signupForm");
-
-  const loginTab =
-    document.getElementById("loginTab");
-
-  const signupTab =
-    document.getElementById("signupTab");
-
-  clearMessage();
-
-  if(type === "login"){
-
-    loginForm.classList.add("active");
-    signupForm.classList.remove("active");
-
-    loginTab.classList.add("active");
-    signupTab.classList.remove("active");
-
-  }else{
-
-    signupForm.classList.add("active");
-    loginForm.classList.remove("active");
-
-    signupTab.classList.add("active");
-    loginTab.classList.remove("active");
-
-  }
+  message.className =
+    "message show " + type;
 
 }
 
 
-/* =========================================
-   PASSWORD SHOW / HIDE
-========================================= */
+function clearMessage(){
 
-function togglePassword(inputId,button){
+  const message =
+    document.getElementById("message");
+
+  message.textContent = "";
+
+  message.className = "message";
+
+}
+
+
+function showLogin(){
+
+  document.getElementById("loginBox")
+    .style.display = "block";
+
+  document.getElementById("signupBox")
+    .style.display = "none";
+
+  document.getElementById("loginTab")
+    .classList.add("active");
+
+  document.getElementById("signupTab")
+    .classList.remove("active");
+
+  clearMessage();
+
+}
+
+
+function showSignup(){
+
+  document.getElementById("loginBox")
+    .style.display = "none";
+
+  document.getElementById("signupBox")
+    .style.display = "block";
+
+  document.getElementById("loginTab")
+    .classList.remove("active");
+
+  document.getElementById("signupTab")
+    .classList.add("active");
+
+  clearMessage();
+
+}
+
+
+function togglePassword(id,button){
 
   const input =
-    document.getElementById(inputId);
+    document.getElementById(id);
 
   if(input.type === "password"){
 
@@ -544,265 +497,312 @@ function togglePassword(inputId,button){
 }
 
 
-/* =========================================
-   MESSAGE
-========================================= */
+async function login(){
 
-function showMessage(text,type){
+  const email =
+    document
+      .getElementById("loginEmail")
+      .value
+      .trim();
 
-  const message =
-    document.getElementById("message");
+  const password =
+    document
+      .getElementById("loginPassword")
+      .value;
 
-  message.textContent = text;
 
-  message.className =
-    "message " + type;
+  if(!email || !password){
+
+    showMessage(
+      "Please enter email and password.",
+      "error"
+    );
+
+    return;
+
+  }
+
+
+  const button =
+    document.getElementById("loginButton");
+
+  button.disabled = true;
+  button.textContent = "Logging in...";
+
+  clearMessage();
+
+
+  try{
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signInWithPassword({
+        email:email,
+        password:password
+      });
+
+
+    if(error){
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(!data.user){
+
+      showMessage(
+        "Login failed. Please try again.",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    showMessage(
+      "Login successful! Redirecting...",
+      "success"
+    );
+
+
+    setTimeout(
+      function(){
+
+        window.location.href =
+          "profile.html";
+
+      },
+      700
+    );
+
+
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Something went wrong.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = "Login";
+
+  }
 
 }
 
-function clearMessage(){
 
-  const message =
-    document.getElementById("message");
+async function signup(){
 
-  message.textContent = "";
+  const name =
+    document
+      .getElementById("signupName")
+      .value
+      .trim();
 
-  message.className = "message";
+  const email =
+    document
+      .getElementById("signupEmail")
+      .value
+      .trim();
 
-}
+  const password =
+    document
+      .getElementById("signupPassword")
+      .value;
 
 
-/* =========================================
-   SIGN UP
-========================================= */
+  if(!name || !email || !password){
 
-document
-  .getElementById("signupForm")
-  .addEventListener(
-    "submit",
-    async function(event){
+    showMessage(
+      "Please fill in all fields.",
+      "error"
+    );
 
-      event.preventDefault();
+    return;
 
-      const name =
-        document
-          .getElementById("signupName")
-          .value
-          .trim();
+  }
 
-      const email =
-        document
-          .getElementById("signupEmail")
-          .value
-          .trim();
 
-      const password =
-        document
-          .getElementById("signupPassword")
-          .value;
+  if(password.length < 6){
 
-      const button =
-        document.getElementById("signupButton");
+    showMessage(
+      "Password must be at least 6 characters.",
+      "error"
+    );
 
-      button.disabled = true;
-      button.textContent = "Creating account...";
+    return;
 
-      clearMessage();
+  }
 
-      try{
 
-        const { data, error } =
-          await supabaseClient.auth.signUp({
+  const button =
+    document.getElementById("signupButton");
 
-            email: email,
+  button.disabled = true;
+  button.textContent = "Creating account...";
 
-            password: password,
+  clearMessage();
 
-            options: {
 
-              data: {
-                full_name: name
-              }
+  try{
 
-            }
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signUp({
+
+        email:email,
+
+        password:password,
+
+        options:{
+          data:{
+            full_name:name
+          }
+        }
+
+      });
+
+
+    if(error){
+
+      showMessage(
+        error.message,
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    /*
+      If email confirmation is disabled,
+      user will be logged in immediately.
+    */
+
+    if(data.user){
+
+      /*
+        Create Profile row.
+        If RLS blocks this, the user can still
+        login but Profile table policy must
+        be fixed in Supabase.
+      */
+
+      const {
+        error:profileError
+      } =
+        await supabaseClient
+          .from("Profile")
+          .upsert({
+
+            "Id":data.user.id,
+
+            "Full Name":name,
+
+            email:email
 
           });
 
 
-        if(error){
+      if(profileError){
 
-          showMessage(
-            error.message,
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        /*
-          Email confirmation ON থাকলে
-          session পাওয়া যাবে না।
-        */
-
-        if(data.session){
-
-          showMessage(
-            "Account created successfully!",
-            "success"
-          );
-
-          document
-            .getElementById("signupForm")
-            .reset();
-
-          setTimeout(function(){
-
-            window.location.href =
-              "index.html";
-
-          },1000);
-
-        }else{
-
-          showMessage(
-            "Account created! Please check your email to confirm your account, then login.",
-            "success"
-          );
-
-          document
-            .getElementById("signupForm")
-            .reset();
-
-          setTimeout(function(){
-
-            showForm("login");
-
-          },1200);
-
-        }
-
-      }catch(error){
-
-        showMessage(
-          error.message ||
-          "Something went wrong. Please try again.",
-          "error"
+        console.warn(
+          "Profile creation warning:",
+          profileError
         );
-
-      }finally{
-
-        button.disabled = false;
-        button.textContent = "Create Account";
 
       }
 
-    }
-  );
 
-
-/* =========================================
-   LOGIN
-========================================= */
-
-document
-  .getElementById("loginForm")
-  .addEventListener(
-    "submit",
-    async function(event){
-
-      event.preventDefault();
-
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim();
-
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
-
-      const button =
-        document.getElementById("loginButton");
-
-      button.disabled = true;
-      button.textContent = "Logging in...";
-
-      clearMessage();
-
-      try{
-
-        const { data, error } =
-          await supabaseClient.auth.signInWithPassword({
-
-            email: email,
-
-            password: password
-
-          });
-
-
-        if(error){
-
-          showMessage(
-            error.message,
-            "error"
-          );
-
-          return;
-
-        }
-
+      if(data.session){
 
         showMessage(
-          "Login successful! Opening Kormiva...",
+          "Account created successfully! Redirecting...",
           "success"
         );
 
+        setTimeout(
+          function(){
 
-        setTimeout(function(){
+            window.location.href =
+              "profile.html";
 
-          window.location.href =
-            "index.html";
-
-        },800);
-
-      }catch(error){
-
-        showMessage(
-          error.message ||
-          "Login failed. Please try again.",
-          "error"
+          },
+          700
         );
 
-      }finally{
+      }else{
 
-        button.disabled = false;
-        button.textContent = "Login";
+        showMessage(
+          "Account created. Please check your email to confirm your account.",
+          "success"
+        );
+
+        showLogin();
 
       }
 
     }
-  );
 
 
-/* =========================================
-   IMPORTANT:
-   এখানে আর automatic redirect নেই।
-   
-   তাই auth.html খুললেই
-   user-কে index.html-এ পাঠাবে না।
-========================================= */
+  }catch(error){
+
+    console.error(error);
+
+    showMessage(
+      "Could not create account.",
+      "error"
+    );
+
+  }finally{
+
+    button.disabled = false;
+    button.textContent = "Create Account";
+
+  }
+
+}
 
 
-/* =========================================
-   START
-========================================= */
+/*
+  If already logged in,
+  send user directly to Profile.
+*/
 
-console.log("Kormiva authentication page loaded.");
+async function checkExistingSession(){
+
+  const {
+    data
+  } =
+    await supabaseClient.auth.getSession();
+
+  if(data.session){
+
+    window.location.href =
+      "profile.html";
+
+  }
+
+}
+
+
+checkExistingSession();
 
 </script>
 
