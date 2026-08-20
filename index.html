@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="Kormiva — Connecting people with jobs, skills, learning resources, products, services and opportunities.">
+<meta name="description" content="Kormiva — Jobs, skills, learning, products, services and career opportunities in one place.">
 <meta name="theme-color" content="#2563eb">
 
 <title>Kormiva — Build Your Better Future</title>
@@ -31,6 +31,7 @@ html{
   --white:#ffffff;
   --border:#e2e8f0;
   --success:#22c55e;
+  --danger:#ef4444;
 }
 
 body{
@@ -41,9 +42,20 @@ body{
   overflow-x:hidden;
 }
 
+body.dark{
+  --dark:#f8fafc;
+  --text:#cbd5e1;
+  --muted:#94a3b8;
+  --light:#020617;
+  --white:#0f172a;
+  --border:#334155;
+}
+
 a{
   color:inherit;
 }
+
+/* ================= HEADER ================= */
 
 header{
   position:sticky;
@@ -54,10 +66,15 @@ header{
   border-bottom:1px solid rgba(226,232,240,.8);
 }
 
+body.dark header{
+  background:rgba(15,23,42,.96);
+  border-bottom-color:#334155;
+}
+
 .navbar{
   max-width:1200px;
   margin:auto;
-  padding:18px 25px;
+  padding:16px 22px;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -79,35 +96,33 @@ header{
 nav{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
-nav a{
+nav a,
+.nav-settings{
   text-decoration:none;
   color:var(--text);
-  font-weight:600;
+  font-weight:700;
   padding:10px 13px;
   border-radius:9px;
   transition:.25s;
 }
 
-nav a:hover{
+nav a:hover,
+.nav-settings:hover{
   color:var(--primary);
   background:#eff6ff;
 }
 
-.nav-btn{
+.nav-auth{
   background:var(--primary);
   color:white !important;
   padding:11px 18px !important;
 }
 
-.nav-btn:hover{
+.nav-auth:hover{
   background:var(--primary-dark) !important;
-}
-
-.settings-btn{
-  background:#f1f5f9;
 }
 
 .menu-btn{
@@ -122,7 +137,7 @@ nav a:hover{
   cursor:pointer;
 }
 
-/* HERO */
+/* ================= HERO ================= */
 
 .hero{
   min-height:650px;
@@ -131,6 +146,13 @@ nav a:hover{
     radial-gradient(circle at 85% 20%,rgba(37,99,235,.15),transparent 30%),
     radial-gradient(circle at 10% 80%,rgba(6,182,212,.12),transparent 30%),
     linear-gradient(135deg,#eff6ff,#ffffff);
+}
+
+body.dark .hero{
+  background:
+    radial-gradient(circle at 85% 20%,rgba(37,99,235,.18),transparent 30%),
+    radial-gradient(circle at 10% 80%,rgba(6,182,212,.12),transparent 30%),
+    linear-gradient(135deg,#020617,#0f172a);
 }
 
 .hero-container{
@@ -190,6 +212,7 @@ nav a:hover{
   font-weight:700;
   transition:.25s;
   cursor:pointer;
+  border:0;
 }
 
 .primary{
@@ -209,12 +232,17 @@ nav a:hover{
   border:1px solid #bfdbfe;
 }
 
+body.dark .secondary{
+  background:#0f172a;
+  border-color:#334155;
+}
+
 .secondary:hover{
   transform:translateY(-3px);
   background:#eff6ff;
 }
 
-/* HERO VISUAL */
+/* ================= HERO CARD ================= */
 
 .hero-visual{
   position:relative;
@@ -227,7 +255,7 @@ nav a:hover{
 .visual-card{
   width:340px;
   min-height:390px;
-  background:white;
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:35px;
   box-shadow:0 25px 70px rgba(15,23,42,.12);
@@ -287,6 +315,10 @@ nav a:hover{
   margin-bottom:12px;
 }
 
+body.dark .progress-box{
+  background:#1e293b;
+}
+
 .progress-info{
   display:flex;
   justify-content:space-between;
@@ -311,7 +343,7 @@ nav a:hover{
 
 .floating{
   position:absolute;
-  background:white;
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:15px;
   padding:14px 18px;
@@ -330,7 +362,7 @@ nav a:hover{
   bottom:55px;
 }
 
-/* SECTIONS */
+/* ================= SECTIONS ================= */
 
 section{
   padding:90px 25px;
@@ -357,7 +389,7 @@ section{
   font-size:18px;
 }
 
-/* SEARCH */
+/* ================= SEARCH ================= */
 
 .feature-tools,
 .category-tools{
@@ -376,7 +408,9 @@ section{
   border-radius:14px;
   outline:none;
   font-size:16px;
-  background:white;
+  background:var(--white);
+  color:var(--dark);
+  transition:.25s;
 }
 
 .search:focus{
@@ -401,17 +435,16 @@ section{
   min-height:21px;
 }
 
-/* CARDS */
+/* ================= CARDS ================= */
 
-.features,
-.category-grid{
+.features{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:22px;
 }
 
 .card{
-  background:white;
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:20px;
   padding:28px;
@@ -449,23 +482,33 @@ section{
 .no-results{
   display:none;
   text-align:center;
-  background:white;
+  background:var(--white);
   border:1px solid var(--border);
   border-radius:20px;
   padding:45px 20px;
   color:var(--muted);
 }
 
-/* CATEGORIES */
+/* ================= CATEGORIES ================= */
 
 .categories-section{
   background:#f8fafc;
 }
 
-/* ABOUT */
+body.dark .categories-section{
+  background:#020617;
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+}
+
+/* ================= ABOUT ================= */
 
 .about{
-  background:white;
+  background:var(--white);
 }
 
 .about-grid{
@@ -522,12 +565,10 @@ section{
   color:var(--primary);
 }
 
-/* CTA */
+/* ================= CTA ================= */
 
 .cta{
-  background:
-    radial-gradient(circle at 20% 30%,rgba(255,255,255,.15),transparent 25%),
-    linear-gradient(135deg,#2563eb,#0891b2);
+  background:linear-gradient(135deg,#2563eb,#0891b2);
   color:white;
   text-align:center;
   padding:95px 25px;
@@ -549,7 +590,7 @@ section{
   color:var(--primary);
 }
 
-/* FOOTER */
+/* ================= FOOTER ================= */
 
 footer{
   background:#0f172a;
@@ -572,24 +613,236 @@ footer{
   font-weight:800;
 }
 
-.footer-link{
-  color:#60a5fa;
-  text-decoration:none;
+/* ================= SETTINGS PANEL ================= */
+
+.settings-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.55);
+  z-index:2000;
+}
+
+.settings-overlay.active{
+  display:block;
+}
+
+.settings-panel{
+  position:absolute;
+  right:0;
+  top:0;
+  width:390px;
+  max-width:92%;
+  height:100%;
+  background:var(--white);
+  color:var(--dark);
+  box-shadow:-15px 0 45px rgba(0,0,0,.18);
+  overflow-y:auto;
+  animation:slideSettings .25s ease;
+}
+
+@keyframes slideSettings{
+  from{
+    transform:translateX(100%);
+  }
+  to{
+    transform:translateX(0);
+  }
+}
+
+.settings-header{
+  padding:22px;
+  border-bottom:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.settings-header h2{
+  font-size:24px;
+}
+
+.close-settings{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:10px;
+  background:#fee2e2;
+  color:#991b1b;
+  font-size:20px;
+  cursor:pointer;
+}
+
+.settings-body{
+  padding:20px;
+}
+
+.settings-section-title{
+  font-size:13px;
+  color:var(--muted);
+  font-weight:800;
+  text-transform:uppercase;
+  margin:18px 5px 8px;
+}
+
+.setting-item{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--white);
+  color:var(--dark);
+  border-radius:14px;
+  padding:15px;
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  text-align:left;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.setting-item:hover{
+  border-color:#93c5fd;
+  background:#eff6ff;
+}
+
+.setting-icon{
+  width:42px;
+  height:42px;
+  border-radius:11px;
+  background:#eff6ff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  flex-shrink:0;
+}
+
+.setting-text{
+  flex:1;
+}
+
+.setting-text strong{
+  display:block;
+  font-size:15px;
+  margin-bottom:2px;
+}
+
+.setting-text small{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.switch{
+  width:45px;
+  height:24px;
+  background:#cbd5e1;
+  border-radius:20px;
+  position:relative;
+  flex-shrink:0;
+}
+
+.switch::after{
+  content:"";
+  width:18px;
+  height:18px;
+  background:white;
+  border-radius:50%;
+  position:absolute;
+  top:3px;
+  left:3px;
+  transition:.2s;
+}
+
+.switch.on{
+  background:var(--primary);
+}
+
+.switch.on::after{
+  left:24px;
+}
+
+.settings-note{
+  margin-top:20px;
+  padding:15px;
+  border-radius:12px;
+  background:#eff6ff;
+  color:#1e40af;
+  font-size:13px;
+}
+
+/* ================= SMALL DIALOG ================= */
+
+.dialog{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(15,23,42,.55);
+  z-index:3000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.dialog.active{
+  display:flex;
+}
+
+.dialog-box{
+  width:100%;
+  max-width:430px;
+  background:var(--white);
+  color:var(--dark);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 25px 70px rgba(0,0,0,.2);
+}
+
+.dialog-box h3{
+  margin-bottom:10px;
+}
+
+.dialog-box p{
+  color:var(--muted);
+  margin-bottom:20px;
+}
+
+.dialog-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+}
+
+.dialog-actions button{
+  border:0;
+  padding:10px 16px;
+  border-radius:9px;
+  cursor:pointer;
   font-weight:700;
 }
 
-/* MOBILE */
+.dialog-close{
+  background:#e2e8f0;
+  color:#334155;
+}
+
+.dialog-ok{
+  background:var(--primary);
+  color:white;
+}
+
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
 
   nav{
     display:none;
     position:absolute;
-    top:78px;
+    top:74px;
     left:0;
     right:0;
-    background:white;
-    padding:20px 25px;
+    background:var(--white);
+    padding:18px;
     flex-direction:column;
     align-items:stretch;
     gap:5px;
@@ -601,8 +854,11 @@ footer{
     display:flex;
   }
 
-  nav a{
+  nav a,
+  .nav-settings{
     padding:13px;
+    margin:0;
+    text-align:left;
   }
 
   .menu-btn{
@@ -725,7 +981,14 @@ footer{
     flex-direction:column;
     text-align:center;
   }
+
+  .settings-panel{
+    width:100%;
+    max-width:100%;
+  }
 }
+
+/* ================= ACCESSIBILITY ================= */
 
 button:focus-visible,
 a:focus-visible,
@@ -738,10 +1001,9 @@ input:focus-visible{
 
 <body>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <header>
-
   <div class="navbar">
 
     <a href="#home" class="logo">
@@ -760,38 +1022,34 @@ input:focus-visible{
 
     <nav id="nav">
 
-      <a href="#home" onclick="closeMenu()">
-        🏠 Home
+      <a href="#home" onclick="closeMenu()">Home</a>
+
+      <a href="#features" onclick="closeMenu()">Features</a>
+
+      <a href="#categories" onclick="closeMenu()">Categories</a>
+
+      <a href="#about" onclick="closeMenu()">About</a>
+
+      <!-- LOGIN / SIGN UP -->
+      <a href="auth.html" class="nav-auth" onclick="closeMenu()">
+        Login / Sign Up
       </a>
 
-      <a href="#features" onclick="closeMenu()">
-        ⚡ Features
-      </a>
-
-      <a href="#categories" onclick="closeMenu()">
-        📂 Categories
-      </a>
-
-      <a href="#about" onclick="closeMenu()">
-        ℹ️ About
-      </a>
-
-      <a href="auth.html" onclick="closeMenu()">
-        🔐 Login / Sign Up
-      </a>
-
-      <a href="settings.html" class="settings-btn" onclick="closeMenu()">
+      <!-- SETTINGS -->
+      <button
+        type="button"
+        class="nav-settings"
+        onclick="openSettings()">
         ⚙️ Settings
-      </a>
+      </button>
 
     </nav>
 
   </div>
-
 </header>
 
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 
 <section class="hero" id="home">
 
@@ -828,7 +1086,6 @@ input:focus-visible{
 
     </div>
 
-
     <div class="hero-visual">
 
       <div class="floating float-one">
@@ -838,13 +1095,10 @@ input:focus-visible{
       <div class="visual-card">
 
         <div class="visual-top">
-
           <div class="visual-title">
             My Career
           </div>
-
           <div class="dot"></div>
-
         </div>
 
         <div class="profile">
@@ -864,7 +1118,6 @@ input:focus-visible{
         </div>
 
         <div class="progress-box">
-
           <div class="progress-info">
             <span>Profile Strength</span>
             <span>78%</span>
@@ -873,11 +1126,9 @@ input:focus-visible{
           <div class="progress">
             <span style="width:78%"></span>
           </div>
-
         </div>
 
         <div class="progress-box">
-
           <div class="progress-info">
             <span>Skills Progress</span>
             <span>64%</span>
@@ -886,11 +1137,9 @@ input:focus-visible{
           <div class="progress">
             <span style="width:64%"></span>
           </div>
-
         </div>
 
         <div class="progress-box">
-
           <div class="progress-info">
             <span>Career Goal</span>
             <span>85%</span>
@@ -899,7 +1148,6 @@ input:focus-visible{
           <div class="progress">
             <span style="width:85%"></span>
           </div>
-
         </div>
 
       </div>
@@ -911,27 +1159,22 @@ input:focus-visible{
     </div>
 
   </div>
-
 </section>
 
 
-<!-- FEATURES -->
+<!-- ================= FEATURES ================= -->
 
 <section id="features">
 
   <div class="container">
 
     <div class="section-heading">
-
-      <h2>
-        Everything You Need
-      </h2>
+      <h2>Everything You Need</h2>
 
       <p>
         Discover opportunities, develop your skills
         and take control of your career journey.
       </p>
-
     </div>
 
     <div class="feature-tools">
@@ -958,199 +1201,79 @@ input:focus-visible{
 
     <div class="features" id="featureList">
 
-      <div class="card">
-        <div class="icon">💼</div>
-        <h3>Find Jobs</h3>
-        <p>Discover job opportunities matching your skills and goals.</p>
-      </div>
+      <div class="card"><div class="icon">💼</div><h3>Find Jobs</h3><p>Discover job opportunities matching your skills and goals.</p></div>
 
-      <div class="card">
-        <div class="icon">📚</div>
-        <h3>Learn Skills</h3>
-        <p>Improve your skills with useful learning resources.</p>
-      </div>
+      <div class="card"><div class="icon">📚</div><h3>Learn Skills</h3><p>Improve your skills with useful learning resources.</p></div>
 
-      <div class="card">
-        <div class="icon">🚀</div>
-        <h3>Career Growth</h3>
-        <p>Build a clear path toward your dream career.</p>
-      </div>
+      <div class="card"><div class="icon">🚀</div><h3>Career Growth</h3><p>Build a clear path toward your dream career.</p></div>
 
-      <div class="card">
-        <div class="icon">👤</div>
-        <h3>Create Profile</h3>
-        <p>Create your professional Kormiva profile.</p>
-      </div>
+      <div class="card"><div class="icon">👤</div><h3>Create Profile</h3><p>Create your professional Kormiva profile.</p></div>
 
-      <div class="card">
-        <div class="icon">📄</div>
-        <h3>CV Builder</h3>
-        <p>Create a professional CV that stands out.</p>
-      </div>
+      <div class="card"><div class="icon">📄</div><h3>CV Builder</h3><p>Create a professional CV that stands out.</p></div>
 
-      <div class="card">
-        <div class="icon">🔍</div>
-        <h3>Job Search</h3>
-        <p>Search opportunities by role, skill and location.</p>
-      </div>
+      <div class="card"><div class="icon">🔍</div><h3>Job Search</h3><p>Search opportunities by role, skill and location.</p></div>
 
-      <div class="card">
-        <div class="icon">🎯</div>
-        <h3>Recommended Jobs</h3>
-        <p>Get opportunities based on your profile.</p>
-      </div>
+      <div class="card"><div class="icon">🎯</div><h3>Recommended Jobs</h3><p>Get opportunities based on your profile.</p></div>
 
-      <div class="card">
-        <div class="icon">🏢</div>
-        <h3>Company Directory</h3>
-        <p>Explore companies and career opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">🏢</div><h3>Company Directory</h3><p>Explore companies and career opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">💻</div>
-        <h3>Remote Jobs</h3>
-        <p>Find work-from-anywhere career opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">💻</div><h3>Remote Jobs</h3><p>Find work-from-anywhere career opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">🌍</div>
-        <h3>Jobs Abroad</h3>
-        <p>Explore international career opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">🌍</div><h3>Jobs Abroad</h3><p>Explore international career opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">🎓</div>
-        <h3>Online Courses</h3>
-        <p>Discover courses to improve your knowledge.</p>
-      </div>
+      <div class="card"><div class="icon">🎓</div><h3>Online Courses</h3><p>Discover courses to improve your knowledge.</p></div>
 
-      <div class="card">
-        <div class="icon">🏆</div>
-        <h3>Certificates</h3>
-        <p>Build your credibility with skill certificates.</p>
-      </div>
+      <div class="card"><div class="icon">🏆</div><h3>Certificates</h3><p>Build your credibility with skill certificates.</p></div>
 
-      <div class="card">
-        <div class="icon">🧠</div>
-        <h3>Skill Assessment</h3>
-        <p>Test your skills and discover areas to improve.</p>
-      </div>
+      <div class="card"><div class="icon">🧠</div><h3>Skill Assessment</h3><p>Test your skills and discover areas to improve.</p></div>
 
-      <div class="card">
-        <div class="icon">🤝</div>
-        <h3>Career Mentorship</h3>
-        <p>Connect with mentors for career guidance.</p>
-      </div>
+      <div class="card"><div class="icon">🤝</div><h3>Career Mentorship</h3><p>Connect with mentors for career guidance.</p></div>
 
-      <div class="card">
-        <div class="icon">💬</div>
-        <h3>Career Community</h3>
-        <p>Connect and share experiences with others.</p>
-      </div>
+      <div class="card"><div class="icon">💬</div><h3>Career Community</h3><p>Connect and share experiences with others.</p></div>
 
-      <div class="card">
-        <div class="icon">📢</div>
-        <h3>Job Alerts</h3>
-        <p>Never miss important new opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">📢</div><h3>Job Alerts</h3><p>Never miss important new opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">❤️</div>
-        <h3>Saved Jobs</h3>
-        <p>Save interesting jobs and apply later.</p>
-      </div>
+      <div class="card"><div class="icon">❤️</div><h3>Saved Jobs</h3><p>Save interesting jobs and apply later.</p></div>
 
-      <div class="card">
-        <div class="icon">📊</div>
-        <h3>Career Dashboard</h3>
-        <p>Manage your career activities in one place.</p>
-      </div>
+      <div class="card"><div class="icon">📊</div><h3>Career Dashboard</h3><p>Manage your career activities in one place.</p></div>
 
-      <div class="card">
-        <div class="icon">💰</div>
-        <h3>Salary Guide</h3>
-        <p>Understand salary ranges and career value.</p>
-      </div>
+      <div class="card"><div class="icon">💰</div><h3>Salary Guide</h3><p>Understand salary ranges and career value.</p></div>
 
-      <div class="card">
-        <div class="icon">📝</div>
-        <h3>Interview Preparation</h3>
-        <p>Prepare yourself for important interviews.</p>
-      </div>
+      <div class="card"><div class="icon">📝</div><h3>Interview Preparation</h3><p>Prepare yourself for important interviews.</p></div>
 
-      <div class="card">
-        <div class="icon">🎤</div>
-        <h3>Mock Interview</h3>
-        <p>Practice interview questions and improve confidence.</p>
-      </div>
+      <div class="card"><div class="icon">🎤</div><h3>Mock Interview</h3><p>Practice interview questions and improve confidence.</p></div>
 
-      <div class="card">
-        <div class="icon">💡</div>
-        <h3>Career Advice</h3>
-        <p>Get useful tips for your professional journey.</p>
-      </div>
+      <div class="card"><div class="icon">💡</div><h3>Career Advice</h3><p>Get useful tips for your professional journey.</p></div>
 
-      <div class="card">
-        <div class="icon">🧑‍🎓</div>
-        <h3>Student Corner</h3>
-        <p>Resources and opportunities for students.</p>
-      </div>
+      <div class="card"><div class="icon">🧑‍🎓</div><h3>Student Corner</h3><p>Resources and opportunities for students.</p></div>
 
-      <div class="card">
-        <div class="icon">👩‍💻</div>
-        <h3>Freelance Jobs</h3>
-        <p>Discover freelance and independent work.</p>
-      </div>
+      <div class="card"><div class="icon">👩‍💻</div><h3>Freelance Jobs</h3><p>Discover freelance and independent work.</p></div>
 
-      <div class="card">
-        <div class="icon">🏠</div>
-        <h3>Work From Home</h3>
-        <p>Find flexible work-from-home opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">🏠</div><h3>Work From Home</h3><p>Find flexible work-from-home opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">📈</div>
-        <h3>Career Roadmap</h3>
-        <p>Create a step-by-step plan for your career.</p>
-      </div>
+      <div class="card"><div class="icon">📈</div><h3>Career Roadmap</h3><p>Create a step-by-step plan for your career.</p></div>
 
-      <div class="card">
-        <div class="icon">🔔</div>
-        <h3>Notifications</h3>
-        <p>Stay updated about your career activities.</p>
-      </div>
+      <div class="card"><div class="icon">🔔</div><h3>Notifications</h3><p>Stay updated about your career activities.</p></div>
 
-      <div class="card">
-        <div class="icon">📱</div>
-        <h3>Mobile Profile</h3>
-        <p>Access your professional profile from any device.</p>
-      </div>
+      <div class="card"><div class="icon">📱</div><h3>Mobile Profile</h3><p>Access your professional profile from any device.</p></div>
 
-      <div class="card">
-        <div class="icon">🛡️</div>
-        <h3>Verified Opportunities</h3>
-        <p>Discover safer and more reliable opportunities.</p>
-      </div>
+      <div class="card"><div class="icon">🛡️</div><h3>Verified Opportunities</h3><p>Discover safer and more reliable opportunities.</p></div>
 
-      <div class="card">
-        <div class="icon">🆘</div>
-        <h3>Career Help</h3>
-        <p>Get guidance when you need help with your career.</p>
-      </div>
+      <div class="card"><div class="icon">🆘</div><h3>Career Help</h3><p>Get guidance when you need help with your career.</p></div>
 
     </div>
 
     <div class="no-results" id="noResults">
+      <div style="font-size:45px;">🔎</div>
       <h3>No features found</h3>
       <p>Try another search term.</p>
     </div>
 
   </div>
-
 </section>
 
 
-<!-- CATEGORIES -->
+<!-- ================= CATEGORIES ================= -->
 
 <section class="categories-section" id="categories">
 
@@ -1198,49 +1321,78 @@ input:focus-visible{
     <div class="category-grid" id="categoryList">
 
       <div class="card"><div class="icon">💼</div><h3>Jobs</h3><p>Find jobs and career opportunities.</p></div>
+
       <div class="card"><div class="icon">💻</div><h3>Freelancing</h3><p>Find freelance work and projects.</p></div>
+
       <div class="card"><div class="icon">🛍️</div><h3>Products</h3><p>Buy and sell products online.</p></div>
+
       <div class="card"><div class="icon">🛠️</div><h3>Services</h3><p>Discover useful services near you.</p></div>
+
       <div class="card"><div class="icon">🏢</div><h3>Business</h3><p>Discover businesses and opportunities.</p></div>
+
       <div class="card"><div class="icon">🏠</div><h3>Property & Rent</h3><p>Find property, homes and rental opportunities.</p></div>
+
       <div class="card"><div class="icon">🚗</div><h3>Vehicles</h3><p>Explore vehicles and transport options.</p></div>
+
       <div class="card"><div class="icon">📚</div><h3>Education</h3><p>Find education and learning opportunities.</p></div>
+
       <div class="card"><div class="icon">🎓</div><h3>Courses & Training</h3><p>Learn new skills through courses and training.</p></div>
+
       <div class="card"><div class="icon">💰</div><h3>Finance</h3><p>Explore finance and accounting services.</p></div>
+
       <div class="card"><div class="icon">👨‍💻</div><h3>Technology</h3><p>Technology products, services and opportunities.</p></div>
+
       <div class="card"><div class="icon">📱</div><h3>Mobile & Electronics</h3><p>Find phones, electronics and accessories.</p></div>
+
       <div class="card"><div class="icon">🏥</div><h3>Health & Care</h3><p>Find health and care related services.</p></div>
+
       <div class="card"><div class="icon">🩸</div><h3>Blood Donor</h3><p>Find blood donors and blood requests.</p></div>
+
       <div class="card"><div class="icon">🚨</div><h3>Emergency</h3><p>Get help during emergency situations.</p></div>
+
       <div class="card"><div class="icon">🤝</div><h3>Volunteer</h3><p>Join volunteer activities and help others.</p></div>
+
       <div class="card"><div class="icon">🏛️</div><h3>Organizations</h3><p>Discover organizations and community groups.</p></div>
+
       <div class="card"><div class="icon">🧑‍🌾</div><h3>Agriculture</h3><p>Explore agriculture products and opportunities.</p></div>
+
       <div class="card"><div class="icon">🍔</div><h3>Food & Restaurant</h3><p>Find food, restaurants and delivery services.</p></div>
+
       <div class="card"><div class="icon">🛒</div><h3>Buy & Sell</h3><p>Buy and sell items in your area.</p></div>
+
       <div class="card"><div class="icon">👷</div><h3>Daily Work</h3><p>Find workers and daily work opportunities.</p></div>
+
       <div class="card"><div class="icon">🎨</div><h3>Creative & Design</h3><p>Find creative professionals and design services.</p></div>
+
       <div class="card"><div class="icon">📸</div><h3>Media & Photography</h3><p>Photography, video and media services.</p></div>
+
       <div class="card"><div class="icon">🚚</div><h3>Delivery & Transport</h3><p>Find delivery and transportation services.</p></div>
+
       <div class="card"><div class="icon">🧑‍🏫</div><h3>Tutor & Coaching</h3><p>Find tutors and coaching opportunities.</p></div>
+
       <div class="card"><div class="icon">🧰</div><h3>Repair & Maintenance</h3><p>Find repair and maintenance services.</p></div>
+
       <div class="card"><div class="icon">👗</div><h3>Fashion & Lifestyle</h3><p>Explore fashion and lifestyle products.</p></div>
+
       <div class="card"><div class="icon">🐄</div><h3>Animals & Livestock</h3><p>Find livestock, animals and related services.</p></div>
+
       <div class="card"><div class="icon">🌱</div><h3>Community & Social Help</h3><p>Connect with people and community support.</p></div>
+
       <div class="card"><div class="icon">📢</div><h3>Other / General</h3><p>Explore other useful Kormiva opportunities.</p></div>
 
     </div>
 
     <div class="no-results" id="categoryNoResults">
+      <div style="font-size:45px;">🔎</div>
       <h3>No categories found</h3>
       <p>Try another search term.</p>
     </div>
 
   </div>
-
 </section>
 
 
-<!-- ABOUT -->
+<!-- ================= ABOUT ================= -->
 
 <section class="about" id="about">
 
@@ -1257,9 +1409,8 @@ input:focus-visible{
         </h2>
 
         <p>
-          Kormiva is designed to connect people with
-          meaningful opportunities, useful skills and
-          career resources in one simple platform.
+          Kormiva is designed to connect people with meaningful
+          opportunities, useful skills and career resources in one simple platform.
         </p>
 
         <ul class="check-list">
@@ -1300,11 +1451,10 @@ input:focus-visible{
     </div>
 
   </div>
-
 </section>
 
 
-<!-- CTA -->
+<!-- ================= CTA ================= -->
 
 <section class="cta" id="contact">
 
@@ -1327,7 +1477,7 @@ input:focus-visible{
 </section>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <footer>
 
@@ -1336,14 +1486,6 @@ input:focus-visible{
     <div class="footer-logo">
       Kormiva
     </div>
-
-    <a href="auth.html" class="footer-link">
-      🔐 Login / Sign Up
-    </a>
-
-    <a href="settings.html" class="footer-link">
-      ⚙️ Settings
-    </a>
 
     <p>
       © 2026 Kormiva — Connecting people with opportunities.
@@ -1354,9 +1496,264 @@ input:focus-visible{
 </footer>
 
 
+<!-- ================= SETTINGS ================= -->
+
+<div
+  class="settings-overlay"
+  id="settingsOverlay"
+  onclick="closeSettingsOutside(event)">
+
+  <div
+    class="settings-panel"
+    onclick="event.stopPropagation()">
+
+    <div class="settings-header">
+
+      <h2>⚙️ Settings</h2>
+
+      <button
+        class="close-settings"
+        type="button"
+        onclick="closeSettings()">
+        ✕
+      </button>
+
+    </div>
+
+    <div class="settings-body">
+
+      <div class="settings-section-title">
+        Account
+      </div>
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Account','Manage your Kormiva account, profile and personal information.')">
+
+        <div class="setting-icon">👤</div>
+
+        <div class="setting-text">
+          <strong>Account</strong>
+          <small>Manage your account information</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="location.href='auth.html'">
+
+        <div class="setting-icon">🔐</div>
+
+        <div class="setting-text">
+          <strong>Login & Sign Up</strong>
+          <small>Login or create a Kormiva account</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <div class="settings-section-title">
+        Preferences
+      </div>
+
+
+      <button
+        class="setting-item"
+        onclick="toggleDarkMode()">
+
+        <div class="setting-icon">🌙</div>
+
+        <div class="setting-text">
+          <strong>Dark Mode</strong>
+          <small>Change website appearance</small>
+        </div>
+
+        <div
+          class="switch"
+          id="darkSwitch">
+        </div>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Language','Language preferences can be added here as Kormiva grows.')">
+
+        <div class="setting-icon">🌐</div>
+
+        <div class="setting-text">
+          <strong>Language</strong>
+          <small>Choose your preferred language</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Notifications','Control job alerts, messages and important Kormiva notifications.')">
+
+        <div class="setting-icon">🔔</div>
+
+        <div class="setting-text">
+          <strong>Notifications</strong>
+          <small>Manage your notifications</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Email Preferences','Manage the emails and career updates you want to receive.')">
+
+        <div class="setting-icon">📧</div>
+
+        <div class="setting-text">
+          <strong>Email Preferences</strong>
+          <small>Manage email updates</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <div class="settings-section-title">
+        Privacy & Security
+      </div>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Privacy','Manage how your information is used and displayed on Kormiva.')">
+
+        <div class="setting-icon">🔒</div>
+
+        <div class="setting-text">
+          <strong>Privacy</strong>
+          <small>Control your privacy preferences</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Security','Keep your account secure with strong passwords and account protection.')">
+
+        <div class="setting-icon">🛡️</div>
+
+        <div class="setting-text">
+          <strong>Security</strong>
+          <small>Account security options</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <div class="settings-section-title">
+        Help
+      </div>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('Help & Support','Need help? Kormiva support features can be connected here.')">
+
+        <div class="setting-icon">❓</div>
+
+        <div class="setting-text">
+          <strong>Help & Support</strong>
+          <small>Get help with Kormiva</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <button
+        class="setting-item"
+        onclick="openSettingInfo('About Kormiva','Kormiva connects people with jobs, skills, products, services and opportunities.')">
+
+        <div class="setting-icon">ℹ️</div>
+
+        <div class="setting-text">
+          <strong>About Kormiva</strong>
+          <small>Learn more about Kormiva</small>
+        </div>
+
+        <span>›</span>
+
+      </button>
+
+
+      <div class="settings-note">
+        💡 More account, profile, notification and security
+        features can be connected here as Kormiva develops.
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ================= INFO DIALOG ================= -->
+
+<div
+  class="dialog"
+  id="infoDialog">
+
+  <div class="dialog-box">
+
+    <h3 id="dialogTitle">
+      Kormiva
+    </h3>
+
+    <p id="dialogText">
+      Kormiva information.
+    </p>
+
+    <div class="dialog-actions">
+
+      <button
+        class="dialog-close"
+        onclick="closeDialog()">
+        Close
+      </button>
+
+      <button
+        class="dialog-ok"
+        onclick="closeDialog()">
+        OK
+      </button>
+
+    </div>
+
+  </div>
+</div>
+
+
 <script>
 
-/* MOBILE MENU */
+/* ================= MOBILE MENU ================= */
 
 function toggleMenu(){
 
@@ -1380,10 +1777,9 @@ function toggleMenu(){
     "aria-label",
     isOpen ? "Close menu" : "Open menu"
   );
+
 }
 
-
-/* CLOSE MENU */
 
 function closeMenu(){
 
@@ -1404,21 +1800,146 @@ function closeMenu(){
     "aria-label",
     "Open menu"
   );
+
 }
 
 
-/* FEATURE SEARCH */
+/* ================= SETTINGS ================= */
+
+function openSettings(){
+
+  closeMenu();
+
+  document
+    .getElementById("settingsOverlay")
+    .classList.add("active");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeSettings(){
+
+  document
+    .getElementById("settingsOverlay")
+    .classList.remove("active");
+
+  document.body.style.overflow = "";
+
+}
+
+
+function closeSettingsOutside(event){
+
+  if(
+    event.target ===
+    document.getElementById("settingsOverlay")
+  ){
+
+    closeSettings();
+
+  }
+
+}
+
+
+/* ================= DARK MODE ================= */
+
+function updateDarkSwitch(){
+
+  const switchElement =
+    document.getElementById("darkSwitch");
+
+  if(
+    document.body.classList.contains("dark")
+  ){
+
+    switchElement.classList.add("on");
+
+  }else{
+
+    switchElement.classList.remove("on");
+
+  }
+
+}
+
+
+function toggleDarkMode(){
+
+  document.body.classList.toggle("dark");
+
+  const enabled =
+    document.body.classList.contains("dark");
+
+  localStorage.setItem(
+    "kormivaDarkMode",
+    enabled ? "on" : "off"
+  );
+
+  updateDarkSwitch();
+
+}
+
+
+/* ================= LOAD SETTINGS ================= */
+
+function loadSettings(){
+
+  const darkMode =
+    localStorage.getItem("kormivaDarkMode");
+
+  if(darkMode === "on"){
+
+    document.body.classList.add("dark");
+
+  }
+
+  updateDarkSwitch();
+
+}
+
+
+/* ================= SETTING INFO ================= */
+
+function openSettingInfo(title,text){
+
+  document
+    .getElementById("dialogTitle")
+    .textContent = title;
+
+  document
+    .getElementById("dialogText")
+    .textContent = text;
+
+  document
+    .getElementById("infoDialog")
+    .classList.add("active");
+
+}
+
+
+function closeDialog(){
+
+  document
+    .getElementById("infoDialog")
+    .classList.remove("active");
+
+}
+
+
+/* ================= FEATURE SEARCH ================= */
 
 function searchFeatures(){
 
   const input =
     document.getElementById("featureSearch");
 
-  const list =
-    document.getElementById("featureList");
-
   const cards =
-    list.querySelectorAll(".card");
+    document
+      .getElementById("featureList")
+      .querySelectorAll(".card");
 
   const noResults =
     document.getElementById("noResults");
@@ -1426,23 +1947,25 @@ function searchFeatures(){
   const status =
     document.getElementById("searchStatus");
 
-  const searchText =
-    input.value.trim().toLowerCase();
+  const text =
+    input.value
+      .trim()
+      .toLowerCase();
 
-  let visibleCount = 0;
+  let count = 0;
 
   cards.forEach(function(card){
 
-    const text =
+    const content =
       card.innerText.toLowerCase();
 
     if(
-      searchText === "" ||
-      text.includes(searchText)
+      text === "" ||
+      content.includes(text)
     ){
 
       card.style.display = "";
-      visibleCount++;
+      count++;
 
     }else{
 
@@ -1452,7 +1975,7 @@ function searchFeatures(){
 
   });
 
-  if(visibleCount === 0){
+  if(count === 0){
 
     noResults.style.display = "block";
 
@@ -1463,39 +1986,28 @@ function searchFeatures(){
 
     noResults.style.display = "none";
 
-    if(searchText === ""){
-
-      status.textContent =
-        "Showing all " +
-        visibleCount +
-        " features.";
-
-    }else{
-
-      status.textContent =
-        "Showing " +
-        visibleCount +
-        " matching feature" +
-        (visibleCount === 1 ? "." : "s.");
-
-    }
+    status.textContent =
+      text === ""
+      ? "Showing all " + count + " features."
+      : "Showing " + count + " matching feature" +
+        (count === 1 ? "." : "s.");
 
   }
+
 }
 
 
-/* CATEGORY SEARCH */
+/* ================= CATEGORY SEARCH ================= */
 
 function searchCategories(){
 
   const input =
     document.getElementById("categorySearch");
 
-  const list =
-    document.getElementById("categoryList");
-
   const cards =
-    list.querySelectorAll(".card");
+    document
+      .getElementById("categoryList")
+      .querySelectorAll(".card");
 
   const noResults =
     document.getElementById("categoryNoResults");
@@ -1503,23 +2015,25 @@ function searchCategories(){
   const status =
     document.getElementById("categoryStatus");
 
-  const searchText =
-    input.value.trim().toLowerCase();
+  const text =
+    input.value
+      .trim()
+      .toLowerCase();
 
-  let visibleCount = 0;
+  let count = 0;
 
   cards.forEach(function(card){
 
-    const text =
+    const content =
       card.innerText.toLowerCase();
 
     if(
-      searchText === "" ||
-      text.includes(searchText)
+      text === "" ||
+      content.includes(text)
     ){
 
       card.style.display = "";
-      visibleCount++;
+      count++;
 
     }else{
 
@@ -1529,7 +2043,7 @@ function searchCategories(){
 
   });
 
-  if(visibleCount === 0){
+  if(count === 0){
 
     noResults.style.display = "block";
 
@@ -1540,32 +2054,50 @@ function searchCategories(){
 
     noResults.style.display = "none";
 
-    if(searchText === ""){
+    if(text === ""){
 
       status.textContent =
-        "Showing all " +
-        visibleCount +
-        " categories.";
+        "Showing all " + count + " categories.";
 
     }else{
 
       status.textContent =
-        "Showing " +
-        visibleCount +
+        "Showing " + count +
         " matching categor" +
-        (visibleCount === 1 ? "y." : "ies.");
+        (count === 1 ? "y." : "ies.");
 
     }
 
   }
+
 }
 
 
-/* PAGE READY */
+/* ================= ESCAPE KEY ================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      closeMenu();
+      closeSettings();
+      closeDialog();
+
+    }
+
+  }
+);
+
+
+/* ================= PAGE READY ================= */
 
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+    loadSettings();
 
     const featureSearch =
       document.getElementById("featureSearch");
@@ -1584,22 +2116,7 @@ document.addEventListener(
     );
 
     searchFeatures();
-
     searchCategories();
-
-  }
-);
-
-
-/* ESC KEY */
-
-document.addEventListener(
-  "keydown",
-  function(event){
-
-    if(event.key === "Escape"){
-      closeMenu();
-    }
 
   }
 );
