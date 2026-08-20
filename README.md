@@ -1,7 +1,7 @@
-LifeBridge
-LifeBridge — A platform connecting people with jobs, skills and career opportunities.
-About LifeBridge
-LifeBridge is a platform designed to connect people with job opportunities, useful skills and career development resources.
+Kormiva
+Kormiva — A platform connecting people with jobs, skills and career opportunities.
+About Kormiva
+Kormiva is a platform designed to connect people with job opportunities, useful skills and career development resources.
 Our goal is to help people find the right opportunities and build a better career.
 Features
 🔎 Find job opportunities
