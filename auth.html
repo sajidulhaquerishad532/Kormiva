@@ -10,51 +10,54 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{
-font-family:Arial,sans-serif;
-min-height:100vh;
-background:linear-gradient(135deg,#ecfdf5,#eff6ff);
-display:flex;
-align-items:center;
-justify-content:center;
-padding:20px
+font-family:Arial,sans-serif;min-height:100vh;padding:20px;
+display:flex;align-items:center;justify-content:center;
+background:linear-gradient(135deg,#eff6ff,#ecfeff)
 }
 .box{
-width:100%;max-width:460px;background:#fff;
-border-radius:25px;padding:32px;
-box-shadow:0 25px 70px rgba(15,23,42,.12)
+width:100%;max-width:470px;background:#fff;
+padding:30px;border-radius:24px;
+box-shadow:0 25px 70px rgba(15,23,42,.14)
 }
 .logo{
 display:block;text-align:center;text-decoration:none;
-font-size:32px;font-weight:900;color:#16a34a;margin-bottom:8px
+font-size:32px;font-weight:900;color:#2563eb
 }
-.subtitle{text-align:center;color:#64748b;margin-bottom:25px}
-.tabs{display:flex;gap:5px;background:#f1f5f9;padding:5px;border-radius:12px;margin-bottom:25px}
+.subtitle{text-align:center;color:#64748b;margin:6px 0 25px}
+.tabs{
+display:flex;gap:5px;background:#f1f5f9;
+padding:5px;border-radius:12px;margin-bottom:20px
+}
 .tab{
-flex:1;border:0;background:transparent;padding:12px;
-font-weight:800;border-radius:9px;cursor:pointer
+flex:1;border:0;padding:12px;border-radius:9px;
+font-weight:800;cursor:pointer
 }
-.tab.active{background:#16a34a;color:white}
+.tab.active{background:#2563eb;color:#fff}
 label{display:block;font-weight:700;margin:13px 0 6px}
 input{
-width:100%;padding:13px 14px;border:1px solid #cbd5e1;
-border-radius:10px;font-size:15px;outline:none
+width:100%;padding:13px;border:1px solid #cbd5e1;
+border-radius:10px;outline:none
 }
-input:focus{border-color:#16a34a;box-shadow:0 0 0 3px #dcfce7}
-button.submit{
-width:100%;margin-top:20px;padding:14px;border:0;
-border-radius:11px;background:#16a34a;color:white;
-font-size:16px;font-weight:800;cursor:pointer
+input:focus{
+border-color:#2563eb;
+box-shadow:0 0 0 3px #dbeafe
 }
-button.submit:disabled{opacity:.6}
+.submit{
+width:100%;margin-top:20px;padding:14px;
+border:0;border-radius:11px;background:#2563eb;
+color:#fff;font-weight:800;font-size:16px;cursor:pointer
+}
+.submit:disabled{opacity:.6}
 .message{
 display:none;margin-top:15px;padding:12px;border-radius:10px;
 font-size:14px
 }
-.success{display:block;background:#dcfce7;color:#166534}
-.error{display:block;background:#fee2e2;color:#991b1b}
+.message.show{display:block}
+.success{background:#dcfce7;color:#166534}
+.error{background:#fee2e2;color:#991b1b}
 .back{
 display:block;text-align:center;margin-top:20px;
-color:#16a34a;text-decoration:none;font-weight:700
+color:#2563eb;text-decoration:none;font-weight:700
 }
 .hidden{display:none}
 </style>
@@ -80,7 +83,7 @@ color:#16a34a;text-decoration:none;font-weight:700
 <label>Password</label>
 <input id="loginPassword" type="password" required placeholder="Enter your password">
 
-<button class="submit" type="submit">Login</button>
+<button class="submit" id="loginButton">Login</button>
 
 </form>
 
@@ -99,79 +102,76 @@ color:#16a34a;text-decoration:none;font-weight:700
 <input id="signupPhone" type="tel" placeholder="Phone number">
 
 <label>Role</label>
-<input id="signupRole" type="text" placeholder="e.g. Student, Job Seeker">
+<input id="signupRole" type="text" placeholder="Student / Job Seeker / Freelancer">
 
-<button class="submit" type="submit">Create Account</button>
+<button class="submit" id="signupButton">Create Account</button>
 
 </form>
 
 <div id="message" class="message"></div>
 
-<a href="index.html" class="back">← Back to Home</a>
+<a class="back" href="index.html">← Back to Home</a>
 
 </div>
 
 <script>
-const SUPABASE_URL =
-"https://jobhfmjbvxstyjlpxnpp.supabase.co";
+const SUPABASE_URL="https://jobhfmjbvxstyjlpxnpp.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
 
-const SUPABASE_ANON_KEY =
-"sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+const supabaseClient=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
 
-const supabaseClient =
-supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
-
-function showMessage(text,type){
-
+function msg(text,type){
 const box=document.getElementById("message");
-
 box.textContent=text;
-box.className="message "+type;
+box.className="message show "+type;
+}
 
+function clearMsg(){
+document.getElementById("message").className="message";
 }
 
 function showLogin(){
-
 document.getElementById("loginForm").classList.remove("hidden");
 document.getElementById("signupForm").classList.add("hidden");
-
 document.getElementById("loginTab").classList.add("active");
 document.getElementById("signupTab").classList.remove("active");
-
-document.getElementById("message").className="message";
+clearMsg();
 }
 
 function showSignup(){
-
 document.getElementById("loginForm").classList.add("hidden");
 document.getElementById("signupForm").classList.remove("hidden");
-
 document.getElementById("loginTab").classList.remove("active");
 document.getElementById("signupTab").classList.add("active");
-
-document.getElementById("message").className="message";
+clearMsg();
 }
 
-document.getElementById("loginForm").addEventListener("submit",async function(e){
+document.getElementById("loginForm").addEventListener("submit",async e=>{
 
 e.preventDefault();
+
+const button=document.getElementById("loginButton");
+button.disabled=true;
+button.textContent="Logging in...";
 
 const email=document.getElementById("loginEmail").value.trim();
 const password=document.getElementById("loginPassword").value;
 
-showMessage("Logging in...","success");
-
-const {data,error}=await supabaseClient.auth.signInWithPassword({
-email,
-password
+const {error}=await supabaseClient.auth.signInWithPassword({
+email,password
 });
 
 if(error){
-showMessage(error.message,"error");
+msg(error.message,"error");
+button.disabled=false;
+button.textContent="Login";
 return;
 }
 
-showMessage("Login successful! Redirecting...","success");
+msg("Login successful! Opening your profile...","success");
 
 setTimeout(()=>{
 location.href="profile.html";
@@ -179,9 +179,13 @@ location.href="profile.html";
 
 });
 
-document.getElementById("signupForm").addEventListener("submit",async function(e){
+document.getElementById("signupForm").addEventListener("submit",async e=>{
 
 e.preventDefault();
+
+const button=document.getElementById("signupButton");
+button.disabled=true;
+button.textContent="Creating Account...";
 
 const name=document.getElementById("signupName").value.trim();
 const email=document.getElementById("signupEmail").value.trim();
@@ -189,59 +193,63 @@ const password=document.getElementById("signupPassword").value;
 const phone=document.getElementById("signupPhone").value.trim();
 const role=document.getElementById("signupRole").value.trim();
 
-showMessage("Creating your account...","success");
-
 const {data,error}=await supabaseClient.auth.signUp({
-
 email,
 password,
-
 options:{
 data:{
 full_name:name,
-name:name,
 phone:phone,
 role:role
 }
 }
-
 });
 
 if(error){
-showMessage(error.message,"error");
+msg(error.message,"error");
+button.disabled=false;
+button.textContent="Create Account";
 return;
 }
 
 if(!data.user){
-showMessage("Account could not be created.","error");
+msg("Account could not be created.","error");
+button.disabled=false;
+button.textContent="Create Account";
 return;
 }
 
 /*
-Create profile record.
-This requires public.Profile to have:
-user_id, full_name, email, phone, role, bio, avatar_url
+Profile table:
+id
+full name
+email
+phone
+role
+bio
+avatar_url
+created_at
 */
+
+if(data.session){
 
 const {error:profileError}=await supabaseClient
 .from("Profile")
-.insert({
-user_id:data.user.id,
-full_name:name,
+.upsert({
+id:data.user.id,
+"full name":name,
 email:email,
 phone:phone,
 role:role,
 bio:"",
 avatar_url:""
-});
+},{onConflict:"id"});
 
 if(profileError){
-console.log("Profile insert:",profileError.message);
+console.log("Profile creation:",profileError.message);
 }
 
-if(data.session){
-
-showMessage("Account created! Opening your profile...","success");
+msg("Account created! Opening your profile...","success");
 
 setTimeout(()=>{
 location.href="profile.html";
@@ -249,10 +257,13 @@ location.href="profile.html";
 
 }else{
 
-showMessage(
-"Account created. Please check your email to verify your account.",
+msg(
+"Account created. Please verify your email, then login.",
 "success"
 );
+
+button.disabled=false;
+button.textContent="Create Account";
 
 }
 
