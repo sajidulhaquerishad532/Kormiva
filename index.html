@@ -3,1616 +3,393 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<meta name="description" content="Kormiva — jobs, skills, services, products and opportunities in one place.">
-<meta name="theme-color" content="#16a34a">
+<title>Kormiva — Build Your Better Future</title>
+<meta name="description" content="Kormiva — Jobs, skills, learning, products, services and opportunities.">
 
-<title>Kormiva — Home</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  font-family:Arial,Helvetica,sans-serif;
-  background:#f7faf8;
-  color:#102016;
-  line-height:1.5;
-}
-
-a{
-  text-decoration:none;
-  color:inherit;
-}
-
-button,
-input{
-  font:inherit;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 :root{
-  --green:#16a34a;
-  --green-dark:#15803d;
-  --soft:#eaf8ee;
-  --border:#e2e8e3;
-  --muted:#66756b;
-  --white:#fff;
+ --primary:#16a34a;
+ --primary2:#22c55e;
+ --dark:#0f172a;
+ --text:#334155;
+ --muted:#64748b;
+ --bg:#f8fafc;
+ --white:#fff;
+ --border:#e2e8f0;
 }
-
-/* ================= HEADER ================= */
-
-.header{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border);
-  backdrop-filter:blur(12px);
+body{font-family:Arial,sans-serif;background:var(--bg);color:var(--dark)}
+header{
+ position:sticky;top:0;z-index:1000;background:#fff;
+ border-bottom:1px solid var(--border)
 }
-
 .nav{
-  max-width:1250px;
-  margin:auto;
-  padding:13px 20px;
-  display:flex;
-  align-items:center;
-  gap:22px;
+ max-width:1200px;margin:auto;padding:15px 20px;
+ display:flex;align-items:center;justify-content:space-between
 }
-
-.brand{
-  font-size:27px;
-  font-weight:900;
-  color:#111;
+.logo{font-size:28px;font-weight:900;color:var(--primary);text-decoration:none}
+nav{display:flex;gap:8px;align-items:center}
+nav a{
+ text-decoration:none;color:var(--text);font-weight:700;
+ padding:10px 13px;border-radius:9px
 }
-
-.brand b{
-  color:var(--green);
-}
-
-.search{
-  flex:1;
-  max-width:520px;
-  margin:auto;
-  position:relative;
-}
-
-.search input{
-  width:100%;
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:13px 48px 13px 17px;
-  outline:0;
-  background:#f8faf9;
-}
-
-.search input:focus{
-  border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(22,163,74,.1);
-}
-
-.search button{
-  position:absolute;
-  right:5px;
-  top:5px;
-  border:0;
-  background:var(--green);
-  color:#fff;
-  width:36px;
-  height:36px;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-.navicons{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.iconbtn{
-  border:0;
-  background:#f1f5f2;
-  width:40px;
-  height:40px;
-  border-radius:11px;
-  cursor:pointer;
-}
-
-.user-mini{
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid #bbf7d0;
-}
-
-.login{
-  background:var(--green);
-  color:#fff;
-  padding:10px 15px;
-  border-radius:10px;
-  font-weight:800;
-}
-
-.login:hover{
-  background:var(--green-dark);
-}
-
-/* ================= LAYOUT ================= */
-
-.layout{
-  max-width:1250px;
-  margin:22px auto;
-  display:grid;
-  grid-template-columns:190px 1fr;
-  gap:22px;
-  padding:0 20px;
-}
-
-.sidebar{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:12px;
-  height:max-content;
-  position:sticky;
-  top:85px;
-}
-
-.side a{
-  display:block;
-  padding:12px;
-  border-radius:10px;
-  font-weight:700;
-  margin-bottom:3px;
-}
-
-.side a:hover,
-.side .active{
-  background:var(--soft);
-  color:var(--green-dark);
-}
-
-.main{
-  min-width:0;
-}
-
-/* ================= HERO ================= */
+nav a:hover{background:#dcfce7;color:var(--primary)}
+.auth-btn{background:var(--primary);color:white!important}
+.menu{display:none;border:0;background:#dcfce7;color:var(--primary);font-size:25px;padding:8px 12px;border-radius:9px}
 
 .hero{
-  background:
-    linear-gradient(
-      100deg,
-      #e9f8ed,
-      #f6fffa
-    );
-
-  border:1px solid #d7efdc;
-  border-radius:20px;
-  padding:26px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  gap:20px;
-  overflow:hidden;
+ padding:80px 20px;
+ background:linear-gradient(135deg,#ecfdf5,#fff)
 }
-
-.welcome{
-  display:flex;
-  align-items:center;
-  gap:18px;
+.hero-inner{
+ max-width:1200px;margin:auto;
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:50px;align-items:center
 }
-
-.avatar{
-  width:108px;
-  height:108px;
-  border-radius:50%;
-  object-fit:cover;
-  border:5px solid #fff;
-  box-shadow:0 8px 25px rgba(31,41,55,.12);
-  background:#dff5e5;
+.badge{
+ display:inline-block;background:#dcfce7;color:#15803d;
+ padding:8px 14px;border-radius:30px;font-weight:700;margin-bottom:20px
 }
-
-.hero h1{
-  font-size:28px;
-  margin:3px 0;
+h1{font-size:60px;line-height:1.05;margin-bottom:20px}
+h1 span{color:var(--primary)}
+.hero p{font-size:19px;color:var(--muted);line-height:1.7;margin-bottom:28px}
+.buttons{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+ display:inline-block;padding:14px 22px;border-radius:12px;
+ text-decoration:none;font-weight:800;border:0;cursor:pointer
 }
+.primary{background:var(--primary);color:#fff}
+.secondary{background:#fff;color:var(--primary);border:1px solid #bbf7d0}
 
-.hero p{
-  color:var(--muted);
+.profile-card{
+ background:#fff;border:1px solid var(--border);border-radius:28px;
+ padding:30px;box-shadow:0 20px 50px rgba(15,23,42,.1)
 }
-
-.profile-btn{
-  display:inline-block;
-  margin-top:12px;
-  background:var(--green);
-  color:#fff;
-  padding:9px 14px;
-  border-radius:9px;
-  font-weight:800;
+.profile-top{display:flex;align-items:center;gap:18px;margin-bottom:25px}
+.home-avatar{
+ width:78px;height:78px;border-radius:50%;object-fit:cover;
+ background:#dcfce7;display:flex;align-items:center;justify-content:center;
+ font-size:35px;font-weight:bold;color:var(--primary)
 }
-
-.profile-btn:hover{
-  background:var(--green-dark);
+.user-name{font-size:23px;font-weight:800}
+.user-role{color:var(--muted);margin-top:4px}
+.login-message{
+ padding:18px;background:#f0fdf4;border-radius:15px;color:#166534
 }
-
-.hero-art{
-  font-size:80px;
-  padding-right:25px;
+.section{padding:80px 20px}
+.container{max-width:1200px;margin:auto}
+.heading{text-align:center;max-width:700px;margin:0 auto 45px}
+.heading h2{font-size:40px;margin-bottom:10px}
+.heading p{color:var(--muted);font-size:17px}
+.grid{
+ display:grid;grid-template-columns:repeat(3,1fr);gap:20px
 }
-
-/* ================= QUICK MENU ================= */
-
-.quick{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:12px;
-  margin:18px 0;
+.card{
+ background:#fff;border:1px solid var(--border);border-radius:18px;
+ padding:25px;transition:.25s
 }
-
-.quick a{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:17px 8px;
-  text-align:center;
-  transition:.2s;
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 35px rgba(0,0,0,.08)}
+.icon{
+ width:52px;height:52px;background:#dcfce7;border-radius:14px;
+ display:flex;align-items:center;justify-content:center;
+ font-size:25px;margin-bottom:15px
 }
-
-.quick a:hover{
-  transform:translateY(-3px);
-  box-shadow:0 8px 25px rgba(16,32,22,.08);
-  border-color:#bbf7d0;
+.card h3{margin-bottom:7px}
+.card p{color:var(--muted);font-size:14px}
+.categories{background:#f0fdf4}
+.cta{
+ background:linear-gradient(135deg,#16a34a,#0891b2);
+ color:#fff;text-align:center;padding:80px 20px
 }
+.cta h2{font-size:42px;margin-bottom:12px}
+.cta p{margin-bottom:25px}
+.cta .btn{background:#fff;color:#16a34a}
+footer{background:#0f172a;color:#94a3b8;padding:35px 20px;text-align:center}
+.footer-logo{font-size:23px;font-weight:900;color:#fff;margin-bottom:8px}
 
-.qicon{
-  font-size:25px;
-  display:block;
-  margin-bottom:7px;
+@media(max-width:800px){
+ nav{display:none;position:absolute;top:70px;left:0;right:0;background:#fff;padding:15px;flex-direction:column}
+ nav.active{display:flex}
+ nav a{width:100%}
+ .menu{display:block}
+ .hero-inner{grid-template-columns:1fr;text-align:center}
+ .buttons{justify-content:center}
+ h1{font-size:44px}
+ .grid{grid-template-columns:1fr 1fr}
 }
-
-.quick strong{
-  font-size:13px;
-}
-
-/* ================= GRID ================= */
-
-.grid2{
-  display:grid;
-  grid-template-columns:1.65fr .85fr;
-  gap:18px;
-}
-
-.box{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
-}
-
-.boxhead{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-  gap:10px;
-}
-
-.boxhead h2{
-  font-size:19px;
-}
-
-.view{
-  color:var(--green-dark);
-  font-size:13px;
-  font-weight:800;
-}
-
-/* ================= JOB ================= */
-
-.job{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:15px 0;
-  border-bottom:1px solid #edf1ee;
-}
-
-.job:last-child{
-  border-bottom:0;
-}
-
-.company{
-  width:44px;
-  height:44px;
-  border-radius:11px;
-  background:#eff9f1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:21px;
-  flex-shrink:0;
-}
-
-.jobinfo{
-  flex:1;
-  min-width:0;
-}
-
-.jobinfo h3{
-  font-size:15px;
-}
-
-.jobinfo p{
-  font-size:12px;
-  color:var(--muted);
-}
-
-.tags span{
-  font-size:10px;
-  background:#f1f5f2;
-  padding:4px 7px;
-  border-radius:8px;
-  margin-right:4px;
-}
-
-.salary{
-  color:var(--green-dark);
-  font-size:12px;
-  font-weight:800;
-  white-space:nowrap;
-}
-
-/* ================= STATS ================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-
-.stat{
-  padding:15px;
-  border:1px solid var(--border);
-  border-radius:13px;
-}
-
-.stat b{
-  display:block;
-  font-size:24px;
-}
-
-.stat small{
-  color:var(--muted);
-}
-
-/* ================= ACTIVITY ================= */
-
-.activity div{
-  padding:11px 0;
-  border-bottom:1px solid #edf1ee;
-  font-size:13px;
-}
-
-.activity div:last-child{
-  border:0;
-}
-
-.activity small{
-  display:block;
-  color:var(--muted);
-}
-
-/* ================= CATEGORIES ================= */
-
-.categories{
-  display:grid;
-  grid-template-columns:repeat(6,1fr);
-  gap:12px;
-}
-
-.cat{
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:14px;
-  padding:17px 8px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s;
-}
-
-.cat:hover{
-  transform:translateY(-3px);
-  border-color:#bbf7d0;
-  box-shadow:0 8px 25px rgba(16,32,22,.07);
-}
-
-.cat i{
-  font-style:normal;
-  font-size:25px;
-  display:block;
-}
-
-.cat b{
-  display:block;
-  margin-top:5px;
-}
-
-.cat small{
-  color:var(--muted);
-}
-
-/* ================= BUTTON ================= */
-
-.greenbtn{
-  background:var(--green);
-  color:#fff;
-  border:0;
-  padding:10px 15px;
-  border-radius:9px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.greenbtn:hover{
-  background:var(--green-dark);
-}
-
-/* ================= BANNER ================= */
-
-.banner{
-  background:
-    linear-gradient(
-      100deg,
-      #e8f7ed,
-      #dff4e6
-    );
-
-  border:1px solid #cdebd4;
-  border-radius:18px;
-
-  padding:25px;
-  margin-top:18px;
-
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.banner h2{
-  font-size:22px;
-}
-
-.banner p{
-  color:var(--muted);
-  margin:5px 0 13px;
-}
-
-/* ================= MOBILE BAR ================= */
-
-.mobilebar{
-  display:none;
-}
-
-/* ================= MOBILE ================= */
-
-@media(max-width:950px){
-
-  .layout{
-    grid-template-columns:1fr;
-  }
-
-  .sidebar{
-    display:none;
-  }
-
-  .quick{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .categories{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .grid2{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:650px){
-
-  .nav{
-    padding:10px 12px;
-    gap:8px;
-    flex-wrap:wrap;
-  }
-
-  .brand{
-    font-size:22px;
-  }
-
-  .search{
-    order:3;
-    flex-basis:100%;
-    max-width:none;
-  }
-
-  .navicons{
-    margin-left:auto;
-  }
-
-  .navicons .iconbtn{
-    display:none;
-  }
-
-  .login{
-    padding:8px 10px;
-    font-size:12px;
-  }
-
-  .layout{
-    padding:0 10px;
-    margin:12px auto;
-  }
-
-  .hero{
-    padding:18px;
-  }
-
-  .hero-art{
-    display:none;
-  }
-
-  .avatar{
-    width:82px;
-    height:82px;
-  }
-
-  .hero h1{
-    font-size:21px;
-  }
-
-  .hero p{
-    font-size:13px;
-  }
-
-  .quick{
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-  }
-
-  .quick a{
-    padding:12px 4px;
-  }
-
-  .qicon{
-    font-size:21px;
-  }
-
-  .quick strong{
-    font-size:11px;
-  }
-
-  .grid2{
-    display:block;
-  }
-
-  .categories{
-    grid-template-columns:repeat(3,1fr);
-    gap:8px;
-  }
-
-  .cat{
-    padding:12px 4px;
-  }
-
-  .cat i{
-    font-size:21px;
-  }
-
-  .cat b{
-    font-size:12px;
-  }
-
-  .cat small{
-    font-size:10px;
-  }
-
-  .banner{
-    padding:18px;
-  }
-
-  .banner h2{
-    font-size:18px;
-  }
-
-  .banner p{
-    font-size:13px;
-  }
-
-  .mobilebar{
-    display:flex;
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#fff;
-    border-top:1px solid var(--border);
-    z-index:30;
-    justify-content:space-around;
-    padding:8px;
-  }
-
-  .mobilebar a{
-    text-align:center;
-    font-size:11px;
-    color:#64748b;
-  }
-
-  .mobilebar a:first-child{
-    color:var(--green);
-    font-weight:800;
-  }
-
-  .mobilebar span{
-    display:block;
-    font-size:20px;
-  }
-
-  .main{
-    padding-bottom:70px;
-  }
-
-  .job{
-    align-items:flex-start;
-  }
-
-  .salary{
-    font-size:10px;
-  }
+@media(max-width:550px){
+ .grid{grid-template-columns:1fr}
+ h1{font-size:38px}
+ .heading h2{font-size:31px}
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
+<header>
+<div class="nav">
+<a href="index.html" class="logo">Kormiva</a>
 
-<header class="header">
+<button class="menu" onclick="toggleMenu()">☰</button>
 
-  <div class="nav">
-
-    <a class="brand" href="index.html">
-      <b>K</b>ormiva
-    </a>
-
-    <div class="search">
-
-      <input
-        id="globalSearch"
-        placeholder="Search jobs, skills, services, products..."
-        autocomplete="off">
-
-      <button
-        type="button"
-        onclick="searchSite()">
-        ⌕
-      </button>
-
-    </div>
-
-    <div class="navicons">
-
-      <button
-        class="iconbtn"
-        type="button"
-        onclick="showMessage('Notifications will appear here.')">
-        🔔
-      </button>
-
-      <button
-        class="iconbtn"
-        type="button"
-        onclick="showMessage('Messages will appear here.')">
-        💬
-      </button>
-
-      <a
-        id="authLink"
-        class="login"
-        href="auth.html">
-        Login
-      </a>
-
-      <a
-        id="profileLink"
-        href="profile.html"
-        style="display:none">
-
-        <img
-          id="navAvatar"
-          class="user-mini"
-          alt="Profile">
-
-      </a>
-
-    </div>
-
-  </div>
-
+<nav id="nav">
+<a href="#home" onclick="closeMenu()">Home</a>
+<a href="#features" onclick="closeMenu()">Features</a>
+<a href="#categories" onclick="closeMenu()">Categories</a>
+<a href="#about" onclick="closeMenu()">About</a>
+<a href="profile.html" id="profileLink">Profile</a>
+<a href="auth.html" class="auth-btn" id="authLink">Login / Sign Up</a>
+</nav>
+</div>
 </header>
 
-
-<!-- ================= MAIN LAYOUT ================= -->
-
-<div class="layout">
-
-  <!-- SIDEBAR -->
-
-  <aside class="sidebar">
-
-    <div class="side">
-
-      <a
-        class="active"
-        href="index.html">
-        🏠 Home
-      </a>
-
-      <a href="#jobs">
-        💼 Jobs
-      </a>
-
-      <a href="#skills">
-        🎓 Skills
-      </a>
-
-      <a href="#services">
-        🛠️ Services
-      </a>
-
-      <a href="#products">
-        🛍️ Products
-      </a>
-
-      <a href="#learning">
-        📚 Learning
-      </a>
-
-      <a href="#business">
-        🏢 Business
-      </a>
-
-      <a href="#categories">
-        ▦ Categories
-      </a>
-
-      <a href="profile.html">
-        👤 Profile
-      </a>
-
-      <a href="profile.html">
-        ⚙️ Settings
-      </a>
-
-    </div>
-
-  </aside>
-
-
-  <!-- MAIN -->
-
-  <main class="main">
-
-    <!-- HERO -->
-
-    <section class="hero">
-
-      <div class="welcome">
-
-        <img
-          id="heroAvatar"
-          class="avatar"
-          src=""
-          alt="Profile">
-
-        <div>
-
-          <small id="greeting">
-            Welcome back,
-          </small>
-
-          <h1 id="heroName">
-            Kormiva User 👋
-          </h1>
-
-          <p>
-            Let's achieve something great today!
-          </p>
-
-          <a
-            class="profile-btn"
-            href="profile.html">
-            👤 View Profile
-          </a>
-
-        </div>
-
-      </div>
-
-      <div class="hero-art">
-        🌱
-      </div>
-
-    </section>
-
-
-    <!-- QUICK MENU -->
-
-    <div class="quick">
-
-      <a href="#jobs">
-        <span class="qicon">💼</span>
-        <strong>Find Jobs</strong>
-      </a>
-
-      <a href="#skills">
-        <span class="qicon">🎓</span>
-        <strong>Learn Skills</strong>
-      </a>
-
-      <a href="#services">
-        <span class="qicon">🛠️</span>
-        <strong>Find Services</strong>
-      </a>
-
-      <a href="#products">
-        <span class="qicon">🛍️</span>
-        <strong>Buy Products</strong>
-      </a>
-
-      <a href="#business">
-        <span class="qicon">🏢</span>
-        <strong>For Business</strong>
-      </a>
-
-      <a href="#post">
-        <span class="qicon">📢</span>
-        <strong>Post a Need</strong>
-      </a>
-
-    </div>
-
-
-    <!-- TWO COLUMN -->
-
-    <div class="grid2">
-
-      <div>
-
-        <!-- JOBS -->
-
-        <section
-          class="box"
-          id="jobs">
-
-          <div class="boxhead">
-
-            <h2>
-              Recommended for you
-            </h2>
-
-            <a
-              class="view"
-              href="#jobs">
-              View All Jobs →
-            </a>
-
-          </div>
-
-
-          <div class="job">
-
-            <div class="company">
-              🌐
-            </div>
-
-            <div class="jobinfo">
-
-              <h3>
-                UI/UX Designer
-              </h3>
-
-              <p>
-                Google · Full Time · Remote
-              </p>
-
-              <div class="tags">
-                <span>Figma</span>
-                <span>UI Design</span>
-              </div>
-
-            </div>
-
-            <div class="salary">
-              $1500–$2200
-            </div>
-
-          </div>
-
-
-          <div class="job">
-
-            <div class="company">
-              in
-            </div>
-
-            <div class="jobinfo">
-
-              <h3>
-                Frontend Developer
-              </h3>
-
-              <p>
-                LinkedIn · Full Time · Remote
-              </p>
-
-              <div class="tags">
-                <span>React</span>
-                <span>JavaScript</span>
-              </div>
-
-            </div>
-
-            <div class="salary">
-              $1200–$1800
-            </div>
-
-          </div>
-
-
-          <div class="job">
-
-            <div class="company">
-              🟢
-            </div>
-
-            <div class="jobinfo">
-
-              <h3>
-                WordPress Developer
-              </h3>
-
-              <p>
-                Upwork · Full Time · Remote
-              </p>
-
-              <div class="tags">
-                <span>WordPress</span>
-                <span>PHP</span>
-              </div>
-
-            </div>
-
-            <div class="salary">
-              $800–$1200
-            </div>
-
-          </div>
-
-
-          <div class="job">
-
-            <div class="company">
-              📈
-            </div>
-
-            <div class="jobinfo">
-
-              <h3>
-                Digital Marketing Specialist
-              </h3>
-
-              <p>
-                HubSpot · Hybrid
-              </p>
-
-              <div class="tags">
-                <span>SEO</span>
-                <span>Analytics</span>
-              </div>
-
-            </div>
-
-            <div class="salary">
-              $1000–$1600
-            </div>
-
-          </div>
-
-
-          <div
-            style="
-              text-align:center;
-              padding-top:14px;
-            ">
-
-            <button
-              class="greenbtn"
-              type="button"
-              onclick="showMessage('Job explorer will open here.')">
-
-              Explore More Jobs →
-
-            </button>
-
-          </div>
-
-        </section>
-
-      </div>
-
-
-      <!-- RIGHT SIDE -->
-
-      <div>
-
-        <!-- SUMMARY -->
-
-        <section class="box">
-
-          <div class="boxhead">
-
-            <h2>
-              Your Summary
-            </h2>
-
-            <a
-              class="view"
-              href="profile.html">
-              View All
-            </a>
-
-          </div>
-
-          <div class="stats">
-
-            <div class="stat">
-              <b>12</b>
-              <small>Jobs Applied</small>
-            </div>
-
-            <div class="stat">
-              <b>8</b>
-              <small>Saved Jobs</small>
-            </div>
-
-            <div class="stat">
-              <b>5</b>
-              <small>Proposals Sent</small>
-            </div>
-
-            <div class="stat">
-              <b>3</b>
-              <small>Shortlisted</small>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- ACTIVITY -->
-
-        <section class="box">
-
-          <div class="boxhead">
-
-            <h2>
-              Recent Activity
-            </h2>
-
-          </div>
-
-          <div class="activity">
-
-            <div>
-              ✅ Profile updated successfully
-              <small>2 minutes ago</small>
-            </div>
-
-            <div>
-              📨 Applied for UI/UX Designer
-              <small>15 minutes ago</small>
-            </div>
-
-            <div>
-              🔖 Saved a job
-              <small>1 hour ago</small>
-            </div>
-
-            <div>
-              💬 New message received
-              <small>2 hours ago</small>
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
-
-    </div>
-
-
-    <!-- CATEGORIES -->
-
-    <section
-      class="box"
-      id="categories">
-
-      <div class="boxhead">
-
-        <h2>
-          Top Categories
-        </h2>
-
-        <a
-          class="view"
-          href="#categories">
-          View All Categories →
-        </a>
-
-      </div>
-
-      <div class="categories">
-
-        <div
-          class="cat"
-          id="skills"
-          onclick="showMessage('Jobs category selected.')">
-
-          <i>💼</i>
-          <b>Jobs</b>
-          <small>120+ Jobs</small>
-
-        </div>
-
-        <div
-          class="cat"
-          onclick="showMessage('Skills category selected.')">
-
-          <i>🎓</i>
-          <b>Skills</b>
-          <small>80+ Skills</small>
-
-        </div>
-
-        <div
-          class="cat"
-          id="services"
-          onclick="showMessage('Services category selected.')">
-
-          <i>🛠️</i>
-          <b>Services</b>
-          <small>60+ Services</small>
-
-        </div>
-
-        <div
-          class="cat"
-          id="products"
-          onclick="showMessage('Products category selected.')">
-
-          <i>🛍️</i>
-          <b>Products</b>
-          <small>200+ Products</small>
-
-        </div>
-
-        <div
-          class="cat"
-          id="business"
-          onclick="showMessage('Business category selected.')">
-
-          <i>🏢</i>
-          <b>Business</b>
-          <small>50+ Businesses</small>
-
-        </div>
-
-        <div
-          class="cat"
-          id="learning"
-          onclick="showMessage('Learning category selected.')">
-
-          <i>📚</i>
-          <b>Learning</b>
-          <small>100+ Courses</small>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- BANNER -->
-
-    <section
-      class="banner"
-      id="post">
-
-      <div>
-
-        <h2>
-          Find the right opportunity
-          for your bright future
-        </h2>
-
-        <p>
-          Explore jobs, skills, services and
-          products in one place.
-        </p>
-
-        <button
-          class="greenbtn"
-          type="button"
-          onclick="location.href='auth.html'">
-
-          Get Started Now
-
-        </button>
-
-      </div>
-
-      <div
-        style="font-size:65px">
-        🚀
-      </div>
-
-    </section>
-
-  </main>
+<section class="hero" id="home">
+<div class="hero-inner">
+
+<div>
+<div class="badge">✨ Welcome to Kormiva</div>
+
+<h1>Build Your <span>Better Future</span></h1>
+
+<p>
+Kormiva connects people with jobs, skills, learning,
+services, products and career opportunities — all in one place.
+</p>
+
+<div class="buttons">
+<a href="auth.html" class="btn primary" id="heroAuth">
+Login / Sign Up →
+</a>
+
+<a href="#categories" class="btn secondary">
+Explore Categories
+</a>
+</div>
+</div>
+
+<div class="profile-card">
+
+<div id="loggedOutBox">
+<div class="profile-top">
+<div class="home-avatar">👤</div>
+<div>
+<div class="user-name">Welcome to Kormiva</div>
+<div class="user-role">Create your professional profile</div>
+</div>
+</div>
+
+<div class="login-message">
+Login or create an account to show your profile,
+name and profile picture here.
+</div>
+</div>
+
+<div id="loggedInBox" style="display:none">
+
+<div class="profile-top">
+
+<img id="homeAvatar" class="home-avatar" src="" alt="Profile">
+
+<div>
+<div class="user-name" id="homeName">User</div>
+<div class="user-role" id="homeRole">Kormiva Member</div>
+</div>
 
 </div>
 
+<div class="login-message">
+🎉 Welcome back! Your Kormiva profile is connected successfully.
+</div>
 
-<!-- ================= MOBILE BAR ================= -->
+<br>
 
-<div class="mobilebar">
-
-  <a href="index.html">
-    <span>⌂</span>
-    Home
-  </a>
-
-  <a href="#jobs">
-    <span>💼</span>
-    Jobs
-  </a>
-
-  <a href="#categories">
-    <span>▦</span>
-    Explore
-  </a>
-
-  <a href="#post">
-    <span>➕</span>
-    Post
-  </a>
-
-  <a href="profile.html">
-    <span>👤</span>
-    Profile
-  </a>
+<a href="profile.html" class="btn primary">
+Manage Profile →
+</a>
 
 </div>
 
+</div>
+</div>
+</section>
 
-<!-- ================= SUPABASE ================= -->
+<section class="section" id="features">
+<div class="container">
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<div class="heading">
+<h2>Everything You Need</h2>
+<p>Explore the main features available on Kormiva.</p>
+</div>
+
+<div class="grid">
+
+<div class="card"><div class="icon">💼</div><h3>Find Jobs</h3><p>Discover jobs matching your skills and goals.</p></div>
+<div class="card"><div class="icon">📚</div><h3>Learn Skills</h3><p>Improve your knowledge with useful resources.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Career Growth</h3><p>Build your path toward your dream career.</p></div>
+<div class="card"><div class="icon">📄</div><h3>CV Builder</h3><p>Create a professional CV.</p></div>
+<div class="card"><div class="icon">🎯</div><h3>Recommended Jobs</h3><p>Find opportunities based on your profile.</p></div>
+<div class="card"><div class="icon">🏢</div><h3>Companies</h3><p>Explore companies and career opportunities.</p></div>
+<div class="card"><div class="icon">💻</div><h3>Remote Jobs</h3><p>Find work-from-home opportunities.</p></div>
+<div class="card"><div class="icon">🎓</div><h3>Courses</h3><p>Discover courses and training.</p></div>
+<div class="card"><div class="icon">🤝</div><h3>Mentorship</h3><p>Connect with career mentors.</p></div>
+
+</div>
+</div>
+</section>
+
+<section class="section categories" id="categories">
+<div class="container">
+
+<div class="heading">
+<h2>Explore Categories</h2>
+<p>Find useful opportunities across different categories.</p>
+</div>
+
+<div class="grid">
+
+<div class="card"><div class="icon">💼</div><h3>Jobs</h3><p>Find job opportunities.</p></div>
+<div class="card"><div class="icon">💻</div><h3>Freelancing</h3><p>Find freelance work and projects.</p></div>
+<div class="card"><div class="icon">🛍️</div><h3>Products</h3><p>Buy and sell products.</p></div>
+<div class="card"><div class="icon">🛠️</div><h3>Services</h3><p>Discover useful services.</p></div>
+<div class="card"><div class="icon">🏢</div><h3>Business</h3><p>Discover businesses.</p></div>
+<div class="card"><div class="icon">🏠</div><h3>Property & Rent</h3><p>Find property and rental opportunities.</p></div>
+<div class="card"><div class="icon">🚗</div><h3>Vehicles</h3><p>Explore vehicles.</p></div>
+<div class="card"><div class="icon">📚</div><h3>Education</h3><p>Education and learning opportunities.</p></div>
+<div class="card"><div class="icon">🎓</div><h3>Courses & Training</h3><p>Learn new skills.</p></div>
+<div class="card"><div class="icon">💰</div><h3>Finance</h3><p>Finance and accounting services.</p></div>
+<div class="card"><div class="icon">👨‍💻</div><h3>Technology</h3><p>Technology opportunities.</p></div>
+<div class="card"><div class="icon">📱</div><h3>Mobile & Electronics</h3><p>Phones and electronics.</p></div>
+<div class="card"><div class="icon">🏥</div><h3>Health & Care</h3><p>Health-related services.</p></div>
+<div class="card"><div class="icon">🩸</div><h3>Blood Donor</h3><p>Blood donors and requests.</p></div>
+<div class="card"><div class="icon">🤝</div><h3>Volunteer</h3><p>Volunteer opportunities.</p></div>
+
+</div>
+</div>
+</section>
+
+<section class="section" id="about">
+<div class="container">
+
+<div class="heading">
+<h2>One Platform. Many Opportunities.</h2>
+<p>
+Kormiva is designed to connect people with meaningful
+opportunities, useful skills and career resources.
+</p>
+</div>
+
+<div class="grid">
+<div class="card"><div class="icon">🔎</div><h3>Discover</h3><p>Find opportunities that match your goals.</p></div>
+<div class="card"><div class="icon">🧠</div><h3>Develop</h3><p>Build valuable professional skills.</p></div>
+<div class="card"><div class="icon">🚀</div><h3>Grow</h3><p>Move forward toward a better future.</p></div>
+</div>
+
+</div>
+</section>
+
+<section class="cta">
+<h2>Your Future Starts Here</h2>
+<p>Take the next step with Kormiva.</p>
+<a href="auth.html" class="btn">Login / Sign Up →</a>
+</section>
+
+<footer>
+<div class="footer-logo">Kormiva</div>
+<p>© 2026 Kormiva — Connecting people with opportunities.</p>
+</footer>
 
 <script>
-
 const SUPABASE_URL =
-  "https://jobhfmjbvxstyjlpxnpp.supabase.co";
+"https://jobhfmjbvxstyjlpxnpp.supabase.co";
 
-const SUPABASE_KEY =
-  "sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+const SUPABASE_ANON_KEY =
+"sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
 
 const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
 
-
-/* ================= DEFAULT AVATAR ================= */
-
-const fallbackAvatar =
-  "data:image/svg+xml;charset=UTF-8," +
-  encodeURIComponent(`
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="200"
-      height="200">
-
-      <rect
-        width="100%"
-        height="100%"
-        fill="#dff5e5"/>
-
-      <text
-        x="50%"
-        y="55%"
-        dominant-baseline="middle"
-        text-anchor="middle"
-        font-size="90">
-        👤
-      </text>
-
-    </svg>
-  `);
-
-
-/* ================= MESSAGE ================= */
-
-function showMessage(text){
-
-  alert(text);
-
+function toggleMenu(){
+document.getElementById("nav").classList.toggle("active");
 }
 
+function closeMenu(){
+document.getElementById("nav").classList.remove("active");
+}
 
-/* ================= LOAD USER ================= */
+function getInitial(name){
+return (name || "U").trim().charAt(0).toUpperCase();
+}
 
 async function loadHomeProfile(){
 
-  try{
+const {data:{user}} =
+await supabaseClient.auth.getUser();
 
-    const {
-      data:{
-        user
-      },
-      error:authError
-    } =
-      await supabaseClient.auth.getUser();
+if(!user){
+document.getElementById("loggedOutBox").style.display="block";
+document.getElementById("loggedInBox").style.display="none";
+return;
+}
 
+document.getElementById("loggedOutBox").style.display="none";
+document.getElementById("loggedInBox").style.display="block";
 
-    const heroAvatar =
-      document.getElementById(
-        "heroAvatar"
-      );
+document.getElementById("authLink").textContent="Logout";
+document.getElementById("authLink").href="#";
+document.getElementById("authLink").onclick=async function(e){
+e.preventDefault();
+await supabaseClient.auth.signOut();
+location.reload();
+};
 
-    const navAvatar =
-      document.getElementById(
-        "navAvatar"
-      );
+const {data:profile} =
+await supabaseClient
+.from("Profile")
+.select("*")
+.eq("user_id",user.id)
+.maybeSingle();
 
+const name =
+profile?.full_name ||
+profile?.name ||
+user.user_metadata?.full_name ||
+user.user_metadata?.name ||
+" Kormiva Member";
 
-    /* =================
-       NOT LOGGED IN
-    ================= */
+const role =
+profile?.role ||
+"Kormiva Member";
 
-    if(authError || !user){
+const avatar =
+profile?.avatar_url ||
+profile?.profile_image ||
+profile?.profile_picture ||
+user.user_metadata?.avatar_url ||
+"";
 
-      heroAvatar.src =
-        fallbackAvatar;
+document.getElementById("homeName").textContent=name.trim();
+document.getElementById("homeRole").textContent=role;
 
-      return;
+const img=document.getElementById("homeAvatar");
 
-    }
-
-
-    /* =================
-       GET PROFILE
-    ================= */
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("Profile")
-        .select('"Full Name",avatar_url')
-        .eq(
-          "Id",
-          user.id
-        )
-        .maybeSingle();
-
-
-    if(error){
-
-      console.error(
-        "Profile load error:",
-        error
-      );
-
-    }
-
-
-    /* =================
-       NAME
-    ================= */
-
-    const name =
-      (
-        data &&
-        data["Full Name"]
-      ) ||
-
-      user.user_metadata?.full_name ||
-
-      user.email?.split("@")[0] ||
-
-      "Kormiva User";
-
-
-    /* =================
-       AVATAR
-    ================= */
-
-    const avatarUrl =
-      (
-        data &&
-        data.avatar_url
-      ) ||
-
-      user.user_metadata?.avatar_url ||
-
-      fallbackAvatar;
-
-
-    document.getElementById(
-      "heroName"
-    ).textContent =
-      name + " 👋";
-
-
-    /* =================
-       CACHE REFRESH
-    ================= */
-
-    const cacheBuster =
-      avatarUrl.includes("?")
-      ? "&t="
-      : "?t=";
-
-
-    heroAvatar.src =
-      avatarUrl +
-      cacheBuster +
-      Date.now();
-
-
-    if(
-      navAvatar
-    ){
-
-      navAvatar.src =
-        heroAvatar.src;
-
-    }
-
-
-    /* =================
-       LOGIN → PROFILE
-    ================= */
-
-    document.getElementById(
-      "authLink"
-    ).style.display =
-      "none";
-
-
-    document.getElementById(
-      "profileLink"
-    ).style.display =
-      "inline-block";
-
-
-  }catch(error){
-
-    console.error(
-      "Home profile error:",
-      error
-    );
-
-  }
+if(avatar){
+img.src=avatar;
+img.style.display="block";
+}else{
+img.style.display="flex";
+img.alt=getInitial(name);
+img.src="";
+img.outerHTML=
+`<div id="homeAvatar" class="home-avatar">${getInitial(name)}</div>`;
+}
 
 }
 
-
-/* ================= SEARCH ================= */
-
-function searchSite(){
-
-  const input =
-    document.getElementById(
-      "globalSearch"
-    );
-
-  const query =
-    input.value
-      .trim()
-      .toLowerCase();
-
-
-  if(!query){
-
-    showMessage(
-      "Please type something to search."
-    );
-
-    return;
-
-  }
-
-
-  const pageText =
-    document.body.innerText
-      .toLowerCase();
-
-
-  if(
-    pageText.includes(query)
-  ){
-
-    showMessage(
-      "Search result found for: " +
-      input.value
-    );
-
-  }else{
-
-    showMessage(
-      "No result found for: " +
-      input.value
-    );
-
-  }
-
-}
-
-
-/* ================= ENTER SEARCH ================= */
-
-document
-  .getElementById(
-    "globalSearch"
-  )
-  .addEventListener(
-    "keydown",
-    function(event){
-
-      if(
-        event.key === "Enter"
-      ){
-
-        searchSite();
-
-      }
-
-    }
-  );
-
-
-/* ================= START ================= */
-
-loadHomeProfile();
-
+document.addEventListener("DOMContentLoaded",loadHomeProfile);
 </script>
 
 </body>
