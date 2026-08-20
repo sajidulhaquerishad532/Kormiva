@@ -1,1362 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width,initial-scale=1.0">
-
-<meta
-  name="theme-color"
-  content="#2563eb">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Kormiva — My Profile</title>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <style>
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
+*{box-sizing:border-box;margin:0;padding:0}
 body{
-  min-height:100vh;
-  font-family:Arial,Helvetica,sans-serif;
-
-  color:#0f172a;
-
-  background:
-    radial-gradient(
-      circle at 10% 10%,
-      rgba(37,99,235,.12),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 90% 90%,
-      rgba(6,182,212,.12),
-      transparent 30%
-    ),
-    linear-gradient(
-      135deg,
-      #eff6ff,
-      #ffffff
-    );
-
-  padding:20px 15px;
+font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#eff6ff,#ecfeff);
+min-height:100vh;padding:25px;color:#0f172a
 }
-
-.navbar{
-  width:100%;
-  max-width:1100px;
-  margin:0 auto 25px;
-
-  background:rgba(255,255,255,.95);
-
-  border:1px solid #e2e8f0;
-  border-radius:18px;
-
-  padding:15px 20px;
-
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-
-  box-shadow:
-    0 10px 35px rgba(15,23,42,.08);
+.container{max-width:650px;margin:auto}
+.top{
+display:flex;justify-content:space-between;align-items:center;
+margin-bottom:20px
 }
-
 .logo{
-  font-size:27px;
-  font-weight:900;
-  color:#2563eb;
-  text-decoration:none;
+font-size:28px;font-weight:900;color:#2563eb;
+text-decoration:none
 }
-
-.logo span{
-  color:#06b6d4;
+.top button{
+border:0;background:#2563eb;color:#fff;
+padding:10px 15px;border-radius:9px;
+font-weight:700;cursor:pointer
 }
-
-.nav-actions{
-  display:flex;
-  gap:10px;
+.card{
+background:#fff;border-radius:25px;
+padding:30px;box-shadow:0 25px 70px rgba(15,23,42,.13)
 }
-
-.nav-btn{
-  border:0;
-  padding:10px 15px;
-  border-radius:9px;
-  cursor:pointer;
-  font-weight:700;
-}
-
-.home-btn{
-  background:#eff6ff;
-  color:#2563eb;
-}
-
-.logout-btn{
-  background:#fee2e2;
-  color:#dc2626;
-}
-
-.profile-wrapper{
-  width:100%;
-  max-width:900px;
-  margin:auto;
-}
-
-.profile-card{
-  background:white;
-  border:1px solid #e2e8f0;
-  border-radius:28px;
-  overflow:hidden;
-
-  box-shadow:
-    0 25px 70px rgba(15,23,42,.12);
-}
-
-.profile-header{
-  height:170px;
-
-  background:
-    radial-gradient(
-      circle at 20% 20%,
-      rgba(255,255,255,.35),
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      #2563eb,
-      #06b6d4
-    );
-}
-
-.avatar-area{
-  position:relative;
-
-  width:150px;
-  height:150px;
-
-  margin:-75px auto 15px;
-
-  z-index:2;
-}
-
-.avatar,
-.avatar-placeholder{
-  width:150px;
-  height:150px;
-
-  border-radius:50%;
-
-  border:6px solid white;
-
-  box-shadow:
-    0 12px 30px rgba(15,23,42,.2);
-}
-
+.title{text-align:center;margin-bottom:5px;font-size:28px}
+.subtitle{text-align:center;color:#64748b;margin-bottom:25px}
+.avatar-area{text-align:center;margin-bottom:25px}
 .avatar{
-  object-fit:cover;
-  background:#e2e8f0;
+width:135px;height:135px;border-radius:50%;
+object-fit:cover;border:5px solid #dbeafe;
+background:#eff6ff
 }
-
-.avatar-placeholder{
-  background:#f1f5f9;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-size:65px;
+.photo-btn{
+display:inline-block;margin-top:12px;padding:10px 15px;
+background:#eff6ff;color:#2563eb;border-radius:9px;
+font-weight:800;cursor:pointer
 }
-
-.change-photo{
-  position:absolute;
-
-  right:0;
-  bottom:8px;
-
-  width:42px;
-  height:42px;
-
-  border:4px solid white;
-  border-radius:50%;
-
-  background:#2563eb;
-  color:white;
-
-  cursor:pointer;
-
-  font-size:18px;
+#photoInput{display:none}
+label{display:block;font-weight:800;margin:15px 0 7px}
+input,textarea{
+width:100%;padding:13px;border:1px solid #cbd5e1;
+border-radius:10px;font-size:15px;outline:none
 }
-
-#photoInput{
-  display:none;
+textarea{min-height:120px;resize:vertical}
+input:focus,textarea:focus{
+border-color:#2563eb;box-shadow:0 0 0 3px #dbeafe
 }
-
-.profile-title{
-  text-align:center;
-  padding:0 20px 25px;
+.email{background:#f1f5f9}
+.save{
+width:100%;border:0;padding:15px;margin-top:22px;
+background:#2563eb;color:#fff;border-radius:11px;
+font-size:16px;font-weight:900;cursor:pointer
 }
-
-.profile-title h1{
-  font-size:27px;
-  margin-bottom:6px;
-}
-
-.profile-title p{
-  color:#64748b;
-}
-
-.profile-content{
-  padding:30px;
-}
-
-.section-title{
-  font-size:20px;
-  font-weight:800;
-  margin-bottom:20px;
-}
-
-.form-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:20px;
-}
-
-.form-group{
-  margin-bottom:18px;
-}
-
-.form-group.full{
-  grid-column:1/-1;
-}
-
-label{
-  display:block;
-  font-size:14px;
-  font-weight:700;
-  margin-bottom:8px;
-}
-
-input,
-textarea{
-  width:100%;
-
-  padding:14px 15px;
-
-  border:1px solid #cbd5e1;
-  border-radius:11px;
-
-  font-size:16px;
-
-  outline:none;
-
-  background:white;
-}
-
-input:focus,
-textarea:focus{
-  border-color:#2563eb;
-
-  box-shadow:
-    0 0 0 4px rgba(37,99,235,.1);
-}
-
-input[readonly]{
-  background:#f8fafc;
-  color:#64748b;
-}
-
-textarea{
-  min-height:130px;
-  resize:vertical;
-}
-
-.save-area{
-  margin-top:10px;
-  display:flex;
-  justify-content:flex-end;
-}
-
-.save-btn{
-  border:0;
-
-  background:
-    linear-gradient(
-      135deg,
-      #2563eb,
-      #06b6d4
-    );
-
-  color:white;
-
-  padding:14px 28px;
-
-  border-radius:11px;
-
-  font-size:16px;
-  font-weight:800;
-
-  cursor:pointer;
-}
-
-.save-btn:disabled{
-  opacity:.6;
-  cursor:not-allowed;
-}
-
+.save:disabled{opacity:.6}
 .message{
-  display:none;
-
-  padding:13px 15px;
-
-  border-radius:10px;
-
-  margin-bottom:20px;
-
-  font-size:14px;
-  font-weight:700;
+display:none;margin-bottom:18px;padding:12px;
+border-radius:10px;font-size:14px
 }
-
-.message.success{
-  display:block;
-  background:#dcfce7;
-  color:#166534;
+.message.show{display:block}
+.success{background:#dcfce7;color:#166534}
+.error{background:#fee2e2;color:#991b1b}
+.info{background:#dbeafe;color:#1e40af}
+.note{
+margin-top:15px;padding:13px;border-radius:10px;
+background:#f8fafc;color:#64748b;font-size:13px
 }
-
-.message.error{
-  display:block;
-  background:#fee2e2;
-  color:#991b1b;
-}
-
-.message.info{
-  display:block;
-  background:#dbeafe;
-  color:#1d4ed8;
-}
-
-.loading{
-  text-align:center;
-  padding:60px 20px;
-  color:#64748b;
-}
-
-.spinner{
-  width:40px;
-  height:40px;
-
-  border:4px solid #e2e8f0;
-  border-top-color:#2563eb;
-
-  border-radius:50%;
-
-  animation:spin .8s linear infinite;
-
-  margin:0 auto 15px;
-}
-
-@keyframes spin{
-  to{
-    transform:rotate(360deg);
-  }
-}
-
-.photo-info{
-  text-align:center;
-  color:#64748b;
-  font-size:12px;
-  margin-top:-5px;
-  margin-bottom:20px;
-}
-
-@media(max-width:650px){
-
-  body{
-    padding:12px;
-  }
-
-  .navbar{
-    padding:13px;
-  }
-
-  .logo{
-    font-size:23px;
-  }
-
-  .nav-btn{
-    padding:8px 10px;
-    font-size:13px;
-  }
-
-  .profile-header{
-    height:130px;
-  }
-
-  .avatar-area{
-    width:130px;
-    height:130px;
-    margin:-65px auto 15px;
-  }
-
-  .avatar,
-  .avatar-placeholder{
-    width:130px;
-    height:130px;
-  }
-
-  .profile-content{
-    padding:22px 18px;
-  }
-
-  .form-grid{
-    grid-template-columns:1fr;
-    gap:0;
-  }
-
-  .form-group.full{
-    grid-column:auto;
-  }
-
-  .save-area{
-    display:block;
-  }
-
-  .save-btn{
-    width:100%;
-  }
-
-  .profile-title h1{
-    font-size:23px;
-  }
-
-}
-
+.loading{text-align:center;padding:40px;color:#64748b}
 </style>
-
 </head>
 
 <body>
 
+<div class="container">
 
-<nav class="navbar">
+<div class="top">
+<a href="index.html" class="logo">Kormiva</a>
+<button onclick="location.href='index.html'">Home</button>
+</div>
 
-  <a
-    href="index.html"
-    class="logo">
-    Kormi<span>va</span>
-  </a>
+<div class="card">
 
-  <div class="nav-actions">
+<h1 class="title">My Profile</h1>
+<p class="subtitle">Manage your Kormiva profile</p>
 
-    <button
-      class="nav-btn home-btn"
-      onclick="window.location.href='index.html'">
-      ← Home
-    </button>
+<div id="message" class="message"></div>
 
-    <button
-      class="nav-btn logout-btn"
-      onclick="logout()">
-      Logout
-    </button>
+<div id="loading" class="loading">
+Loading your profile...
+</div>
 
-  </div>
+<div id="profileContent" style="display:none">
 
-</nav>
+<div class="avatar-area">
 
+<img
+id="avatarPreview"
+class="avatar"
+src="https://ui-avatars.com/api/?name=Kormiva&background=2563eb&color=fff"
+alt="Profile Picture">
 
-<main class="profile-wrapper">
+<br>
 
-  <div class="profile-card">
+<label for="photoInput" class="photo-btn">
+📷 Change Profile Picture
+</label>
 
-    <div class="profile-header"></div>
+<input
+id="photoInput"
+type="file"
+accept="image/jpeg,image/png,image/webp">
 
+</div>
 
-    <div class="avatar-area">
+<label>Full Name</label>
+<input id="fullName" type="text" placeholder="Your full name">
 
-      <div
-        id="avatarPlaceholder"
-        class="avatar-placeholder">
-        👤
-      </div>
+<label>Email</label>
+<input id="email" class="email" type="email" readonly>
 
-      <img
-        id="avatar"
-        class="avatar"
-        style="display:none"
-        alt="Profile Picture">
+<label>Phone</label>
+<input id="phone" type="tel" placeholder="Your phone number">
 
-      <button
-        type="button"
-        class="change-photo"
-        onclick="openPhotoPicker()">
-        📷
-      </button>
+<label>Role</label>
+<input id="role" type="text" placeholder="Student / Job Seeker / Freelancer">
 
-      <input
-        type="file"
-        id="photoInput"
-        accept="image/jpeg,image/png,image/webp">
+<label>Bio</label>
+<textarea id="bio" placeholder="Tell us about yourself..."></textarea>
 
-    </div>
+<button id="saveButton" class="save">
+💾 Save Profile
+</button>
 
+<div class="note">
+📌 Profile picture: JPEG, PNG or WebP — maximum 10 MB.
+</div>
 
-    <div class="photo-info">
-      JPEG, PNG or WebP • Maximum 10 MB
-    </div>
+</div>
 
-
-    <div class="profile-title">
-
-      <h1 id="profileName">
-        My Profile
-      </h1>
-
-      <p>
-        Manage your Kormiva profile
-      </p>
-
-    </div>
-
-
-    <div class="profile-content">
-
-      <div
-        id="message"
-        class="message">
-      </div>
-
-
-      <div
-        id="loading"
-        class="loading">
-
-        <div class="spinner"></div>
-
-        Loading your profile...
-
-      </div>
-
-
-      <div
-        id="profileFormArea"
-        style="display:none;">
-
-        <h2 class="section-title">
-          Personal Information
-        </h2>
-
-
-        <div class="form-grid">
-
-          <div class="form-group">
-
-            <label for="fullName">
-              Full Name
-            </label>
-
-            <input
-              type="text"
-              id="fullName"
-              placeholder="Your full name">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="email">
-              Email
-            </label>
-
-            <input
-              type="email"
-              id="email"
-              readonly>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="phone">
-              Phone
-            </label>
-
-            <input
-              type="tel"
-              id="phone"
-              placeholder="Your phone number">
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label for="role">
-              Role
-            </label>
-
-            <input
-              type="text"
-              id="role"
-              placeholder="Student, Developer, Designer...">
-
-          </div>
-
-
-          <div class="form-group full">
-
-            <label for="bio">
-              Bio
-            </label>
-
-            <textarea
-              id="bio"
-              placeholder="Tell people a little about yourself..."></textarea>
-
-          </div>
-
-        </div>
-
-
-        <div class="save-area">
-
-          <button
-            id="saveButton"
-            class="save-btn"
-            onclick="saveProfile()">
-
-            💾 Save Changes
-
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</main>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</div>
+</div>
 
 <script>
+const SUPABASE_URL="https://jobhfmjbvxstyjlpxnpp.supabase.co";
+const SUPABASE_ANON_KEY="sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
 
-const SUPABASE_URL =
-  "https://jobhfmjbvxstyjlpxnpp.supabase.co";
+const supabaseClient=supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
 
-const SUPABASE_KEY =
-  "sb_publishable_imDL1J97UKXC7wDh8awxBw_VtzH1N60";
+let currentUser=null;
+let selectedFile=null;
+let currentAvatarUrl="";
 
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-let currentUser = null;
-let currentProfile = null;
-
-
-/* ================= MESSAGE ================= */
-
-function showMessage(text,type){
-
-  const message =
-    document.getElementById("message");
-
-  message.textContent = text;
-
-  message.className =
-    "message " + type;
-
+function message(text,type){
+const box=document.getElementById("message");
+box.textContent=text;
+box.className="message show "+type;
 }
-
 
 function clearMessage(){
-
-  const message =
-    document.getElementById("message");
-
-  message.textContent = "";
-
-  message.className = "message";
-
+document.getElementById("message").className="message";
 }
-
-
-/* ================= PHOTO PICKER ================= */
-
-function openPhotoPicker(){
-
-  document
-    .getElementById("photoInput")
-    .click();
-
-}
-
-
-/* ================= LOAD PROFILE ================= */
 
 async function loadProfile(){
 
-  try{
+const {data,error}=await supabaseClient.auth.getUser();
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getUser();
+if(error || !data.user){
+location.href="auth.html";
+return;
+}
 
+currentUser=data.user;
 
-    if(error || !data.user){
+document.getElementById("email").value=currentUser.email || "";
 
-      window.location.href =
-        "auth.html";
+const {data:profile,error:profileError}=await supabaseClient
+.from("Profile")
+.select("*")
+.eq("id",currentUser.id)
+.maybeSingle();
 
-      return;
+if(profileError){
+console.log(profileError.message);
+}
 
-    }
+if(profile){
 
+document.getElementById("fullName").value=
+profile["full name"] || profile.full_name || "";
 
-    currentUser =
-      data.user;
+document.getElementById("phone").value=
+profile.phone || "";
 
+document.getElementById("role").value=
+profile.role || "";
 
-    const {
-      data:profile,
-      error:profileError
-    } =
-      await supabaseClient
-        .from("Profile")
-        .select("*")
-        .eq("Id",currentUser.id)
-        .maybeSingle();
+document.getElementById("bio").value=
+profile.bio || "";
 
+currentAvatarUrl=profile.avatar_url || "";
 
-    if(profileError){
+if(currentAvatarUrl){
+document.getElementById("avatarPreview").src=currentAvatarUrl;
+}else{
+setAvatarFallback();
+}
 
-      console.error(profileError);
+}else{
 
-      showMessage(
-        profileError.message,
-        "error"
-      );
+const metadata=currentUser.user_metadata || {};
 
-      return;
+document.getElementById("fullName").value=
+metadata.full_name || "";
 
-    }
+document.getElementById("phone").value=
+metadata.phone || "";
 
+document.getElementById("role").value=
+metadata.role || "";
 
-    /*
-      If Profile row does not exist,
-      create it automatically.
-    */
-
-    if(!profile){
-
-      const {
-        data:newProfile,
-        error:createError
-      } =
-        await supabaseClient
-          .from("Profile")
-          .insert({
-
-            "Id":currentUser.id,
-
-            "Full Name":
-              currentUser.user_metadata
-                ?.full_name || "",
-
-            email:
-              currentUser.email || ""
-
-          })
-          .select()
-          .single();
-
-
-      if(createError){
-
-        console.error(createError);
-
-        showMessage(
-          "Profile row could not be created. Check your Profile table RLS policies.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      currentProfile =
-        newProfile;
-
-    }else{
-
-      currentProfile =
-        profile;
-
-    }
-
-
-    fillProfile();
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Something went wrong while loading your profile.",
-      "error"
-    );
-
-  }
+setAvatarFallback();
 
 }
 
-
-/* ================= FILL PROFILE ================= */
-
-function fillProfile(){
-
-  const data =
-    currentProfile;
-
-
-  document.getElementById("fullName").value =
-    data["Full Name"] || "";
-
-
-  document.getElementById("email").value =
-    data.email ||
-    currentUser.email ||
-    "";
-
-
-  document.getElementById("phone").value =
-    data.Phone || "";
-
-
-  document.getElementById("role").value =
-    data.role || "";
-
-
-  document.getElementById("bio").value =
-    data.bio || "";
-
-
-  const name =
-    data["Full Name"] ||
-    "My Profile";
-
-
-  document.getElementById(
-    "profileName"
-  ).textContent = name;
-
-
-  if(data.avatar_url){
-
-    setAvatar(data.avatar_url);
-
-  }
-
-
-  document.getElementById(
-    "loading"
-  ).style.display = "none";
-
-
-  document.getElementById(
-    "profileFormArea"
-  ).style.display = "block";
-
+document.getElementById("loading").style.display="none";
+document.getElementById("profileContent").style.display="block";
 }
 
+function setAvatarFallback(){
 
-/* ================= AVATAR ================= */
+const name=document.getElementById("fullName").value || "Kormiva";
 
-function setAvatar(url){
-
-  const avatar =
-    document.getElementById("avatar");
-
-  const placeholder =
-    document.getElementById(
-      "avatarPlaceholder"
-    );
-
-
-  avatar.src =
-    url +
-    (url.includes("?") ? "&" : "?") +
-    "v=" +
-    Date.now();
-
-
-  avatar.style.display =
-    "block";
-
-
-  placeholder.style.display =
-    "none";
-
+document.getElementById("avatarPreview").src=
+"https://ui-avatars.com/api/?name="+
+encodeURIComponent(name)+
+"&background=2563eb&color=fff";
 }
 
+document.getElementById("fullName").addEventListener("input",setAvatarFallback);
 
-/* ================= SAVE PROFILE ================= */
+document.getElementById("photoInput").addEventListener("change",function(){
+
+const file=this.files[0];
+
+if(!file)return;
+
+const allowed=[
+"image/jpeg",
+"image/png",
+"image/webp"
+];
+
+if(!allowed.includes(file.type)){
+message("Only JPEG, PNG or WebP images are allowed.","error");
+this.value="";
+return;
+}
+
+if(file.size>10*1024*1024){
+message("Maximum image size is 10 MB.","error");
+this.value="";
+return;
+}
+
+selectedFile=file;
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+document.getElementById("avatarPreview").src=e.target.result;
+};
+
+reader.readAsDataURL(file);
+
+clearMessage();
+
+});
+
+async function uploadAvatar(){
+
+if(!selectedFile)return currentAvatarUrl;
+
+const extension=
+selectedFile.type==="image/png"?"png":
+selectedFile.type==="image/webp"?"webp":"jpg";
+
+const filePath=
+currentUser.id+"/profile."+extension;
+
+message("Uploading profile picture...","info");
+
+const {error}=await supabaseClient.storage
+.from("avatars")
+.upload(filePath,selectedFile,{
+upsert:true,
+contentType:selectedFile.type
+});
+
+if(error){
+throw new Error("Image upload failed: "+error.message);
+}
+
+const {data}=supabaseClient.storage
+.from("avatars")
+.getPublicUrl(filePath);
+
+if(!data.publicUrl){
+throw new Error("Could not get profile picture URL.");
+}
+
+return data.publicUrl+"?v="+Date.now();
+}
 
 async function saveProfile(){
 
-  if(!currentUser){
+const button=document.getElementById("saveButton");
 
-    window.location.href =
-      "auth.html";
+button.disabled=true;
+button.textContent="Saving...";
 
-    return;
+try{
 
-  }
+const name=document.getElementById("fullName").value.trim();
+const phone=document.getElementById("phone").value.trim();
+const role=document.getElementById("role").value.trim();
+const bio=document.getElementById("bio").value.trim();
 
+if(!name){
+throw new Error("Please enter your full name.");
+}
 
-  const button =
-    document.getElementById(
-      "saveButton"
-    );
+let avatarUrl=currentAvatarUrl;
 
+if(selectedFile){
+avatarUrl=await uploadAvatar();
+}
 
-  const fullName =
-    document
-      .getElementById("fullName")
-      .value
-      .trim();
+message("Saving your profile...","info");
 
+const {error}=await supabaseClient
+.from("Profile")
+.upsert({
+id:currentUser.id,
+"full name":name,
+email:currentUser.email,
+phone:phone,
+role:role,
+bio:bio,
+avatar_url:avatarUrl
+},{onConflict:"id"});
 
-  const phone =
-    document
-      .getElementById("phone")
-      .value
-      .trim();
+if(error){
+throw new Error(error.message);
+}
 
+currentAvatarUrl=avatarUrl;
+selectedFile=null;
+document.getElementById("photoInput").value="";
 
-  const role =
-    document
-      .getElementById("role")
-      .value
-      .trim();
+message(
+"Profile updated successfully! ✓ Redirecting to Home...",
+"success"
+);
 
+setTimeout(()=>{
+location.href="index.html";
+},1000);
 
-  const bio =
-    document
-      .getElementById("bio")
-      .value
-      .trim();
+}catch(error){
 
+console.error(error);
 
-  button.disabled = true;
+message(error.message,"error");
 
-  button.textContent =
-    "Saving...";
-
-
-  clearMessage();
-
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("Profile")
-        .update({
-
-          "Full Name":
-            fullName,
-
-          Phone:
-            phone || null,
-
-          role:
-            role || null,
-
-          bio:
-            bio || null
-
-        })
-        .eq(
-          "Id",
-          currentUser.id
-        );
-
-
-    if(error){
-
-      console.error(error);
-
-      showMessage(
-        error.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    currentProfile["Full Name"] =
-      fullName;
-
-    currentProfile.Phone =
-      phone || null;
-
-    currentProfile.role =
-      role || null;
-
-    currentProfile.bio =
-      bio || null;
-
-
-    document.getElementById(
-      "profileName"
-    ).textContent =
-      fullName || "My Profile";
-
-
-    showMessage(
-      "Profile updated successfully! ✓",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Could not update profile.",
-      "error"
-    );
-
-  }finally{
-
-    button.disabled = false;
-
-    button.textContent =
-      "💾 Save Changes";
-
-  }
+button.disabled=false;
+button.textContent="💾 Save Profile";
 
 }
 
-
-/* ================= PHOTO UPLOAD ================= */
-
-document
-  .getElementById("photoInput")
-  .addEventListener(
-    "change",
-    handlePhotoUpload
-  );
-
-
-async function handlePhotoUpload(event){
-
-  const file =
-    event.target.files[0];
-
-
-  /*
-    Reset input so the same file
-    can be selected again.
-  */
-
-  event.target.value = "";
-
-
-  if(!file){
-    return;
-  }
-
-
-  if(!currentUser){
-
-    showMessage(
-      "Please login first.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /*
-    Allowed MIME types
-  */
-
-  const allowedTypes = [
-    "image/jpeg",
-    "image/png",
-    "image/webp"
-  ];
-
-
-  if(!allowedTypes.includes(file.type)){
-
-    showMessage(
-      "Only JPEG, PNG or WebP images are allowed.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  /*
-    10 MB maximum
-  */
-
-  const MAX_SIZE =
-    10 * 1024 * 1024;
-
-
-  if(file.size > MAX_SIZE){
-
-    showMessage(
-      "Image is too large. Maximum size is 10 MB.",
-      "error"
-    );
-
-    return;
-
-  }
-
-
-  showMessage(
-    "Uploading profile picture...",
-    "info"
-  );
-
-
-  try{
-
-    /*
-      Use one stable filename per user.
-      This makes replacement easy.
-    */
-
-    const filePath =
-      currentUser.id +
-      "/avatar.webp";
-
-
-    /*
-      Upload / replace
-    */
-
-    const {
-      error:uploadError
-    } =
-      await supabaseClient
-        .storage
-        .from("avatars")
-        .upload(
-          filePath,
-          file,
-          {
-            upsert:true,
-            contentType:file.type,
-            cacheControl:"3600"
-          }
-        );
-
-
-    if(uploadError){
-
-      console.error(uploadError);
-
-      showMessage(
-        "Photo upload failed: " +
-        uploadError.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    /*
-      Get public URL
-    */
-
-    const {
-      data:publicData
-    } =
-      supabaseClient
-        .storage
-        .from("avatars")
-        .getPublicUrl(
-          filePath
-        );
-
-
-    if(!publicData?.publicUrl){
-
-      showMessage(
-        "Could not create photo URL.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const publicUrl =
-      publicData.publicUrl;
-
-
-    /*
-      Save URL to Profile table
-    */
-
-    const {
-      error:updateError
-    } =
-      await supabaseClient
-        .from("Profile")
-        .update({
-
-          avatar_url:
-            publicUrl
-
-        })
-        .eq(
-          "Id",
-          currentUser.id
-        );
-
-
-    if(updateError){
-
-      console.error(updateError);
-
-      showMessage(
-        "Photo uploaded but profile update failed: " +
-        updateError.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    /*
-      Cache refresh
-    */
-
-    const cacheBustedUrl =
-      publicUrl +
-      "?v=" +
-      Date.now();
-
-
-    setAvatar(
-      cacheBustedUrl
-    );
-
-
-    currentProfile.avatar_url =
-      publicUrl;
-
-
-    showMessage(
-      "Profile picture updated successfully! ✓",
-      "success"
-    );
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      error.message ||
-      "Photo upload failed.",
-      "error"
-    );
-
-  }
-
 }
 
+document.getElementById("saveButton")
+.addEventListener("click",saveProfile);
 
-/* ================= LOGOUT ================= */
-
-async function logout(){
-
-  try{
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .auth
-        .signOut();
-
-
-    if(error){
-
-      showMessage(
-        error.message,
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    window.location.href =
-      "index.html";
-
-
-  }catch(error){
-
-    console.error(error);
-
-    showMessage(
-      "Logout failed.",
-      "error"
-    );
-
-  }
-
-}
-
-
-/* ================= START ================= */
-
-loadProfile();
-
+document.addEventListener("DOMContentLoaded",loadProfile);
 </script>
 
 </body>
